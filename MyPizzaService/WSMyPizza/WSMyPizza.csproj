@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\proyecto-visual\Modelo\Modelo\Modelo.csproj">
-      <Project>{e4004408-b0b3-4b43-9b1b-e5dc6bcf23b1}</Project>
+      <Project>{E4004408-B0B3-4B43-9B1B-E5DC6BCF23B1}</Project>
       <Name>Modelo</Name>
     </ProjectReference>
   </ItemGroup>

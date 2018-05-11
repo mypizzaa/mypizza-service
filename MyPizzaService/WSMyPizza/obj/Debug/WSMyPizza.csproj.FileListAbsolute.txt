@@ -1,0 +1,9 @@
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\obj\Debug\WSMyPizza.csprojResolveAssemblyReference.cache
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\bin\WSMyPizza.dll.config
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\bin\WSMyPizza.dll
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\bin\WSMyPizza.pdb
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\bin\Modelo.dll
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\bin\MySql.Data.dll
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\bin\Modelo.pdb
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\obj\Debug\WSMyPizza.dll
+C:\Users\alumne\Documents\GitHub\mypizza-service\MyPizzaService\WSMyPizza\obj\Debug\WSMyPizza.pdb

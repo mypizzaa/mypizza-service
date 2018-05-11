@@ -14,19 +14,13 @@ namespace WSMyPizza
     public class WSLogin : IWSLogin
     {
 
-        private LoginDAO instance = null;    
-        private WSLogin() { }
-        public WSLogin GetInstance()
+        private LoginDAO model = null;    
+        public WSLogin ()
         {
-            if (instance == null)
+            if (model == null)
             {
-                instance = new LoginDAO();
+                model = new LoginDAO();
             }
-
-            return instance;
-        }
-        public WSLogin() {
-
         }
 
         public bool addUsuario(Usuario u)
@@ -41,7 +35,7 @@ namespace WSMyPizza
 
         public Usuario LoginUsuario(string correo, string password)
         {
-            throw new NotImplementedException();
+            return model.loginUsuario(correo, password);
         }
 
         public bool modificarUsuario(Usuario u)
