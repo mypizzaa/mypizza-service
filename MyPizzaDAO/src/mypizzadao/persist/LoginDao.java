@@ -6,17 +6,11 @@ package mypizzadao.persist;
  * and open the template in the editor.
  */
 
-import mypizzadao.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import modelo.Usuario;
 /**
  *
  * @author Javi Delgado
@@ -25,11 +19,12 @@ public class LoginDao {
 
     private StoreDBConnect dbConnect;
     
+     private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND contraseña =? ";
+    
     public LoginDao() {
         try {
             dbConnect = new StoreDBConnect();
-        } catch (ClassNotFoundException ex) {
-            
+        } catch (ClassNotFoundException ex) {            
         }
     }
     
@@ -37,21 +32,38 @@ public class LoginDao {
         Usuario u = null;
         
         Connection conn = dbConnect.getConnection();
-        
-        String sql = "SELECT correo FROM tb_usuario WHERE correo = '"+correo+"' AND contraseña = '"+password+"' ;";
-
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            
-            while(rs.next()){
-                u= new Usuario(rs.getString("correo"));         
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginDao.class.getName()).log(Level.SEVERE, null, ex);
+            if (conn != null) {
+                PreparedStatement st = conn.prepareStatement(QUERY_FIND_USER);
+                st.setString(1, correo);
+                st.setString(2, password);
+                ResultSet rs = st.executeQuery();
+                rs.next();
+                u = resultsetToUser(rs);    
         }
-        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return u;
+    }
+    
+    private Usuario resultsetToUser(ResultSet rs) throws SQLException {
+        Usuario u = null;
+        long id_usuario = rs.getLong("id_usuario");
+        String dni = rs.getString("dni");
+        String nombre = rs.getString("nombre");
+        String apellidos = rs.getString("apellidos");
+        String passwd = rs.getString("contraseña");
+        String imagen = rs.getString("imagen");
+        String tipo_usuario = rs.getString("tipo_usuario");
+        String correo = rs.getString("correo");
+        u = new Usuario(id_usuario, dni, nombre, apellidos, correo, imagen, tipo_usuario, correo);
         return u;
     }
 
+    
+    
+    
 }

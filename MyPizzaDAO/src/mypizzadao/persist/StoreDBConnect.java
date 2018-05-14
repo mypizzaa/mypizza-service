@@ -25,7 +25,7 @@ public class StoreDBConnect {
      */
     public Connection getConnection(){
         try{
-        Connection conn=DriverManager.getConnection(BD_URL, USUARI, PASSWORD);
+            Connection conn=DriverManager.getConnection(BD_URL, USUARI, PASSWORD);
         return conn;
         }catch(SQLException ex){
             System.out.println("There is no connection with the database ");
