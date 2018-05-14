@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
  
 import java.util.List;
 import javax.servlet.RequestDispatcher;
-import modelo.Pizza;
-import mypizzadao.Model;
+import proven.modelo.Pizza;
+import proven.mypizzadao.Model;
  
 /**
  * Servlet to resolve requests in Friends application

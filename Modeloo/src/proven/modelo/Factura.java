@@ -1,4 +1,4 @@
-package modelo;
+package proven.modelo;
 
 import java.util.Date;
 

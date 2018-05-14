@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mypizzadao.persist;
+package proven.mypizzadao.persist;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Pizza;
-import modelo.Usuario;
+import proven.modelo.Pizza;
+import proven.modelo.Usuario;
 
 /**
  *
@@ -43,20 +43,19 @@ public class ProductDao {
                 }
         }
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
         return pizzaList;
     }
     
     private Pizza resultsetToPizza(ResultSet rs) throws SQLException {
-        Pizza p = null;
         long id_producto = rs.getLong("id_producto");
         String nombre = rs.getString("nombre");
-        double precio = rs.getDouble("preio");
+        double precio = rs.getDouble("precio");
         String imagen = rs.getString("imagen");
         long id_tipo = rs.getLong("id_producto");
         long id_pizza = rs.getLong("id_producto");
-
-        p = new Pizza(id_producto, nombre, precio, imagen, id_tipo, id_pizza);
+        Pizza p = new Pizza(id_producto, nombre, precio, imagen, id_tipo, id_pizza);
         return p;
     }  
 }

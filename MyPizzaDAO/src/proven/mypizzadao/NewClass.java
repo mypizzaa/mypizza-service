@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mypizzadao;
-
-import mypizzadao.persist.LoginDao;
+package proven.mypizzadao;
 
 /**
  *
@@ -20,6 +18,7 @@ public class NewClass {
 
     private void run() {
         Model m = new Model();
-        System.out.println( m.login("javii.delgaado@gmail.com", "admin"));
+        System.out.println( m.login("ad@gmail.com", "123"));
+        System.out.println(m.getAllPizzas());
     }
 }

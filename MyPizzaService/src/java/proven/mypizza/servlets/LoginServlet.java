@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import modelo.Usuario;
-import mypizzadao.Model;
+import proven.modelo.Usuario;
+import proven.mypizzadao.Model;
 
 /**
  *
@@ -62,16 +62,16 @@ public class LoginServlet extends HttpServlet {
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(true);
 
         String correo = request.getParameter("correo");
         String password = request.getParameter("password");
 
         if (correo != null && password != null) {       
             Usuario u = model.login(correo, password);
-            if (u!= null) {
+            if (u != null) {
                 session.setAttribute("correo", correo);
-                //session.setAttribute("userrole", u.getRole());
+                session.setAttribute("userrole", u.getTipoUsuario());               
                 MyPizzaRequestResult result = new MyPizzaRequestResult("Login OK", 1);
                 request.setAttribute("result", result);
                 request.getRequestDispatcher("/WEB-INF/jsp/json-result.jsp").forward(request, response);

@@ -1,5 +1,5 @@
 
-package modelo;
+package proven.modelo;
 
 public class Usuario {
 

@@ -140,7 +140,7 @@ public class AuthenticationFilter implements Filter {
             HttpSession session = req.getSession(false);
             //check permissions
             if (session != null) {
-                String correo = (String) session.getAttribute("cprreo");
+                String correo = (String) session.getAttribute("correo");
                 if ( (correo != null)) {
                     //TODO check rol permissions.
                     granted = true;

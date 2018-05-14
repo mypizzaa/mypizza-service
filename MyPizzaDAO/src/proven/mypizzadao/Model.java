@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mypizzadao;
+package proven.mypizzadao;
 
 
 import java.util.List;
-import modelo.Pizza;
-import modelo.Usuario;
-import mypizzadao.persist.LoginDao; 
-import mypizzadao.persist.ProductDao;
+import proven.modelo.Pizza;
+import proven.modelo.Usuario;
+import proven.mypizzadao.persist.LoginDao;
+import proven.mypizzadao.persist.ProductDao;
 
 /**
  *
