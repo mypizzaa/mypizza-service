@@ -254,7 +254,7 @@ INSERT INTO tb_pizza(`id_producto`) VALUES (28), (29), (30), (31),(32), (33), (3
 INSERT INTO tb_refresco(`id_producto`) VALUES (39), (40);
 
 -- Barbacoa
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (24, 1), (19, 1), (20, 1), (23, 1);
+INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (2, 1), (19, 1), (20, 1), (23, 1);
 
 -- 4 Quesos
 INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (11, 2), (13, 2), (12, 2), (13, 2);

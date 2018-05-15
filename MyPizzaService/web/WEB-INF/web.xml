@@ -8,9 +8,17 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/servlet/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>product-servlet-json</servlet-name>
         <servlet-class>proven.mypizza.servlets.ProductServletJson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServicioWeb</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>product-servlet-json</servlet-name>
@@ -23,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicioWeb</servlet-name>
+        <url-pattern>/ServicioWeb</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -20,5 +20,8 @@ public class NewClass {
         Model m = new Model();
         System.out.println( m.login("123", "123"));
         System.out.println(m.getAllPizzas());
+        System.out.println(m.getAllIngredients());
+        System.out.println(m.getAllDrinks());
+        System.out.println(m.getIngredientsFromPizzaId(1));
     }
 }

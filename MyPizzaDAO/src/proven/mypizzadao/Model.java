@@ -7,7 +7,9 @@ package proven.mypizzadao;
 
 
 import java.util.List;
+import proven.modelo.Ingrediente;
 import proven.modelo.Pizza;
+import proven.modelo.Refresco;
 import proven.modelo.Usuario;
 import proven.mypizzadao.persist.LoginDao;
 import proven.mypizzadao.persist.ProductDao;
@@ -31,6 +33,18 @@ public class Model {
     
     public List<Pizza> getAllPizzas(){
         return productDao.getAllPizzas();
+    }
+    
+    public List<Ingrediente> getAllIngredients(){
+        return productDao.getAllIngredients();
+    }
+    
+    public List<Refresco> getAllDrinks(){
+        return productDao.getAllDrinks();
+    }
+    
+    public List<Ingrediente> getIngredientsFromPizzaId(long id){
+        return productDao.getIngredientsFromPizzaId(id); 
     }
     
 }
