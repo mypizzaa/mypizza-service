@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class StoreDBConnect {
     
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String BD_URL = "jdbc:mysql://"+"127.0.0.1/mypizza";
+    private static final String BD_URL = "jdbc:mysql://localhost/mypizza";
     private static final String USUARI = "administrator";
     private static final String PASSWORD = "adminpsw";
 
@@ -19,8 +19,7 @@ public class StoreDBConnect {
     
     /**
      * 
-     * @return a connection 
-     * @throws SQLException if a connection error occurs
+     * @return a connection
      */
     public Connection getConnection(){
         try{

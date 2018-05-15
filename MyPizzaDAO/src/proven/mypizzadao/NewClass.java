@@ -18,7 +18,7 @@ public class NewClass {
 
     private void run() {
         Model m = new Model();
-        System.out.println( m.login("ad@gmail.com", "123"));
+        System.out.println( m.login("123", "123"));
         System.out.println(m.getAllPizzas());
     }
 }

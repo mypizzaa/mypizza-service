@@ -19,12 +19,13 @@ public class LoginDao {
 
     private StoreDBConnect dbConnect;
 
-    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND contraseña =? ";
+    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? ";
 
     public LoginDao() {
         try {
             dbConnect = new StoreDBConnect();
         } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
