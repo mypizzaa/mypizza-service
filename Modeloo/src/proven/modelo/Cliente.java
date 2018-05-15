@@ -24,6 +24,13 @@ public class Cliente extends Usuario {
         this.telefono = telefono;
     }
 
+    public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, String telefono, String primeraDireccion, String segundaDireccion) {
+        super(dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
+        this.primeraDireccion = primeraDireccion;
+        this.segundaDireccion = segundaDireccion;
+        this.telefono = telefono;
+    }   
+
     //getters
     public long getIdCliente() {
         return this.id_cliente;
@@ -50,9 +57,28 @@ public class Cliente extends Usuario {
         this.segundaDireccion = direccion;
     }
 
-    //toString
-    public String toString() {
-        return "";
+    public long getId_cliente() {
+        return id_cliente;
     }
+
+    public void setId_cliente(long id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +super.toString()+ "id_cliente=" + id_cliente + ", primeraDireccion=" + primeraDireccion + ", segundaDireccion=" + segundaDireccion + ", telefono=" + telefono + '}';
+    }
+
+    
+    
 
 }

@@ -29,6 +29,17 @@ public class Usuario {
         this.password = password;
     }
 
+    public Usuario(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.password = password;
+        this.imagen = imagen;
+        this.tipo_Usuario = tipo_Usuario;
+        this.correo = correo;
+    }
+        
+
     public Usuario() {
        
     }

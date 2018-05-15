@@ -5,6 +5,8 @@
  */
 package proven.mypizzadao;
 
+import proven.modelo.Cliente;
+
 /**
  *
  * @author alumne
@@ -23,5 +25,9 @@ public class NewClass {
         System.out.println(m.getAllIngredients());
         System.out.println(m.getAllDrinks());
         System.out.println(m.getIngredientsFromPizzaId(1));
+        
+        System.out.println("-------------------------------------------------");
+        System.out.println(m.addClient(new Cliente("1234678Z", "Yo", "Apellido1 apellido2", "123", "img.png", "client", "yo", "213445", "d1", "d2")));
+     
     }
 }

@@ -50,6 +50,7 @@ public class LoginDao {
         }
         return u;
     }
+    
 
     private Usuario resultsetToUser(ResultSet rs) throws SQLException {
         long id_usuario = rs.getLong("id_usuario");
