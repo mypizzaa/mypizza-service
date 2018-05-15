@@ -1,3 +1,7 @@
+DROP USER 'administrator'@'localhost';
+
+DROP DATABASE mypizza;
+
 CREATE USER 'administrator'@'localhost' IDENTIFIED BY 'adminpsw';
 -- Crear base de dades.
 
@@ -87,7 +91,7 @@ CREATE TABLE `tb_detalleFactura` (
     PRIMARY KEY (`id_detalleFactura`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `tb_Factura` (
+CREATE TABLE `tb_factura` (
 	`id_factura` INT(4) NOT NULL AUTO_INCREMENT,
     `id_cliente` INT(4),
     `id_metodoPago` INT(4),
@@ -96,7 +100,7 @@ CREATE TABLE `tb_Factura` (
     PRIMARY KEY (`id_factura`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `tb_MetodoPago` (
+CREATE TABLE `tb_metodoPago` (
 	`id_metodoPago` INT(4) NOT NULL AUTO_INCREMENT,
     `nombre` VARCHAR(40),
     `otros_detalles` VARCHAR(40),
@@ -115,12 +119,12 @@ CREATE TABLE `tb_empleado` (
     PRIMARY KEY (`id_empleado`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `Usuario` (
+CREATE TABLE `tb_usuario` (
     `id_usuario` INT(4) NOT NULL AUTO_INCREMENT,
     `dni` VARCHAR(9) DEFAULT NULL UNIQUE,
     `nombre` VARCHAR(40) DEFAULT NULL,
     `apellidos` VARCHAR(40) DEFAULT NULL,
-    `contraseña` VARCHAR(40) DEFAULT NULL,
+    `password` VARCHAR(40) DEFAULT NULL,
     `imagen` VARCHAR(40) DEFAULT NULL,
     `tipo_usuario` VARCHAR(40) DEFAULT NULL,
     `correo` VARCHAR(40) DEFAULT NULL,
@@ -130,7 +134,8 @@ CREATE TABLE `Usuario` (
 
 CREATE TABLE `tb_cliente` (
     `id_cliente` INT(4) NOT NULL AUTO_INCREMENT,
-    `id_usuario` INT(4),
+    `id_usuario` INT(4) NOT NULL,
+    `telefono` INT (4) DEFAULT NULL,
     `direccion1` VARCHAR(40) DEFAULT NULL,
     `direccion2` VARCHAR(40) DEFAULT NULL,   
     PRIMARY KEY (`id_cliente`)
@@ -174,7 +179,7 @@ alter table tb_pedido ADD CONSTRAINT FK_tbPedido_tbCliente
 foreign key (id_cliente) references tb_cliente(id_cliente)
 on update cascade;
 
-alter table tb_detalleFactura ADD CONSTRAINT FK_tbDetalleFactura_tbPedido
+alter table tb_detalleFactura ADD CONSTRAINT FK_tbdetalleFactura_tbPedido
 foreign key (id_pedido) references tb_pedido(id_pedido)
 on update cascade;
 
@@ -183,13 +188,26 @@ foreign key (id_factura) references tb_Factura(id_factura)
 on update cascade;
 
 alter table tb_cliente ADD CONSTRAINT FK_tbCliente_tbUsuario
-foreign key (id_usuario) references Usuario(id_usuario)
+foreign key (id_usuario) references tb_usuario(id_usuario)
 on update cascade;
 
 alter table tb_empleado ADD CONSTRAINT FK_tbEmpleado_tbUsuario
-foreign key (id_usuario) references Usuario(id_usuario)
+foreign key (id_usuario) references tb_usuario(id_usuario)
 on update cascade;
 
 alter table tb_estado ADD CONSTRAINT FK_tbEstado_tbEmpleado
 foreign key (id_empleado) references tb_empleado(id_empleado)
 on update cascade;
+
+alter table tb_factura ADD CONSTRAINT FK_tbFactura_tbMetodoPago
+foreign key (id_metodoPago) references tb_metodoPago(id_metodoPago)
+on update cascade;
+
+alter table tb_ingredientes ADD CONSTRAINT FK_tbingrediente_tbProducto
+foreign key (id_producto) references tb_producto(id_producto)
+on update cascade;
+
+alter table tb_factura ADD CONSTRAINT FK_tbFactura_tbCliente
+foreign key (id_cliente) references tb_cliente(id_cliente)
+on update cascade;
+
