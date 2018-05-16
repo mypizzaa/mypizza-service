@@ -5,10 +5,12 @@
  */
 package proven.mypizzadao.persist;
 
+import com.sun.security.ntlm.Client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,12 +40,10 @@ public class ClientDao {
 
     public int addClient(Cliente c) {
         int i = 0;
-        System.out.println(c.toString());
-        Connection conn = dbConnect.getConnection();
-        
 
+        Connection conn = dbConnect.getConnection();
         try {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_usuario (dni, nombre, apellidos, password, imagen, tipo_usuario, correo) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_usuario (dni, nombre, apellidos, password, imagen, tipo_usuario, correo) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, c.getDni());
             pst.setString(2, c.getNombre());
             pst.setString(3, c.getApellidos());
@@ -51,6 +51,7 @@ public class ClientDao {
             pst.setString(5, c.getImagen());
             pst.setString(6, c.getTipoUsuario());
             pst.setString(7, c.getCorreo());
+            pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();
 
@@ -62,12 +63,86 @@ public class ClientDao {
                 pst1.setString(2, c.getTelefono());
                 pst1.setString(3, c.getPrimeraDireccion());
                 pst1.setString(4, c.getSegundaDireccion());
-                
-                i = pst.executeUpdate();
+
+                i = pst1.executeUpdate();
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        }
+        return i;
+    }
+
+    public int checkIfExist(Cliente c) {
+        int i = 0;
+
+        Connection conn = dbConnect.getConnection();
+
+        if (conn != null && c != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE correo=?");
+                pst.setString(1, c.getCorreo());
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    i = 1;
+                }
+            } catch (SQLException ex) {
+            }
+
+        }
+        return i;
+    }
+
+    public int modifyPassword(Cliente c) {
+        int i = 0;
+        if (c.getCorreo() != null && c.getPassword() != null) {
+            Connection conn = dbConnect.getConnection();
+            if (conn != null) {
+                try {
+                    PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET password=? WHERE correo=?");
+                    pst.setString(1, c.getPassword());
+                    pst.setString(2, c.getCorreo());
+                    i = pst.executeUpdate();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        return i;
+    }
+
+    public int modifyClient(Cliente c) {
+        int i = 0;
+        if (c != null) {
+            Connection conn = dbConnect.getConnection();
+            if (conn != null) {
+                try {
+                    PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET password=? WHERE correo=?");
+                    pst.setString(1, c.getPassword());
+                    pst.setString(2, c.getCorreo());
+                    i = pst.executeUpdate();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        return i;
+    }
+
+    public int inactivateClient(Cliente c) {
+        int i = 0;
+
+        Connection conn = dbConnect.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET activo=? WHERE correo=?");
+                pst.setInt(1, 0);
+                pst.setString(2, c.getCorreo());
+                i = pst.executeUpdate();
+            } catch (SQLException ex) {
+                
+            }
+
         }
         return i;
     }
