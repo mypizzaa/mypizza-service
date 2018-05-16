@@ -11,9 +11,9 @@ import proven.modelo.Cliente;
  *
  * @author alumne
  */
-public class NewClass {
+public class Prueba {
    public static void main(String[] args) {
-        NewClass myApp = new NewClass();
+        Prueba myApp = new Prueba();
         myApp.run();
         
     }
