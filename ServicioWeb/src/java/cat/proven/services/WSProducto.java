@@ -13,7 +13,9 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import proven.modelo.Ingrediente;
 import proven.modelo.Pizza;
+import proven.modelo.Refresco;
 import proven.mypizzadao.Model;
 
 /**
@@ -34,15 +36,14 @@ public class WSProducto {
     
     /**
      * Lista todas las pizzas de la tienda     
-     * @return una lista de pizzas
+     * @return una lista de pizzas si no null
      */
     @WebMethod(operationName = "pizzas")
     @Path("pizzas")
     @GET
     public String listallpizzas() {
         
-        List<Pizza> listapizzas;
-        
+        List<Pizza> listapizzas;        
         listapizzas = model.getAllPizzas();
         
         return new Gson().toJson(listapizzas);
@@ -50,30 +51,41 @@ public class WSProducto {
 
     /**
      * Lista todas las bebidas de la tienda     
-     * @return lista de bebidas
+     * @return lista de bebidas si no null
      */
     @WebMethod(operationName = "bebidas")
     public String listallbebidas() {
-        return "";
+        
+        List<Refresco> listaRefrescos;        
+        listaRefrescos = model.getAllDrinks();
+        
+        return new Gson().toJson(listaRefrescos);
     }
 
     /**
      * Lista todos los ingredientes de la tienda  
-     * @return lista de ingredientes
+     * @return lista de ingredientes si no null
      */
     @WebMethod(operationName = "ingredientes")
     public String listAllIngredients() {
-        return "";
+        List<Ingrediente> listaIngredientes;        
+        listaIngredientes = model.getAllIngredients();
+        
+        return new Gson().toJson(listaIngredientes);
     }
 
     /**
      * Lista todos los ingredientes de la pizza que recibe por parametro
      * @param id idpizza
-     * @return una lista de ingredientes
+     * @return una lista de ingredientes si no null
      */
     @WebMethod(operationName = "ingredientespizza")
     public String listIngredientesOfPizza(@WebParam(name = "idpizza") long id) {
-        return "";
+        
+        List<Ingrediente> listaIngredientes;
+        listaIngredientes = model.getIngredientsFromPizzaId(id);
+        
+        return new Gson().toJson(listaIngredientes);
     }
 
 }
