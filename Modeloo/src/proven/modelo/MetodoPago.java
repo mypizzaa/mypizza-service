@@ -6,11 +6,13 @@ public class MetodoPago {
     private String nombre;
     private String detalles;
 
+    //constructor
     public MetodoPago(long id_metodo, String nombre, String detalles) {
         this.id_metodoPago = id_metodo;
         this.nombre = nombre;
         this.detalles = detalles;
     }
+    //--------------------------------------------------------------------------
 
     //getters
     public long getIdMetodoPago() {

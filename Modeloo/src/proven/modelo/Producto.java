@@ -1,4 +1,3 @@
-
 package proven.modelo;
 
 public class Producto {
@@ -17,6 +16,7 @@ public class Producto {
         this.imagen = img;
         this.id_tipo = id_tip;
     }
+    //--------------------------------------------------------------------------
 
     //Getters
     public long getIdProducto() {

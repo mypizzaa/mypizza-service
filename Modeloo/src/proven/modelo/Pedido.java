@@ -25,6 +25,7 @@ public class Pedido {
         this.observaciones = observaciones;
         this.id_cliente = id_cliente;
     }
+    //--------------------------------------------------------------------------
 
     //Getters
     public long getIdPedido() {

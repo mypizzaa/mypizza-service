@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proven.modelo;
 
 import java.util.Date;
 
-/**
- *
- * @author ASUS
- */
 public class Empleado extends Usuario {
 
     private long id_empleado;
@@ -19,6 +10,7 @@ public class Empleado extends Usuario {
     private int horasSemanales;
     private double Salario;
 
+    //constructor
     public Empleado(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, long id_empleado, Date hora_entrada, Date hora_salida, int horasSemanales, double salario) {
         super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.id_empleado = id_empleado;
@@ -27,8 +19,9 @@ public class Empleado extends Usuario {
         this.horasSemanales = horasSemanales;
         this.Salario = salario;
     }
-    //getters
+    //--------------------------------------------------------------------------
 
+    //getters
     public long getIdEmpleado() {
         return this.id_empleado;
     }

@@ -18,6 +18,7 @@ public class Factura {
         this.id_metodoPago = id_metodoPago;
         this.cobrado = cobrado;
     }
+    //--------------------------------------------------------------------------
 
     //Getters
     public long getIdFactura() {

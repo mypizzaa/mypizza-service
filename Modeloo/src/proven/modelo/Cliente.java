@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proven.modelo;
 
-/**
- *
- * @author ASUS
- */
 public class Cliente extends Usuario {
 
     private long id_cliente;
@@ -16,6 +7,7 @@ public class Cliente extends Usuario {
     private String segundaDireccion;
     private String telefono;
 
+    //constructor
     public Cliente(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, long id_cliente, String primeraDireccion, String segundaDireccion, String telefono) {
         super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.id_cliente = id_cliente;
@@ -29,16 +21,17 @@ public class Cliente extends Usuario {
         this.primeraDireccion = primeraDireccion;
         this.segundaDireccion = segundaDireccion;
         this.telefono = telefono;
-    }   
+    }
 
     public Cliente(String correo, String password) {
         super(correo, password);
-    }        
+    }
 
     public Cliente(String correo) {
         super(correo);
     }
 
+    //--------------------------------------------------------------------------
     //getters
     public long getIdCliente() {
         return this.id_cliente;
@@ -83,10 +76,7 @@ public class Cliente extends Usuario {
 
     @Override
     public String toString() {
-        return "Cliente{" +super.toString()+ "id_cliente=" + id_cliente + ", primeraDireccion=" + primeraDireccion + ", segundaDireccion=" + segundaDireccion + ", telefono=" + telefono + '}';
+        return "Cliente{" + super.toString() + "id_cliente=" + id_cliente + ", primeraDireccion=" + primeraDireccion + ", segundaDireccion=" + segundaDireccion + ", telefono=" + telefono + '}';
     }
-
-    
-    
 
 }

@@ -47,7 +47,8 @@ public class Usuario {
     public Usuario() {
        
     }
-
+    //--------------------------------------------------------------------------
+    
     //Getters
     public long getIdUsuario() {
         return this.id_usuario;

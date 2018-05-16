@@ -13,11 +13,13 @@ public class Refresco extends Producto {
 
     private long id_refresco;
 
+    //constructor
     public Refresco(long id_prod, String nombre, double precio, String img, long id_tip, long id_refresco) {
         super(id_prod, nombre, precio, img, id_tip);
         this.id_refresco = id_refresco;
     }
-
+    //--------------------------------------------------------------------------
+    
     //Getters
     public long getIdRefresco() {
         return this.id_refresco;

@@ -22,7 +22,7 @@ public class Pizza extends Producto {
     //ToString
     public String toString() {
         
-        return super.toString()+", id_pizza = "+id_pizza;
+        return super.toString()+", id_pizza = "+id_pizza+"\n";
     }
 
 }
