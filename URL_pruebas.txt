@@ -1,2 +1,6 @@
-Login: login?correo=javii.delgaado@gmail.com&password=admin
-List all pizzas: servlet/product?action=list_all_pizzas
+
+listar todas las pizzas:
+------------------------------------------------------------
+http://localhost:8080/ServicioWeb/services/WSProducto/pizzas 
+
+ 

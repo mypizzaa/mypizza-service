@@ -29,7 +29,8 @@ public class Usuario {
         this.correo = correo;
         this.password = password;
     }
-
+   
+   
     public Usuario(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
         this.dni = dni;
         this.nombre = nombre;
@@ -81,6 +82,10 @@ public class Usuario {
     public String getCorreo() {
         return this.correo;
     }
+    
+     public int getActivo() {
+        return activo;
+    }
 
     //Setters
     public void setIdUsuario(long idUsuario) {
@@ -114,24 +119,11 @@ public class Usuario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
-    public String getTipo_Usuario() {
-        return tipo_Usuario;
-    }
-
-    public void setTipo_Usuario(String tipo_Usuario) {
-        this.tipo_Usuario = tipo_Usuario;
-    }
-
-    public int getActivo() {
-        return activo;
-    }
-
+ 
     public void setActivo(int activo) {
         this.activo = activo;
     }
-    
-    
+        
 
     //toString
     @Override
@@ -147,6 +139,7 @@ public class Usuario {
         sb.append(", imagen = " + imagen);
         sb.append(", tipo_Usuario = " + tipo_Usuario);
         sb.append(", correo = " + correo);
+        sb.append(", activo = "+activo);
         sb.append(" ]");
 
         return sb.toString();

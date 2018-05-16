@@ -16,7 +16,7 @@ public class Cliente extends Usuario {
         this.telefono = telefono;
     }
 
-    public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, String telefono, String primeraDireccion, String segundaDireccion) {
+    public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo,String primeraDireccion, String segundaDireccion, String telefono) {
         super(dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.primeraDireccion = primeraDireccion;
         this.segundaDireccion = segundaDireccion;
