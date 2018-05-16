@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <endpoint implementation="cat.proven.services.WSProducto" name="WSProducto" url-pattern="/WSProducto"/>
+  <endpoint implementation="cat.proven.services.WSEmpleado" name="WSEmpleado" url-pattern="/WSEmpleado"/>
+  <endpoint implementation="cat.proven.services.WSPedido" name="WSPedido" url-pattern="/WSPedido"/>
+  <endpoint implementation="cat.proven.services.WSCliente" name="WSCliente" url-pattern="/WSCliente"/>
+  <endpoint implementation="cat.proven.services.WSLogin" name="WSLogin" url-pattern="/WSLogin"/>
+</endpoints>

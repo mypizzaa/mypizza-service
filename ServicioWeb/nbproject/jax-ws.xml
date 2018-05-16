@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="WSProducto">
+      <implementation-class>cat.proven.services.WSProducto</implementation-class>
+    </service>
+    <service name="WSEmpleado">
+      <implementation-class>cat.proven.services.WSEmpleado</implementation-class>
+    </service>
+    <service name="WSPedido">
+      <implementation-class>cat.proven.services.WSPedido</implementation-class>
+    </service>
+    <service name="WSCliente">
+      <implementation-class>cat.proven.services.WSCliente</implementation-class>
+    </service>
+    <service name="WSLogin">
+      <implementation-class>cat.proven.services.WSLogin</implementation-class>
+    </service>
+  </services>
+  <clients/>
+  <jsr109>false</jsr109>
+</jax-ws>
