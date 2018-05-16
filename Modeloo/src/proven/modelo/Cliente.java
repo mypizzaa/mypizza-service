@@ -31,6 +31,14 @@ public class Cliente extends Usuario {
         this.telefono = telefono;
     }   
 
+    public Cliente(String correo, String password) {
+        super(correo, password);
+    }        
+
+    public Cliente(String correo) {
+        super(correo);
+    }
+
     //getters
     public long getIdCliente() {
         return this.id_cliente;

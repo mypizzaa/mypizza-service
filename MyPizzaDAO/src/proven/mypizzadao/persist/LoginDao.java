@@ -19,7 +19,7 @@ public class LoginDao {
 
     private StoreDBConnect dbConnect;
 
-    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? ";
+    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? activo=?";
 
     public LoginDao() {
         try {
@@ -37,6 +37,7 @@ public class LoginDao {
                 PreparedStatement st = conn.prepareStatement(QUERY_FIND_USER);
                 st.setString(1, correo);
                 st.setString(2, password);
+                st.setInt(3, 1);
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
                     u = resultsetToUser(rs);

@@ -11,6 +11,7 @@ public class Usuario {
     private String imagen;
     private String tipo_Usuario;
     private String correo;
+    private int activo;
 
     //Constructor
     public Usuario(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
@@ -38,7 +39,10 @@ public class Usuario {
         this.tipo_Usuario = tipo_Usuario;
         this.correo = correo;
     }
-        
+
+    public Usuario(String correo) {
+        this.correo = correo;
+    }  
 
     public Usuario() {
        
@@ -109,6 +113,24 @@ public class Usuario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public String getTipo_Usuario() {
+        return tipo_Usuario;
+    }
+
+    public void setTipo_Usuario(String tipo_Usuario) {
+        this.tipo_Usuario = tipo_Usuario;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+    
+    
 
     //toString
     @Override

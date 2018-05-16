@@ -39,6 +39,18 @@ public class Model {
         return clientDao.addClient(c);
     }
     
+    public int checkIfExist(Cliente c){
+        return clientDao.checkIfExist(c);
+    }
+    
+    public int inactivateClient(Cliente c){
+        return clientDao.inactivateClient(c);
+    }
+    
+    public int changePassword(Cliente c){
+        return clientDao.modifyPassword(c);
+    }
+    
     public List<Pizza> getAllPizzas(){
         return productDao.getAllPizzas();
     }

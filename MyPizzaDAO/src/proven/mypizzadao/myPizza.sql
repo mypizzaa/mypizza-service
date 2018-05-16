@@ -128,6 +128,7 @@ CREATE TABLE `tb_usuario` (
     `imagen` VARCHAR(40) DEFAULT NULL,
     `tipo_usuario` VARCHAR(40) DEFAULT NULL,
     `correo` VARCHAR(40) DEFAULT NULL,
+    `activo` BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB;
 
