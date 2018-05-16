@@ -1,0 +1,7 @@
+Json
+MyPizzaDAo
+Modeloo
+MYSQL JDBC
+JAX-WS 2.2.6
+Jersey 2.5.1 (JAX-RS RI)
+JAX-RS 2.0
