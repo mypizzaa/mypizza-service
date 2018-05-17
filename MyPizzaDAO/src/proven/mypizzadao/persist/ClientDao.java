@@ -18,21 +18,19 @@ import proven.modelo.Cliente;
  *
  * @author alumne
  */
+
+
 public class ClientDao {
 
     private StoreDBConnect dbConnect;
 
     public ClientDao() {
-        try {
-            dbConnect = new StoreDBConnect();
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
+        dbConnect = new StoreDBConnect();
     }
 
     public List<Cliente> listAllClients() {
         List<Cliente> cList = null;
-
+        //TODO
         return cList;
     }
 
@@ -55,12 +53,13 @@ public class ClientDao {
 
             if (rs.next()) {
                 long id = rs.getInt(1);
-                System.out.println(id);
-                PreparedStatement pst1 = conn.prepareStatement("INSERT INTO tb_cliente (id_usuario, telefono, direccion1, direccion2) VALUES(?, ?, ?, ?)");
+                PreparedStatement pst1 = conn.prepareStatement("INSERT INTO tb_cliente (id_usuario, telefono, direccion1, direccion2, poblacion, codigo_postal) VALUES(?, ?, ?, ?, ?, ?)");
                 pst1.setLong(1, id);
                 pst1.setString(2, c.getTelefono());
                 pst1.setString(3, c.getPrimeraDireccion());
                 pst1.setString(4, c.getSegundaDireccion());
+                pst1.setString(5, c.getPoblacion());
+                pst1.setInt(6, c.getCodigo_postal());
 
                 i = pst1.executeUpdate();
             }
@@ -78,8 +77,8 @@ public class ClientDao {
 
         if (conn != null && c != null) {
             try {
-                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE correo=?");
-                pst.setString(1, c.getCorreo());
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE dni=?");
+                pst.setString(1, c.getDni());
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     i = 1;
@@ -97,9 +96,9 @@ public class ClientDao {
             Connection conn = dbConnect.getConnection();
             if (conn != null) {
                 try {
-                    PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET password=? WHERE correo=?");
+                    PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET password=? WHERE dni=?");
                     pst.setString(1, c.getPassword());
-                    pst.setString(2, c.getCorreo());
+                    pst.setString(2, c.getDni());
                     i = pst.executeUpdate();
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
@@ -115,10 +114,26 @@ public class ClientDao {
             Connection conn = dbConnect.getConnection();
             if (conn != null) {
                 try {
-                    PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET password=? WHERE correo=?");
-                    pst.setString(1, c.getPassword());
-                    pst.setString(2, c.getCorreo());
+                    PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET nombre=?, apellidos=?, password=?, imagen=?, correo=? WHERE id_usuario=?");
+                    pst.setString(1, c.getNombre());
+                    pst.setString(2, c.getApellidos());
+                    pst.setString(3, c.getPassword());
+                    pst.setString(4, c.getImagen());
+                    pst.setString(5, c.getCorreo());
+                    pst.setLong(6, c.getIdUsuario());
+
                     i = pst.executeUpdate();
+
+                    if (i > 0) {
+                        PreparedStatement pst1 = conn.prepareStatement("UPDATE tb_cliente SET telefono=?, direccion1=?, direccion2=?, poblacion=?, codigo_postal=? WHERE id_usuario=?");
+                        pst1.setString(1, c.getTelefono());
+                        pst1.setString(2, c.getPrimeraDireccion());
+                        pst1.setString(3, c.getSegundaDireccion());
+                        pst1.setString(4, c.getPoblacion());
+                        pst1.setInt(5, c.getCodigo_postal());
+                        pst1.setLong(6, c.getIdUsuario());                        
+                        i = pst1.executeUpdate();
+                    }
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -133,12 +148,12 @@ public class ClientDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null) {
             try {
-                PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET activo=? WHERE correo=?");
+                PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET activo=? WHERE dni=?");
                 pst.setInt(1, 0);
-                pst.setString(2, c.getCorreo());
+                pst.setString(2, c.getDni());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
-                
+
             }
 
         }

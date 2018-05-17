@@ -25,10 +25,7 @@ public class ProductDao {
     private StoreDBConnect dbConnect;    
    
     public ProductDao() {
-        try {
-            dbConnect = new StoreDBConnect();
-        } catch (ClassNotFoundException ex) {            
-        }
+        dbConnect = new StoreDBConnect();
     }
     
     public List<Pizza> getAllPizzas(){

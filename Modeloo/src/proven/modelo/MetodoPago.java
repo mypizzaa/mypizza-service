@@ -12,6 +12,12 @@ public class MetodoPago {
         this.nombre = nombre;
         this.detalles = detalles;
     }
+
+    public MetodoPago(long id_metodoPago) {
+        this.id_metodoPago = id_metodoPago;
+    }
+    
+    
     //--------------------------------------------------------------------------
 
     //getters

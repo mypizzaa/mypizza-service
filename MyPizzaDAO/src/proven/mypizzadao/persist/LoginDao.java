@@ -22,11 +22,9 @@ public class LoginDao {
     private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? activo=?";
 
     public LoginDao() {
-        try {
-            dbConnect = new StoreDBConnect();
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
+
+        dbConnect = new StoreDBConnect();
+
     }
 
     public Usuario login(String correo, String password) {
@@ -51,7 +49,6 @@ public class LoginDao {
         }
         return u;
     }
-    
 
     private Usuario resultsetToUser(ResultSet rs) throws SQLException {
         long id_usuario = rs.getLong("id_usuario");

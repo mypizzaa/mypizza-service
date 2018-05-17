@@ -41,8 +41,8 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public Usuario(String correo) {
-        this.correo = correo;
+    public Usuario(String dni) {
+        this.dni = dni;
     }  
 
     public Usuario() {

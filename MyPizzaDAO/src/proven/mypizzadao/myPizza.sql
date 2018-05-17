@@ -112,8 +112,8 @@ CREATE TABLE `tb_metodoPago` (
 CREATE TABLE `tb_empleado` (
     `id_empleado` INT(4) NOT NULL AUTO_INCREMENT,
     `id_usuario` INT(4),
-    `hora_entrada` DATETIME,
-    `hora_salida` DATETIME,
+    `hora_entrada` TIME,
+    `hora_salida` TIME,
     `horas_semanales` int(4),
     `salario` DOUBLE DEFAULT 0.0,  
     PRIMARY KEY (`id_empleado`)
@@ -138,7 +138,9 @@ CREATE TABLE `tb_cliente` (
     `id_usuario` INT(4) NOT NULL,
     `telefono` INT (4) DEFAULT NULL,
     `direccion1` VARCHAR(40) DEFAULT NULL,
-    `direccion2` VARCHAR(40) DEFAULT NULL,   
+    `direccion2` VARCHAR(40) DEFAULT NULL,
+    `poblacion`  VARCHAR (60) DEFAULT NULL,
+    `codigo_postal` INT(5) DEFAULT NULL,
     PRIMARY KEY (`id_cliente`)
 ) ENGINE=InnoDB;
 
@@ -247,9 +249,6 @@ INSERT INTO tb_producto(`nombre`, `precio`, `imagen`, id_tipo ) VALUES
 ('Coca-Cola', 1.8, 'beb', 2),
 ('Aquarius', 1.6, 'beb', 2);
 
-INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
-('46472595Z', 'Javi', 'Delgado', 'a','imagen', 'admin', 'a');
-
 INSERT INTO tb_pizza(`id_producto`) VALUES (28), (29), (30), (31),(32), (33), (34), (35), (36), (37), (38);
 
 INSERT INTO tb_refresco(`id_producto`) VALUES (39), (40);
@@ -286,3 +285,27 @@ INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (19, 10), (20, 
 
 -- De la Terra
 INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (6, 11), (7, 11), (19, 11), (23, 11);
+
+
+
+-- Empleados
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('46472595Z', 'Javi', 'Delgado', 'a','jdelgado.jpg', 'admin', 'a');
+INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
+VALUES (1, '10:00:00', '18:00:00', '40', '1200');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('21343243A', 'Jose', 'Morales', 'b','jmorales.jpg', 'empleado', 'b');
+INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
+VALUES (2, '9:00:00', '13:00:00', '20', '1100');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('87542162P', 'Miquel', 'Gomez', 'c','mgomez.jpg', 'empleado', 'c');
+INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
+VALUES (3, '13:00:00', '17:00:00', '20', '1100');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('12345678C', 'David', 'Ramirez', 'd','dramirez.jpg', 'admin', 'd');
+INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
+VALUES (4, '17:00:00', '21:00:00', '20', '1100');
