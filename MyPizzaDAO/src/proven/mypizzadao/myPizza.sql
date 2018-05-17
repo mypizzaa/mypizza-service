@@ -215,7 +215,7 @@ foreign key (id_cliente) references tb_cliente(id_cliente)
 on update cascade;
 
 
-
+-- Tipos de productos
 INSERT INTO `tb_tipo`(`nombre`) VALUES ("Pizza");
 INSERT INTO `tb_tipo`(`nombre`) VALUES ("Bebida");
 INSERT INTO `tb_tipo`(`nombre`) VALUES ("Ingrediente");
@@ -239,6 +239,7 @@ INSERT INTO tb_ingredientes (`id_producto`) VALUES (1), (2), (3), (4),
 (5), (6), (7), (8), (9), (10),(11), (12), (13), (14), (15), (16), 
 (17), (18), (19), (20), (21), (22), (23), (24), (25), (26), (27);
 
+-- Pizzas y bebidas
 INSERT INTO tb_producto(`nombre`, `precio`, `imagen`, id_tipo ) VALUES 
 ('Pizza Barbacoa', 14.95, 'pbarbacoa.png', 1), ('Pizza 4 quesos', 13.55, 'pqueso.png', 1),
 ('Pizza Champiñones', 13.55, 'pchampiñones.png', 1), ('Pizza Hawaiana', 14.95, 'phawaiana.png', 1),
@@ -309,3 +310,10 @@ INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo
 ('12345678C', 'David', 'Ramirez', 'd','dramirez.jpg', 'admin', 'd');
 INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
 VALUES (4, '17:00:00', '21:00:00', '20', '1100');
+
+
+-- Clientes
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('21354234C', 'Helena', 'Rada', 'hel123','dramirez.jpg', 'cliente', 'hel@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(5, '123456789', 'c/Barcelona 14', NULL, 'L"Hospitalet de Llobregat', '08901')
