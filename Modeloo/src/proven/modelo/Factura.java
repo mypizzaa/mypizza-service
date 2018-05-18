@@ -9,17 +9,21 @@ public class Factura {
     private long id_cliente;
     private long id_metodoPago;
     private Boolean cobrado;
+    private long id_pedido;
+    private double precio_total;
 
     //Constructor
-    public Factura(long id_factura, Date fecha, long id_cliente, long id_metodoPago, Boolean cobrado) {
+    public Factura(long id_factura, Date fecha, long id_cliente, long id_metodoPago, Boolean cobrado, long id_pedido, double precio_total) {
         this.id_factura = id_factura;
         this.fecha = fecha;
         this.id_cliente = id_cliente;
         this.id_metodoPago = id_metodoPago;
         this.cobrado = cobrado;
+        this.id_pedido = id_pedido;
+        this.precio_total = precio_total;
     }
-    //--------------------------------------------------------------------------
 
+    //--------------------------------------------------------------------------
     //Getters
     public long getIdFactura() {
         return this.id_factura;

@@ -75,8 +75,8 @@ CREATE TABLE `tb_pedido` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE `tb_estado` (
-	`id_estado` INT(4) NOT NULL AUTO_INCREMENT,
-    `observaciones` VARCHAR(40),
+    `id_estado` INT(4) NOT NULL AUTO_INCREMENT,
+    `tipo_estado` VARCHAR(40),
     `id_empleado` INT(4),
     PRIMARY KEY (`id_estado`)
 ) ENGINE=InnoDB;
@@ -220,6 +220,7 @@ INSERT INTO `tb_tipo`(`nombre`) VALUES ("Pizza");
 INSERT INTO `tb_tipo`(`nombre`) VALUES ("Bebida");
 INSERT INTO `tb_tipo`(`nombre`) VALUES ("Ingrediente");
 
+-- Ingredientes
 INSERT INTO tb_producto (nombre,precio,imagen,id_tipo) VALUES ("Jamon York", 0.50, "jamonyork.png",3),
 ("Salsa barbacoa", 0.50, "salsabarbacoa.png",3), ("Jamon Serrano", 0.50, "jamonserrano.png",3),
 ("Atún", 0.50, "atun.png",3), ("Salami", 0.50, "salami.png",3),
@@ -299,17 +300,17 @@ VALUES (1, '10:00:00', '18:00:00', '40', '1200');
 INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
 ('21343243A', 'Jose', 'Morales', 'b','jmorales.jpg', 'empleado', 'b');
 INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
-VALUES (2, '9:00:00', '13:00:00', '20', '1100');
+VALUES (2, '12:00:00', '21:00:00', '20', '1100');
 
 INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
 ('87542162P', 'Miquel', 'Gomez', 'c','mgomez.jpg', 'empleado', 'c');
 INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
-VALUES (3, '13:00:00', '17:00:00', '20', '1100');
+VALUES (3, '12:00:00', '21:00:00', '20', '1100');
 
 INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
-('12345678C', 'David', 'Ramirez', 'd','dramirez.jpg', 'admin', 'd');
+('12345678C', 'David', 'Ramirez', 'd','dramirez.jpg', 'empleado', 'd');
 INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
-VALUES (4, '17:00:00', '21:00:00', '20', '1100');
+VALUES (4, '12:00:00', '21:00:00', '20', '1100');
 
 
 -- Clientes
@@ -362,3 +363,14 @@ INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo
 ('51204428B', 'Marc', 'Marti Perna', 'mart123','mmarti.jpg', 'cliente', 'mmarti@gmail.com');
 INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
 (14, '601123593', 'c/Deia 7', NULL, 'Barcelona', '08016');
+
+
+-- Metodos de pago
+INSERT INTO tb_metodoPago (`nombre`, `otros_detalles`) VALUES ('Tarjeta', 'VISA'), 
+('Tarjeta', 'VISA Electron'), ('Tarjeta', 'MaterCard'), ('Tarjeta', 'Maestro'), ('PAYPAL', NULL),
+('Contra Rembolso', NULL);
+
+-- Estados pedido
+INSERT INTO tb_estado (`tipo_estado`, `id_empleado`) VALUES ('Recibido', 2),
+('Cocinando', 3), ('Listo', NULL), ('En reparto', 4);
+
