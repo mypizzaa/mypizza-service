@@ -1,17 +1,18 @@
 package proven.modelo;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Empleado extends Usuario {
 
     private long id_empleado;
-    private Date hora_entrada;
-    private Date hora_salida;
+    private Time hora_entrada;
+    private Time hora_salida;
     private int horasSemanales;
     private double Salario;
 
     //constructor
-    public Empleado(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, long id_empleado, Date hora_entrada, Date hora_salida, int horasSemanales, double salario) {
+    public Empleado(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, long id_empleado, Time hora_entrada, Time hora_salida, int horasSemanales, double salario) {
         super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.id_empleado = id_empleado;
         this.hora_entrada = hora_entrada;
@@ -26,11 +27,11 @@ public class Empleado extends Usuario {
         return this.id_empleado;
     }
 
-    public Date getHoraEntrada() {
+    public Time getHoraEntrada() {
         return this.hora_entrada;
     }
 
-    public Date getHoraSalida() {
+    public Time getHoraSalida() {
         return this.hora_salida;
     }
 
@@ -47,11 +48,11 @@ public class Empleado extends Usuario {
         this.id_empleado = idEmpleado;
     }
 
-    public void setHoraEntrada(Date horaEntrada) {
+    public void setHoraEntrada(Time horaEntrada) {
         this.hora_entrada = horaEntrada;
     }
 
-    public void setHoraSalida(Date horaSalida) {
+    public void setHoraSalida(Time horaSalida) {
         this.hora_salida = horaSalida;
     }
 

@@ -18,7 +18,7 @@ public class StoreDBConnect {
         try{
         Class.forName(this.DRIVER);
         }catch(ClassNotFoundException ex){
-            System.out.println("Error falta driver.");
+
         }
     }
     

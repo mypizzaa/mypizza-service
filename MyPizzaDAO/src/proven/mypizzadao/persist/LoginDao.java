@@ -21,7 +21,8 @@ public class LoginDao {
 
     private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? activo=?";
 
-    public LoginDao(){
+    public LoginDao() {
+
 
         dbConnect = new StoreDBConnect();
 

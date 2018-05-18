@@ -5,6 +5,8 @@
  */
 package proven.modelo;
 
+import java.util.List;
+
 /**
  *
  * @author ASUS
@@ -12,74 +14,27 @@ package proven.modelo;
 public class Pedido {
 
     private long id_pedido;
-    private long id_pedido_info;
-    private long id_producto;
-    private String observaciones;
+    private String estadoPedido;
+    private String direccionPedido;
+    private String fechaPedido;
+    private List<Producto> prodList;
     private long id_cliente;
+    private double precioTotal;
+    private long id_factura;
 
-    //Construcor
-    public Pedido(long id_pedido, long id_pedido_info, long id_producto, String observaciones, long id_cliente) {
+    public Pedido(long id_pedido, String estadoPedido, String direccionPedido, String fechaPedido, List<Producto> prodList, long id_cliente, double precioTotal, long id_factura) {
         this.id_pedido = id_pedido;
-        this.id_pedido_info = id_pedido_info;
-        this.id_producto = id_producto;
-        this.observaciones = observaciones;
+        this.estadoPedido = estadoPedido;
+        this.direccionPedido = direccionPedido;
+        this.fechaPedido = fechaPedido;
+        this.prodList = prodList;
         this.id_cliente = id_cliente;
-    }
-    //--------------------------------------------------------------------------
-
-    //Getters
-    public long getIdPedido() {
-        return this.id_pedido;
+        this.precioTotal = precioTotal;
+        this.id_factura = id_factura;
     }
 
-    public long getIdPedidoInfo() {
-        return this.id_pedido_info;
+    public Pedido() {
     }
-
-    public long getIdProducto() {
-        return this.id_producto;
-    }
-
-    public String getObservaciones() {
-        return this.observaciones;
-    }
-
-    public long getIdCliente() {
-        return this.id_cliente;
-    }
-
-    //Setters
-    public void setIdPedido(long idPedido) {
-        this.id_pedido = idPedido;
-    }
-
-    public void setIdPedidoInfo(long idPedidoInfo) {
-        this.id_pedido = idPedidoInfo;
-    }
-
-    public void setIdProducto(long idProd) {
-        this.id_producto = idProd;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public void setIdCliente(long idCliente) {
-        this.id_cliente = idCliente;
-    }
-
-    //toString
-    public String ToString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Pedido [ ");
-        sb.append(" id_pedido = " + id_pedido);
-        sb.append(", id_pedido_info = " + id_pedido_info);
-        sb.append(", id_producto = " + id_producto);
-        sb.append(", Observaciones = " + observaciones);
-        sb.append(", id_cliente = " + id_cliente);
-        sb.append(" ]");
-
-        return sb.toString();
-    }
+    
+  
 }
