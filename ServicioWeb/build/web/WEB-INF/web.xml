@@ -4,11 +4,6 @@
         <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>WSProducto</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet>
         <servlet-name>WSEmpleado</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -28,10 +23,11 @@
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet-mapping>
+    <servlet>
         <servlet-name>WSProducto</servlet-name>
-        <url-pattern>/WSProducto</url-pattern>
-    </servlet-mapping>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WSEmpleado</servlet-name>
         <url-pattern>/WSEmpleado</url-pattern>
@@ -47,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>WSLogin</servlet-name>
         <url-pattern>/WSLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WSProducto</servlet-name>
+        <url-pattern>/WSProducto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

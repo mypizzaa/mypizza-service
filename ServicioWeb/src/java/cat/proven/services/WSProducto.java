@@ -11,8 +11,10 @@ import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 import proven.modelo.Ingrediente;
 import proven.modelo.Pizza;
 import proven.modelo.Refresco;
@@ -29,7 +31,7 @@ public class WSProducto {
     private final Model model;
     
     public WSProducto(){
-        model = new Model();
+       model = new Model();
     }
     
     //--------------------------------------------------------------------------
@@ -54,6 +56,8 @@ public class WSProducto {
      * @return lista de bebidas si no null
      */
     @WebMethod(operationName = "bebidas")
+    @Path("bebidas")
+    @GET
     public String listallbebidas() {
         
         List<Refresco> listaRefrescos;        
@@ -67,6 +71,8 @@ public class WSProducto {
      * @return lista de ingredientes si no null
      */
     @WebMethod(operationName = "ingredientes")
+    @Path("ingredientes")
+    @GET
     public String listAllIngredients() {
         List<Ingrediente> listaIngredientes;        
         listaIngredientes = model.getAllIngredients();

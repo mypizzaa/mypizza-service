@@ -18,16 +18,14 @@ import proven.modelo.Cliente;
  *
  * @author alumne
  */
+
+
 public class ClientDao {
 
     private StoreDBConnect dbConnect;
 
     public ClientDao() {
-        try {
-            dbConnect = new StoreDBConnect();
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
+        dbConnect = new StoreDBConnect();
     }
 
     public List<Cliente> listAllClients() {
@@ -138,7 +136,7 @@ public class ClientDao {
                 pst.setString(2, c.getCorreo());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
-                
+
             }
 
         }

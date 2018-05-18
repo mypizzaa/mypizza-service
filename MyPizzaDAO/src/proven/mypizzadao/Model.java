@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proven.mypizzadao;
 
 
@@ -16,16 +12,12 @@ import proven.mypizzadao.persist.ClientDao;
 import proven.mypizzadao.persist.LoginDao;
 import proven.mypizzadao.persist.ProductDao;
 
-/**
- *
- * @author alumne
- */
 public class Model {
     private final LoginDao loginDao;
     private final ProductDao productDao;
     private final ClientDao clientDao;
     
-    public Model() {
+    public Model(){
         loginDao = new LoginDao();
         productDao = new ProductDao();
         clientDao = new ClientDao();

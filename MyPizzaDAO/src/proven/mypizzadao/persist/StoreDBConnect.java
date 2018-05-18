@@ -13,8 +13,13 @@ public class StoreDBConnect {
     private static final String USUARI = "administrator";
     private static final String PASSWORD = "adminpsw";
 
-    public StoreDBConnect() throws ClassNotFoundException {
-        Class.forName(this.DRIVER);       
+    public StoreDBConnect(){
+        
+        try{
+        Class.forName(this.DRIVER);
+        }catch(ClassNotFoundException ex){
+            System.out.println("Error falta driver.");
+        }
     }
     
     /**
