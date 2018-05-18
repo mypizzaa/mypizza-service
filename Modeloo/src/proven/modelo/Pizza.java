@@ -9,6 +9,12 @@ public class Pizza extends Producto {
         this.id_pizza = id_pizza;
     }
 
+    public Pizza(long id_pizza) {
+        this.id_pizza = id_pizza;
+    }
+    
+    
+
     //Getters
     public long getIdPizza() {
         return this.id_pizza;

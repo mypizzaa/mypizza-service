@@ -314,6 +314,51 @@ VALUES (4, '17:00:00', '21:00:00', '20', '1100');
 
 -- Clientes
 INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
-('21354234C', 'Helena', 'Rada', 'hel123','dramirez.jpg', 'cliente', 'hel@gmail.com');
+('21354234C', 'Helena', 'Rada', 'hel123','hrada.jpg', 'cliente', 'hel@gmail.com');
 INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
-(5, '123456789', 'c/Barcelona 14', NULL, 'L"Hospitalet de Llobregat', '08901')
+(5, '123456789', 'c/Barcelona 14', NULL, 'L"Hospitalet de Llobregat', '08901');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+    ('78414103L', 'Jose Maria', 'Gonzalez Lopez', 'jos123','jgonzalez.jpg', 'cliente', 'jos@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(6, '216325234', 'c/Provença 32', 'c/Lletra A De La Zona Franca 46', 'Barcelona', '08040');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('26037843A', 'Luis', 'Casanova Sanchez', 'luis123','lcasanova.jpg', 'cliente', 'luis.cas@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(7, '623112322', 'c/Edison 42', NULL, 'Barcelona', '08018');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('28078196A', 'Maria', 'Mercedes Ale', 'mer123', 'mmercedes.jpg', 'cliente', 'merale@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(8, '524742433', 'c/Rull 12', NULL, 'Barcelona', '08002');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('60239236M', 'Lucia', 'Soria Lacasa', 'luc123', 'slacasa.jpg', 'cliente', 'luc@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(9, '642743214', 'c/S’Agaro 54', 'c/Ruiz De Padron', 'Barcelona', '08033');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('62317466R', 'Javi', 'Lozano', 'jav123','jlozano.jpg', 'cliente', 'jav@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(10, '522123123', 'c/Inca 64', NULL, 'Barcelona', '08031');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('56693619E', 'Carlos', 'Castillo Zamora', 'cas123', 'ccastillo.jpg', 'cliente', 'cast@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(11, '754234472', 'c/Hortes 1', NULL, 'Barcelona', '08004');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('70267778H', 'Toni', 'Sanfeli Pons', 'ton123', 'tsanfeliu.jpg', 'cliente', 'tsanfeliu@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(12, '215864921', 'c/Cunit 53', NULL, 'Barcelona', '08024');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('24192569L', 'Antoni', 'Rodrigez Losa', 'ant123', 'antrodriguez.jpg', 'cliente', 'ant@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(13, '643123553', 'c/Unio 12', 'c/Ullastre 43', 'Barcelona', '08023');
+
+INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
+('51204428B', 'Marc', 'Marti Perna', 'mart123','mmarti.jpg', 'cliente', 'mmarti@gmail.com');
+INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `poblacion`, `codigo_postal`) VALUES 
+(14, '601123593', 'c/Deia 7', NULL, 'Barcelona', '08016');

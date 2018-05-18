@@ -16,6 +16,11 @@ public class Producto {
         this.imagen = img;
         this.id_tipo = id_tip;
     }
+
+    public Producto() {
+    }
+    
+    
     //--------------------------------------------------------------------------
 
     //Getters
