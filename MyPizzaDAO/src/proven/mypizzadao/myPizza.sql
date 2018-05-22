@@ -61,8 +61,6 @@ CREATE TABLE `tb_pedido_info` (
     `id_pedido_info` INT(4) NOT NULL AUTO_INCREMENT,
     `id_estado` INT(4),
     `direccion` VARCHAR(40),
-    `dia_hora` DATETIME,
-    `id_cliente` INT(4),
     PRIMARY KEY (`id_pedido_info`)
 ) ENGINE=InnoDB;
 
@@ -83,14 +81,13 @@ CREATE TABLE `tb_estado` (
     PRIMARY KEY (`id_estado`)
 ) ENGINE=InnoDB;
 
-
 CREATE TABLE `tb_factura` (
     `id_factura` INT(4) NOT NULL AUTO_INCREMENT,
     `id_cliente` INT(4),
     `id_metodoPago` INT(4),
     `id_pedido_info` INT(4),
     `precio_total` DOUBLE DEFAULT 0.0,
-    `fecha` DATE,
+    `dia_hora` DATETIME DEFAULT NULL,
     `cobrado` BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (`id_factura`)
 ) ENGINE=InnoDB;
@@ -101,8 +98,6 @@ CREATE TABLE `tb_metodoPago` (
     `otros_detalles` VARCHAR(40),
     PRIMARY KEY (`id_metodoPago`)
 ) ENGINE=InnoDB;
-
-
 
 CREATE TABLE `tb_empleado` (
     `id_empleado` INT(4) NOT NULL AUTO_INCREMENT,
@@ -171,10 +166,6 @@ on update cascade;
 
 alter table tb_pedido ADD CONSTRAINT FK_tbPedido_tbProducto
 foreign key (id_producto) references tb_producto(id_producto)
-on update cascade;
-
-alter table tb_pedido_info ADD CONSTRAINT FK_tbPedido_tbCliente
-foreign key (id_cliente) references tb_cliente(id_cliente)
 on update cascade;
 
 alter table tb_factura ADD CONSTRAINT FK_Factura_tbPedidoInfo
@@ -365,3 +356,104 @@ INSERT INTO tb_metodoPago (`nombre`, `otros_detalles`) VALUES ('Tarjeta', 'VISA'
 INSERT INTO tb_estado (`tipo_estado`, `id_empleado`) VALUES ('Recibido', 2),
 ('Cocinando', 3), ('Listo', NULL), ('En reparto', 4);
 
+
+-- Pedidos recibidos
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(1, 'c/Cunit 53, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(3, 1, 1, 27.10, '2018-05-22 15:00:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(1, 29, NULL, 2, 27.10);
+
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(1, 'c/Hortes 1, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(7, 1, 2, 27.10, '2018-05-22 15:23:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(2, 33, 'Solo burguer', 1, 30.7);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(2, 32, NULL, 1, 13.55);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(2, 39, NULL, 2, 3.6);
+
+-- Pedidos cocinando
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(2, 'c/Ullastre 43, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(5, 2, 3, 15.35, '2018-05-22 15:43:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(3, 30, NULL, 1, 13.55);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(3, 39, NULL, 1, 1.8);
+
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(2, 'c/Rull 32, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(4, 3, 4, 29.40, '2018-05-22 21:33:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(4, 33, 'Sin salsa', 1, 13.55);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(4, 36, 'Con gambas', 1, 14.05);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(4, 39, NULL, 1, 1.8);
+
+
+-- Pedidos listos
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(3, 'c/Rull 12, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(9, 2, 5, 29.9, '2018-05-22 14:30:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(5, 28, NULL, 2, 29.9);
+
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(3, 'c/Rull 42, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(10, 2, 6, 56.20, '2018-05-22 22:00:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(6, 35, 'Con queso', 2, 28.10);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(6, 34, 'Con frankfurt', 2, 28.10);
+
+-- Pedidos en reparto
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(4, 'c/Inca 64, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(7, 1, 7, 13.55, '2018-05-22 13:00:00', 0);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(7, 37, 'Con tomate', 1, 13.55);
+
+-- Pedidos pagados
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(4, 'c/Edison 42, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(2, 1, 8, 14.05, '2018-05-21 12:00:00', 1);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(8, 32, 'Con pollo', 1, 14.05);
+
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(4, 'c/Inca 64, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(2, 1, 9, 27.10, '2018-05-21 15:20:00', 1);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(9, 35, 'Sin picante', 1, 13.55);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(9, 35, NULL, 1, 13.55);
+
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(4, 'c/Sant Roc, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(7, 1, 10, 27.10, '2018-05-21 14:24:00', 1);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(10, 31, NULL, 1, 13.55);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(10, 31, 'Sin piña', 1, 13.55);
+
+INSERT INTO tb_pedido_info (`id_estado`, `direccion`) VALUES
+(4, 'c/Mayor 18, Barcelona');
+INSERT INTO tb_factura(`id_cliente`, `id_metodoPago`, `id_pedido_info`, `precio_total`, `dia_hora`, `cobrado`)
+VALUES(3, 2, 11, 15.85, '2018-05-21 13:00:00', 1);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(11, 37, 'Con salsa barbacoa', 1, 14.05);
+INSERT INTO tb_pedido(`id_pedido_info`, `id_producto`, `observaciones`, `cantidad`, `precio`) VALUES
+(11, 39, NULL, 1, 1.8);

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Factura {
 
     private long id_factura;
-    private Date fecha;
+    private String fecha;
     private long id_cliente;
     private long id_metodoPago;
     private Boolean cobrado;
@@ -13,7 +13,7 @@ public class Factura {
     private double precio_total;
 
     //Constructor
-    public Factura(long id_factura, Date fecha, long id_cliente, long id_metodoPago, Boolean cobrado, long id_pedido, double precio_total) {
+    public Factura(long id_factura, String fecha, long id_cliente, long id_metodoPago, Boolean cobrado, long id_pedido, double precio_total) {
         this.id_factura = id_factura;
         this.fecha = fecha;
         this.id_cliente = id_cliente;
@@ -23,7 +23,7 @@ public class Factura {
         this.precio_total = precio_total;
     }
 
-    public Factura(Date fecha, long id_cliente, long id_metodoPago, double precio_total) {
+    public Factura(String fecha, long id_cliente, long id_metodoPago, double precio_total) {
         this.fecha = fecha;
         this.id_cliente = id_cliente;
         this.id_metodoPago = id_metodoPago;
@@ -42,11 +42,11 @@ public class Factura {
         this.id_factura = id_factura;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

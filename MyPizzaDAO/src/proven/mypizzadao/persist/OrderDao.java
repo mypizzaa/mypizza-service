@@ -55,11 +55,9 @@ public class OrderDao {
     private int receiveOrder(PedidoInfo pi, Connection conn) throws SQLException {
         int id_pedido = 0;
         if (conn != null) {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_pedido_info (id_estado, direccion, dia_hora, id_cliente) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_pedido_info (id_estado, direccion) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, 1);
             pst.setString(2, pi.getDireccion());
-            pst.setString(3, pi.getDia_hora());
-            pst.setLong(4, pi.getId_cliente());
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
@@ -92,12 +90,12 @@ public class OrderDao {
     private int generateBill(long id_info_pedido, Factura f, Connection conn) throws SQLException {
         int i = 0;
         if (conn != null) {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_factura(id_cliente, id_metodoPago, id_pedido_info, precio_total, fecha, cobrado) VALUES (?,?,?,?,?,?)");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_factura(id_cliente, id_metodoPago, id_pedido_info, precio_total, dia_hora, cobrado) VALUES (?,?,?,?,?,?)");
             pst.setLong(1, f.getId_cliente());
             pst.setLong(2, f.getId_metodoPago());
             pst.setLong(3, id_info_pedido);
             pst.setDouble(4, f.getPrecio_total());
-            pst.setDate(5, (Date) f.getFecha());
+            pst.setString(5, f.getFecha());
             pst.setInt(6, 0);
             i += pst.executeUpdate();
         }
@@ -208,7 +206,7 @@ public class OrderDao {
     }
 
     private PedidoInfo pedidoInfoToResultSet(ResultSet rs) throws SQLException {
-        return new PedidoInfo(rs.getLong("id_pedido_info"), rs.getLong("id_estado"), rs.getString("direccion"), rs.getString("dia_hora"), rs.getLong("id_cliente"));
+        return new PedidoInfo(rs.getLong("id_pedido_info"), rs.getLong("id_estado"), rs.getString("direccion"));
     }
 
     private Pedido resultSetToPedido(ResultSet rs) throws SQLException {
