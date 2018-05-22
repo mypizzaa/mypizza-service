@@ -158,8 +158,8 @@ public class OrderDao {
         if (conn != null) {
             PreparedStatement pst;
             try {
-                pst = conn.prepareStatement("UPDATE tb_pedido_info SET id_estado=? WHERE id_pedido_info=?");
-                pst.setInt(1, 4);
+                pst = conn.prepareStatement("UPDATE tb_facturta SET cobrado=? WHERE id_pedido_info=?");
+                pst.setInt(1, 1);
                 pst.setLong(2, pi.getId_pedido_info());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {

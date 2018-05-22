@@ -11,7 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import proven.modelo.Cliente;
 
 /**
@@ -30,7 +33,19 @@ public class ClientDao {
 
     public List<Cliente> listAllClients() {
         List<Cliente> cList = null;
-        //TODO
+        Connection conn = dbConnect.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario INNER JOIN tb_cliente ON tb_cliente.id_usuario = tb_usuario.id_usuario WHERE tb_usuario.activo=1");
+                ResultSet rs = pst.executeQuery();
+                cList = new ArrayList<Cliente>();
+                while (rs.next()){
+                    cList.add(resultSetToClient(rs));
+                }
+            } catch (SQLException ex) {              
+            }
+            
+        }
         return cList;
     }
 
@@ -131,7 +146,7 @@ public class ClientDao {
                         pst1.setString(3, c.getSegundaDireccion());
                         pst1.setString(4, c.getPoblacion());
                         pst1.setInt(5, c.getCodigo_postal());
-                        pst1.setLong(6, c.getIdUsuario());                        
+                        pst1.setLong(6, c.getIdUsuario());
                         i = pst1.executeUpdate();
                     }
                 } catch (SQLException ex) {
@@ -158,6 +173,15 @@ public class ClientDao {
 
         }
         return i;
+    }
+
+    private Cliente resultSetToClient(ResultSet rs) throws SQLException {
+        return new Cliente(rs.getLong("id_cliente"), rs.getString("telefono"), 
+                rs.getString("direccion1"), rs.getString("direccion2"), rs.getString("poblacion"), 
+                rs.getInt("codigo_postal"), rs.getLong("id_usuario"), rs.getString("dni"), 
+                rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), 
+                rs.getString("imagen"),rs.getString("tipo_usuario"), rs.getString("correo"), 
+                rs.getInt("activo"));
     }
 
 }
