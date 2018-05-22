@@ -19,7 +19,7 @@ public class LoginDao {
 
     private StoreDBConnect dbConnect;
 
-    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? activo=?";
+    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? AND activo=?";
 
     public LoginDao() {
 

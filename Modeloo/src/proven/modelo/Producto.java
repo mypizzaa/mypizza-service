@@ -17,6 +17,13 @@ public class Producto {
         this.id_tipo = id_tip;
     }
 
+    public Producto(String nombre, double precio, String imagen, long id_tipo) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.imagen = imagen;
+        this.id_tipo = id_tipo;
+    }         
+    
     public Producto() {
     }
     

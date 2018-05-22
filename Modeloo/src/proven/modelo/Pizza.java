@@ -9,12 +9,14 @@ public class Pizza extends Producto {
         this.id_pizza = id_pizza;
     }
 
+    public Pizza(String nombre, double precio, String imagen, long id_tipo) {
+        super(nombre, precio, imagen, id_tipo);
+    }
+
     public Pizza(long id_pizza) {
         this.id_pizza = id_pizza;
     }
     
-    
-
     //Getters
     public long getIdPizza() {
         return this.id_pizza;

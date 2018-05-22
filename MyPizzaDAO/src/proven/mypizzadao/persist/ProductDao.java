@@ -165,11 +165,10 @@ public class ProductDao {
                         Pizza pizz = new Pizza(rs.getInt(1));
                         i = addIngredientsToPizza(pizz, iList);
                     }
-                    rs.close();
                 }
 
             } catch (SQLException ex) {
-
+                  System.out.println(ex.getMessage());
             }
         }
         return i;
@@ -257,6 +256,7 @@ public class ProductDao {
                     i += pst.executeUpdate();
                     pst.close();
                 } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
                 }
             }
         }

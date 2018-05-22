@@ -5,7 +5,9 @@
  */
 package proven.mypizzadao;
 
-import proven.modelo.Cliente;
+import java.util.ArrayList;
+import java.util.List;
+import proven.modelo.*;
 
 /**
  *
@@ -19,18 +21,28 @@ public class Prueba {
     }
 
     private void run() {
-        Model m = new Model();
-        System.out.println("Login: " + m.login("123", "123"));
-        System.out.println("All pizzas: " + m.getAllPizzas());
-        System.out.println("All ingredients: " + m.getAllIngredients());
-        System.out.println("All drinks: " + m.getAllDrinks());
-        System.out.println("Ingredients by pizza: " + m.getIngredientsFromPizzaId(1));
+        Model m = Model.getInstance();       
+        System.out.println("----------Testig model---------------");
+        System.out.println("");
+        System.out.println("Login:");
+        System.out.println("Login ok: "+ m.login("a", "a"));
+        System.out.println("Login error: "+ m.login("a", "b"));
+        System.out.println("");
+        System.out.println("Product:");
+        System.out.println("Get all pizzas: "+m.getAllPizzas());
+        System.out.println("Get ingredients from pizza: "+m.getIngredientsFromPizzaId(1));
+        System.out.println("Get all ingredients: "+m.getAllIngredients());
+        System.out.println("Get all drinks: "+m.getAllDrinks());
+        System.out.println("Add a pizza: "+ m.addPizza(new Pizza("Pizza Queso", 13.95, "pqsa.jpj", 1), createListOfIngredients()));
+        
+    }
 
-        System.out.println("-------------------------------------------------");
-        System.out.println("Add Client: " + m.addClient(new Cliente("1234678Z", "Yo", "Apellido1 apellido2", "123", "img.png", "client", "yo", "213445", "d1", "d2")));
-        System.out.println("Change password: " + m.changePassword(new Cliente("a", "b")));
-        System.out.println("Exist user: " + m.checkIfExist(new Cliente("a")));
-        System.out.println("Inactivate client: " + m.inactivateClient(new Cliente("yo")));
-
+    private List<Ingrediente> createListOfIngredients() {
+        List<Ingrediente> iList = new ArrayList<Ingrediente>();
+        iList.add(new Ingrediente(1));
+        iList.add(new Ingrediente(2));
+        iList.add(new Ingrediente(3));
+        iList.add(new Ingrediente(4));
+        return iList;
     }
 }
