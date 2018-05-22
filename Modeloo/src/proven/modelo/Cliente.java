@@ -11,8 +11,8 @@ public class Cliente extends Usuario {
 
     //constructor
 
-    public Cliente(long id_cliente, String primeraDireccion, String segundaDireccion, String telefono, String poblacion, int codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
-        super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
+    public Cliente(long id_cliente, String primeraDireccion, String segundaDireccion, String telefono, String poblacion, int codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
+        super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo, activo);
         this.id_cliente = id_cliente;
         this.primeraDireccion = primeraDireccion;
         this.segundaDireccion = segundaDireccion;
@@ -20,6 +20,8 @@ public class Cliente extends Usuario {
         this.poblacion = poblacion;
         this.codigo_postal = codigo_postal;
     }
+
+    
 
 
     public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo,String primeraDireccion, String segundaDireccion, String telefono) {

@@ -151,6 +151,22 @@ public class OrderDao {
         }
         return i;
     }
+    
+    public int setBillToPaid(PedidoInfo pi) {
+        int i = 0;
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            PreparedStatement pst;
+            try {
+                pst = conn.prepareStatement("UPDATE tb_pedido_info SET id_estado=? WHERE id_pedido_info=?");
+                pst.setInt(1, 4);
+                pst.setLong(2, pi.getId_pedido_info());
+                i = pst.executeUpdate();
+            } catch (SQLException ex) {
+            }
+        }
+        return i;
+    }
 
     public List<PedidoInfo> getAllInfoOrder() {
         List<PedidoInfo> piList = null;
@@ -180,10 +196,10 @@ public class OrderDao {
                 pst.setLong(1, pi.getId_pedido_info());
                 ResultSet rs = pst.executeQuery();
                 peList = new ArrayList<Pedido>();
-                while(rs.next()){
+                while (rs.next()) {
                     peList.add(resultSetToPedido(rs));
-                } 
-               
+                }
+
             } catch (SQLException ex) {
             }
 
@@ -197,8 +213,20 @@ public class OrderDao {
 
     private Pedido resultSetToPedido(ResultSet rs) throws SQLException {
         Pedido pe = null;
-        
+
         long id_producto = rs.getLong("id_producto");
-        return pe; 
+
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            PreparedStatement pst1 = conn.prepareStatement("SELECT * FROM tb_producto WHERE id_producto = ?");
+            pst1.setLong(1, id_producto);
+            ResultSet rs1 = pst1.executeQuery();
+            if (rs1.next()) {
+                Producto p = new Producto(id_producto, rs.getString("nombre"), rs.getDouble("precio"), rs.getString("imagen"), rs.getInt("id_tipo"));
+                pe = new Pedido(rs.getLong("id_pedido"), rs.getLong("id_pedido_info"), p, rs.getString("observaciones"), rs.getInt("cantidad"), rs.getDouble("precio"));
+            }            
+        }
+
+        return pe;
     }
 }

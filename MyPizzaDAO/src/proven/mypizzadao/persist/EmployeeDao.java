@@ -137,24 +137,24 @@ public class EmployeeDao {
         int i = 0;
         if (e.getDni() != null) {
             Connection conn = dbConnection.getConnection();
-            if (conn != null){
+            if (conn != null) {
                 try {
                     PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET activo=0 WHERE dni=?");
                     pst.setString(1, e.getDni());
                     i = pst.executeUpdate();
                 } catch (SQLException ex) {
                 }
-            }            
+            }
         }
         return i;
     }
 
     private Empleado resultSetToEmployee(ResultSet rs) throws SQLException {
-        return new Empleado(rs.getLong("id_usuario"), rs.getString("dni"), rs.getString("nombre"),
-                rs.getString("apellidos"), rs.getString("password"), rs.getString("imagen"),
-                rs.getString("tipo_usuario"), rs.getString("correo"), rs.getLong("id_empleado"),
+        return new Empleado(rs.getLong("id_empleado"),
                 rs.getTime("hora_entrada"), rs.getTime("hora_salida"), rs.getInt("horas_semanales"),
-                rs.getDouble("salario"));
+                rs.getDouble("salario"), rs.getLong("id_usuario"), rs.getString("dni"), rs.getString("nombre"),
+                rs.getString("apellidos"), rs.getString("password"), rs.getString("imagen"),
+                rs.getString("tipo_usuario"), rs.getString("correo"), rs.getInt("activo"));
     }
 
 }

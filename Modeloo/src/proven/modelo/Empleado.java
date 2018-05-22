@@ -12,16 +12,16 @@ public class Empleado extends Usuario {
     private double Salario;
 
     //constructor
-    public Empleado(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, long id_empleado, Time hora_entrada, Time hora_salida, int horasSemanales, double salario) {
-        super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
+    public Empleado(long id_empleado, Time hora_entrada, Time hora_salida, int horasSemanales, double Salario, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
+        super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo, activo);
         this.id_empleado = id_empleado;
         this.hora_entrada = hora_entrada;
         this.hora_salida = hora_salida;
         this.horasSemanales = horasSemanales;
-        this.Salario = salario;
+        this.Salario = Salario;
     }
-    //--------------------------------------------------------------------------
 
+    //--------------------------------------------------------------------------
     //getters
     public long getIdEmpleado() {
         return this.id_empleado;
