@@ -23,51 +23,77 @@ public class Factura {
         this.precio_total = precio_total;
     }
 
+    public Factura(Date fecha, long id_cliente, long id_metodoPago, double precio_total) {
+        this.fecha = fecha;
+        this.id_cliente = id_cliente;
+        this.id_metodoPago = id_metodoPago;
+        this.precio_total = precio_total;
+    }
+    
+    
+
     //--------------------------------------------------------------------------
-    //Getters
-    public long getIdFactura() {
-        return this.id_factura;
+
+    public long getId_factura() {
+        return id_factura;
+    }
+
+    public void setId_factura(long id_factura) {
+        this.id_factura = id_factura;
     }
 
     public Date getFecha() {
-        return this.fecha;
-    }
-
-    public long getIdCliente() {
-        return this.id_cliente;
-    }
-
-    public long getIdMetodoPago() {
-        return this.id_metodoPago;
-    }
-
-    public Boolean getCobrado() {
-        return this.cobrado;
-    }
-
-    //Setters
-    public void setIdFactura(long idfactura) {
-        this.id_factura = idfactura;
+        return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public void setIdCliente(long idcliente) {
-        this.id_cliente = idcliente;
+    public long getId_cliente() {
+        return id_cliente;
     }
 
-    public void setIdMetodoPago(long idMetodo) {
-        this.id_metodoPago = idMetodo;
+    public void setId_cliente(long id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public long getId_metodoPago() {
+        return id_metodoPago;
+    }
+
+    public void setId_metodoPago(long id_metodoPago) {
+        this.id_metodoPago = id_metodoPago;
+    }
+
+    public Boolean getCobrado() {
+        return cobrado;
     }
 
     public void setCobrado(Boolean cobrado) {
         this.cobrado = cobrado;
     }
 
-    //toString
-    public String toString() {
-        return "id_factura = "+id_factura+", fecha = "+fecha+", id_cliente = "+id_cliente+",id_metodoPago = "+id_metodoPago+", cobrado = "+cobrado;
+    public long getId_pedido() {
+        return id_pedido;
     }
+
+    public void setId_pedido(long id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+
+    public double getPrecio_total() {
+        return precio_total;
+    }
+
+    public void setPrecio_total(double precio_total) {
+        this.precio_total = precio_total;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" + "id_factura=" + id_factura + ", fecha=" + fecha + ", id_cliente=" + id_cliente + ", id_metodoPago=" + id_metodoPago + ", cobrado=" + cobrado + ", id_pedido=" + id_pedido + ", precio_total=" + precio_total + '}';
+    }
+   
+            
 }

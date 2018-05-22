@@ -62,15 +62,17 @@ CREATE TABLE `tb_pedido_info` (
     `id_estado` INT(4),
     `direccion` VARCHAR(40),
     `dia_hora` DATETIME,
+    `id_cliente` INT(4),
     PRIMARY KEY (`id_pedido_info`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `tb_pedido` (
-	`id_pedido` INT(4) NOT NULL AUTO_INCREMENT,
+    `id_pedido` INT(4) NOT NULL AUTO_INCREMENT,
     `id_pedido_info` INT(4),
     `id_producto` INT(4),
-    `observaciones` VARCHAR(40),
-    `id_cliente` INT(4),
+    `observaciones` VARCHAR(200),
+    `cantidad` INT(4),
+    `precio` DOUBLE DEFAULT 0.0,   
     PRIMARY KEY (`id_pedido`)
 ) ENGINE=InnoDB;
 
@@ -82,19 +84,12 @@ CREATE TABLE `tb_estado` (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE `tb_detalleFactura` (
-	`id_detalleFactura` INT(4) NOT NULL AUTO_INCREMENT,
-    `id_pedido` INT(4),
-    `id_factura` INT(4),
-    `cantidad` INT(4),
-    `precio_total` DOUBLE DEFAULT 0.0,
-    PRIMARY KEY (`id_detalleFactura`)
-) ENGINE=InnoDB;
-
 CREATE TABLE `tb_factura` (
-	`id_factura` INT(4) NOT NULL AUTO_INCREMENT,
+    `id_factura` INT(4) NOT NULL AUTO_INCREMENT,
     `id_cliente` INT(4),
     `id_metodoPago` INT(4),
+    `id_pedido_info` INT(4),
+    `precio_total` DOUBLE DEFAULT 0.0,
     `fecha` DATE,
     `cobrado` BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (`id_factura`)
@@ -178,16 +173,12 @@ alter table tb_pedido ADD CONSTRAINT FK_tbPedido_tbProducto
 foreign key (id_producto) references tb_producto(id_producto)
 on update cascade;
 
-alter table tb_pedido ADD CONSTRAINT FK_tbPedido_tbCliente
+alter table tb_pedido_info ADD CONSTRAINT FK_tbPedido_tbCliente
 foreign key (id_cliente) references tb_cliente(id_cliente)
 on update cascade;
 
-alter table tb_detalleFactura ADD CONSTRAINT FK_tbdetalleFactura_tbPedido
-foreign key (id_pedido) references tb_pedido(id_pedido)
-on update cascade;
-
-alter table tb_detalleFactura ADD CONSTRAINT FK_tbDetalleFactura_tbFactura
-foreign key (id_factura) references tb_factura(id_factura)
+alter table tb_factura ADD CONSTRAINT FK_Factura_tbPedidoInfo
+foreign key (id_pedido_info) references tb_pedido_info(id_pedido_info)
 on update cascade;
 
 alter table tb_cliente ADD CONSTRAINT FK_tbCliente_tbUsuario

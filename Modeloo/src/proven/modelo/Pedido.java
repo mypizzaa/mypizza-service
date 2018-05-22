@@ -14,23 +14,26 @@ import java.util.List;
 public class Pedido {
 
     private long id_pedido;
-    private long id_estado;
-    private String direccionPedido;
-    private String fechaDiaPedido;
-    private long id_producto;
-    private long id_cliente;
-    private double precioTotal;
-    private long id_factura;
+    private long id_pedido_info;    
+    private Producto producto;
+    private String observaciones;
+    private int cantidad;
+    private double precio;
 
-    public Pedido(long id_pedido, long id_estado, String direccionPedido, String fechaDiaPedido, long id_producto, long id_cliente, double precioTotal, long id_factura) {
+    public Pedido(long id_pedido, long id_pedido_info, Producto producto, String observaciones, int cantidad, double precio) {
         this.id_pedido = id_pedido;
-        this.id_estado = id_estado;
-        this.direccionPedido = direccionPedido;
-        this.fechaDiaPedido = fechaDiaPedido;
-        this.id_producto = id_producto;
-        this.id_cliente = id_cliente;
-        this.precioTotal = precioTotal;
-        this.id_factura = id_factura;
+        this.id_pedido_info = id_pedido_info;
+        this.producto = producto;
+        this.observaciones = observaciones;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    public Pedido(Producto producto, String observaciones, int cantidad, double precio) {
+        this.producto = producto;
+        this.observaciones = observaciones;
+        this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     public Pedido() {
@@ -44,64 +47,48 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
-    public long getId_estado() {
-        return id_estado;
+    public long getId_pedido_info() {
+        return id_pedido_info;
     }
 
-    public void setId_estado(long id_estado) {
-        this.id_estado = id_estado;
+    public void setId_pedido_info(long id_pedido_info) {
+        this.id_pedido_info = id_pedido_info;
     }
 
-    public String getDireccionPedido() {
-        return direccionPedido;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setDireccionPedido(String direccionPedido) {
-        this.direccionPedido = direccionPedido;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public String getFechaDiaPedido() {
-        return fechaDiaPedido;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setFechaDiaPedido(String fechaDiaPedido) {
-        this.fechaDiaPedido = fechaDiaPedido;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
-    public long getId_producto() {
-        return id_producto;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setId_producto(long id_producto) {
-        this.id_producto = id_producto;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public long getId_cliente() {
-        return id_cliente;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setId_cliente(long id_cliente) {
-        this.id_cliente = id_cliente;
-    }
-
-    public double getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public void setPrecioTotal(double precioTotal) {
-        this.precioTotal = precioTotal;
-    }
-
-    public long getId_factura() {
-        return id_factura;
-    }
-
-    public void setId_factura(long id_factura) {
-        this.id_factura = id_factura;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
-        return "Pedido{" + "id_pedido=" + id_pedido + ", id_estado=" + id_estado + ", direccionPedido=" + direccionPedido + ", fechaDiaPedido=" + fechaDiaPedido + ", id_producto=" + id_producto + ", id_cliente=" + id_cliente + ", precioTotal=" + precioTotal + ", id_factura=" + id_factura + '}';
-    }
+        return "Pedido{" + "id_pedido=" + id_pedido + ", id_pedido_info=" + id_pedido_info + ", Producto=" + producto + ", observaciones=" + observaciones + ", cantidad=" + cantidad + ", precio=" + precio + '}';
+    }  
 }

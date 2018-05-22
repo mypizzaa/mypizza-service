@@ -59,7 +59,8 @@ public class LoginDao {
         String imagen = rs.getString("imagen");
         String tipo_usuario = rs.getString("tipo_usuario");
         String correo = rs.getString("correo");
-        Usuario u = new Usuario(id_usuario, dni, nombre, apellidos, correo, imagen, tipo_usuario, correo);
+        int activo = rs.getInt("activo");
+        Usuario u = new Usuario(id_usuario, dni, nombre, apellidos, correo, imagen, tipo_usuario, correo, activo);
         return u;
     }
 

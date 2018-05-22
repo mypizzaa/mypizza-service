@@ -14,7 +14,7 @@ public class Usuario {
     private int activo;
 
     //Constructor
-    public Usuario(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
+    public Usuario(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
         this.id_usuario = id_usuario;
         this.dni = dni;
         this.nombre = nombre;
