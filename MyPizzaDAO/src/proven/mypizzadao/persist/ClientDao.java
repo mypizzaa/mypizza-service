@@ -95,7 +95,7 @@ public class ClientDao {
                 pst1.setString(3, c.getPrimeraDireccion());
                 pst1.setString(4, c.getSegundaDireccion());
                 pst1.setString(5, c.getPoblacion());
-                pst1.setInt(6, c.getCodigo_postal());
+                pst1.setLong(6, c.getCodigo_postal());
 
                 i = pst1.executeUpdate();
             }
@@ -166,7 +166,7 @@ public class ClientDao {
                         pst1.setString(2, c.getPrimeraDireccion());
                         pst1.setString(3, c.getSegundaDireccion());
                         pst1.setString(4, c.getPoblacion());
-                        pst1.setInt(5, c.getCodigo_postal());
+                        pst1.setLong(5, c.getCodigo_postal());
                         pst1.setLong(6, c.getIdUsuario());
                         i = pst1.executeUpdate();
                     }
