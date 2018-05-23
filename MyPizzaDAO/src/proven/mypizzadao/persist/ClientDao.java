@@ -39,14 +39,35 @@ public class ClientDao {
                 PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario INNER JOIN tb_cliente ON tb_cliente.id_usuario = tb_usuario.id_usuario WHERE tb_usuario.activo=1");
                 ResultSet rs = pst.executeQuery();
                 cList = new ArrayList<Cliente>();
-                while (rs.next()){
+                while (rs.next()) {
                     cList.add(resultSetToClient(rs));
                 }
-            } catch (SQLException ex) {              
+            } catch (SQLException ex) {
             }
-            
+
         }
         return cList;
+    }
+
+    public Cliente findClientByDni(Cliente c) {
+        Cliente cli = null;
+        Connection conn = dbConnect.getConnection();
+        if (conn != null && c.getDni() != null) {
+            PreparedStatement pst;
+            try {
+                pst = conn.prepareStatement("SELECT * FROM tb_usuario INNER JOIN tb_cliente ON tb_cliente.id_usuario = tb_usuario.id_usuario WHERE tb_usuario.activo=1 AND tb_usuario.dni=?");
+                pst.setString(1, c.getDni());
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    cli = resultSetToClient(rs);
+                }
+
+            } catch (SQLException ex) {
+            }
+
+        }
+
+        return cli;
     }
 
     public int addClient(Cliente c) {
@@ -176,11 +197,11 @@ public class ClientDao {
     }
 
     private Cliente resultSetToClient(ResultSet rs) throws SQLException {
-        return new Cliente(rs.getLong("id_cliente"), rs.getString("telefono"), 
-                rs.getString("direccion1"), rs.getString("direccion2"), rs.getString("poblacion"), 
-                rs.getInt("codigo_postal"), rs.getLong("id_usuario"), rs.getString("dni"), 
-                rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"), 
-                rs.getString("imagen"),rs.getString("tipo_usuario"), rs.getString("correo"), 
+        return new Cliente(rs.getLong("id_cliente"), rs.getString("telefono"),
+                rs.getString("direccion1"), rs.getString("direccion2"), rs.getString("poblacion"),
+                rs.getInt("codigo_postal"), rs.getLong("id_usuario"), rs.getString("dni"),
+                rs.getString("nombre"), rs.getString("apellidos"), rs.getString("password"),
+                rs.getString("imagen"), rs.getString("tipo_usuario"), rs.getString("correo"),
                 rs.getInt("activo"));
     }
 

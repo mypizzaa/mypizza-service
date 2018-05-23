@@ -3,26 +3,23 @@ package proven.modelo;
 public class Cliente extends Usuario {
 
     private long id_cliente;
-    private String primeraDireccion;
-    private String segundaDireccion;
     private String telefono;
+    private String primeraDireccion;
+    private String segundaDireccion;    
     private String poblacion;
     private int codigo_postal;
 
     //constructor
 
-    public Cliente(long id_cliente, String primeraDireccion, String segundaDireccion, String telefono, String poblacion, int codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
+    public Cliente(long id_cliente, String telefono, String primeraDireccion, String segundaDireccion, String poblacion, int codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
         super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo, activo);
         this.id_cliente = id_cliente;
+        this.telefono = telefono;
         this.primeraDireccion = primeraDireccion;
         this.segundaDireccion = segundaDireccion;
-        this.telefono = telefono;
         this.poblacion = poblacion;
         this.codigo_postal = codigo_postal;
     }
-
-    
-
 
     public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo,String primeraDireccion, String segundaDireccion, String telefono) {
         super(dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
@@ -97,12 +94,11 @@ public class Cliente extends Usuario {
     public void setCodigo_postal(int codigo_postal) {
         this.codigo_postal = codigo_postal;
     }
-    
-    
-    
+
     @Override
     public String toString() {
-        return "Cliente{" + super.toString() + "id_cliente=" + id_cliente + ", primeraDireccion=" + primeraDireccion + ", segundaDireccion=" + segundaDireccion + ", telefono=" + telefono + '}';
+        return "Cliente{" + "id_cliente=" + id_cliente + ", telefono=" + telefono + ", primeraDireccion=" + primeraDireccion + ", segundaDireccion=" + segundaDireccion + ", poblacion=" + poblacion + ", codigo_postal=" + codigo_postal + "}"+super.toString();
     }
-
+    
+    
 }

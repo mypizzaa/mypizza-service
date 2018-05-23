@@ -23,6 +23,19 @@ public class Producto {
         this.imagen = imagen;
         this.id_tipo = id_tipo;
     }         
+
+    public Producto(long id_producto) {
+        this.id_producto = id_producto;
+    }
+
+    public Producto(long id_producto, String nombre, double precio, String imagen) {
+        this.id_producto = id_producto;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.imagen = imagen;
+    }
+    
+    
     
     public Producto() {
     }

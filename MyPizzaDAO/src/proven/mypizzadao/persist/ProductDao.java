@@ -153,22 +153,22 @@ public class ProductDao {
                 pst.setInt(4, 1);
                 pst.executeUpdate();
                 ResultSet rs = pst.getGeneratedKeys();
-                pst.close();
                 if (rs.next()) {
-                    pst = conn.prepareStatement("INSERT INTO tb_pizza (id_producto) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-                    pst.setInt(1, rs.getInt(1));
-                    pst.executeUpdate();
-                    rs.close();
-                    rs = pst.getGeneratedKeys();
+                    int id_product = rs.getInt(1);
                     pst.close();
+                    pst = conn.prepareStatement("INSERT INTO tb_pizza (id_producto) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+                    pst.setInt(1, id_product);
+                    pst.executeUpdate();
+                    rs = pst.getGeneratedKeys();
                     if (rs.next()) {
                         Pizza pizz = new Pizza(rs.getInt(1));
+                        pst.close();
                         i = addIngredientsToPizza(pizz, iList);
                     }
                 }
 
             } catch (SQLException ex) {
-                  System.out.println(ex.getMessage());
+                System.out.println(ex.getMessage());
             }
         }
         return i;
@@ -184,13 +184,14 @@ public class ProductDao {
                 pst.setDouble(2, r.getPrecio());
                 pst.setString(3, r.getImagen());
                 pst.setInt(4, 2);
-                pst.executeUpdate();
+                i += pst.executeUpdate();
                 ResultSet rs = pst.getGeneratedKeys();
-                pst.close();
                 if (rs.next()) {
+                    long id_producto = rs.getInt(1);
+                    pst.close();
                     pst = conn.prepareStatement("INSERT INTO tb_refresco (id_producto) VALUES (?)");
-                    pst.setLong(1, rs.getInt(1));
-                    i = pst.executeUpdate();
+                    pst.setLong(1, id_producto);
+                    i += pst.executeUpdate();
                 }
 
             } catch (SQLException ex) {
@@ -210,13 +211,14 @@ public class ProductDao {
                 pst.setDouble(2, ing.getPrecio());
                 pst.setString(3, ing.getImagen());
                 pst.setInt(4, 3);
-                pst.executeUpdate();
+                i += pst.executeUpdate();
                 ResultSet rs = pst.getGeneratedKeys();
-                pst.close();
                 if (rs.next()) {
+                    long id_producto = rs.getInt(1);
+                    pst.close();
                     pst = conn.prepareStatement("INSERT INTO tb_ingredientes (id_producto) VALUES (?)");
-                    pst.setLong(1, rs.getInt(1));
-                    i = pst.executeUpdate();
+                    pst.setLong(1, id_producto);
+                    i += pst.executeUpdate();
                 }
 
             } catch (SQLException ex) {
@@ -248,13 +250,21 @@ public class ProductDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null && p != null && iList != null) {
             PreparedStatement pst;
+            ResultSet rs;
             for (Ingrediente ing : iList) {
                 try {
-                    pst = conn.prepareStatement("INSERT INTO tb_pizzaDetalle(id_ingrediente, id_ pizza) VALUES(?,?)");
-                    pst.setLong(1, ing.getIdIngrediente());
-                    pst.setLong(2, p.getIdPizza());
-                    i += pst.executeUpdate();
-                    pst.close();
+                    pst = conn.prepareStatement("SELECT * FROM tb_pizzadetalle WHERE id_pizza=? AND id_ingrediente=?");
+                    pst.setLong(1, p.getIdPizza());
+                    pst.setLong(2, ing.getIdIngrediente());
+                    rs = pst.executeQuery();
+                    if (!rs.next()) {
+                        pst.close();
+                        pst = conn.prepareStatement("INSERT INTO tb_pizzaDetalle (id_ingrediente, id_pizza) VALUES (?,?)");
+                        pst.setLong(1, ing.getIdIngrediente());
+                        pst.setLong(2, p.getIdPizza());
+                        i += pst.executeUpdate();
+                        pst.close();
+                    }
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -288,22 +298,37 @@ public class ProductDao {
         if (conn != null && p != null) {
             PreparedStatement pst;
             try {
-                pst = conn.prepareStatement("DELETE FROM tb_producto WHERE id_producto = ?");
-                pst.setLong(1, p.getIdProducto());
-                i += pst.executeUpdate();
-                pst.close();
 
-                pst = conn.prepareStatement("DELETE FROM tb_pizza WHERE id_producto=?");
-                pst.setLong(1, p.getIdProducto());
-                i += pst.executeUpdate();
-                pst.close();
-
-                pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_pizza=?");
+                pst = conn.prepareStatement("SELECT id_producto FROM tb_pizza WHERE id_pizza=?");
                 pst.setLong(1, p.getIdPizza());
-                i += pst.executeUpdate();
-                pst.close();
+                ResultSet rs = pst.executeQuery();
 
+                if (rs.next()) {
+                    long id_producto = rs.getInt(1);
+                    pst.close();
+
+                    pst = conn.prepareStatement("SELECT * FROM tb_pedido INNER JOIN tb_pedido_info ON tb_pedido_info.id_pedido_info = tb_pedido.id_pedido_info INNER JOIN tb_factura ON tb_factura.id_pedido_info = tb_pedido_info.id_pedido_info WHERE tb_pedido.id_producto=? && tb_factura.cobrado = 0");
+                    pst.setLong(1, id_producto);
+                    rs = pst.executeQuery();
+                    if (!rs.next()) {
+                        pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_pizza=?");
+                        pst.setLong(1, p.getIdPizza());
+                        i += pst.executeUpdate();
+                        pst.close();
+                        
+                        pst = conn.prepareStatement("DELETE FROM tb_pizza WHERE id_pizza=?");
+                        pst.setLong(1, p.getIdPizza());
+                        i += pst.executeUpdate();
+                        pst.close();
+
+                        pst = conn.prepareStatement("DELETE FROM tb_producto WHERE id_producto = ?");
+                        pst.setLong(1, id_producto);
+                        i += pst.executeUpdate();
+                        pst.close();
+                    }
+                }
             } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
 
         }
@@ -316,20 +341,35 @@ public class ProductDao {
         if (conn != null && ing != null) {
             PreparedStatement pst;
             try {
-                pst = conn.prepareStatement("DELETE FROM tb_producto WHERE id_producto = ?");
-                pst.setLong(1, ing.getIdProducto());
-                i += pst.executeUpdate();
-                pst.close();
 
-                pst = conn.prepareStatement("DELETE FROM tb_ingredientes WHERE id_producto=?");
-                pst.setLong(1, ing.getIdProducto());
-                i += pst.executeUpdate();
-                pst.close();
-
-                pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_ingrediente=?");
+                pst = conn.prepareStatement("SELECT id_producto FROM tb_ingredientes WHERE id_ingrediente=?");
                 pst.setLong(1, ing.getIdIngrediente());
-                i += pst.executeUpdate();
-                pst.close();
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+                    long id_producto = rs.getInt(1);
+                    pst.close();
+                    pst = conn.prepareStatement("SELECT * FROM tb_pedido INNER JOIN tb_pedido_info ON tb_pedido_info.id_pedido_info = tb_pedido.id_pedido_info INNER JOIN tb_factura ON tb_factura.id_pedido_info = tb_pedido_info.id_pedido_info WHERE tb_pedido.id_producto=? && tb_factura.cobrado = 0");
+                    pst.setLong(1, id_producto);
+                    rs = pst.executeQuery();
+                    if (!rs.next()) {
+                        pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_ingrediente=?");
+                        pst.setLong(1, ing.getIdIngrediente());
+                        i += pst.executeUpdate();
+                        pst.close();
+
+                        pst = conn.prepareStatement("DELETE FROM tb_ingredientes WHERE id_ingrediente=?");
+                        pst.setLong(1, ing.getIdIngrediente());
+                        i += pst.executeUpdate();
+                        pst.close();
+
+                        pst = conn.prepareStatement("DELETE FROM tb_producto WHERE id_producto = ?");
+                        pst.setLong(1, id_producto);
+                        i += pst.executeUpdate();
+                        pst.close();
+                    }
+
+                }
 
             } catch (SQLException ex) {
             }
@@ -344,16 +384,28 @@ public class ProductDao {
         if (conn != null && r != null) {
             PreparedStatement pst;
             try {
-                pst = conn.prepareStatement("DELETE FROM tb_producto WHERE id_producto = ?");
-                pst.setLong(1, r.getIdProducto());
-                i += pst.executeUpdate();
-                pst.close();
+                pst = conn.prepareStatement("SELECT id_producto FROM tb_refresco WHERE id_refresco=?");
+                pst.setLong(1, r.getIdRefresco());
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    long id_producto = rs.getInt(1);
+                    pst.close();
+                    pst = conn.prepareStatement("SELECT * FROM tb_pedido INNER JOIN tb_pedido_info ON tb_pedido_info.id_pedido_info = tb_pedido.id_pedido_info INNER JOIN tb_factura ON tb_factura.id_pedido_info = tb_pedido_info.id_pedido_info WHERE tb_pedido.id_producto=? && tb_factura.cobrado = 0");
+                    pst.setLong(1, id_producto);
+                    rs = pst.executeQuery();
+                    if (!rs.next()) {
+                        pst.close();
+                        pst = conn.prepareStatement("DELETE FROM tb_refresco WHERE id_refresco=?");
+                        pst.setLong(1, r.getIdRefresco());
+                        i += pst.executeUpdate();
+                        pst.close();
 
-                pst = conn.prepareStatement("DELETE FROM tb_refresco WHERE id_producto=?");
-                pst.setLong(1, r.getIdProducto());
-                i += pst.executeUpdate();
-                pst.close();
-
+                        pst = conn.prepareStatement("DELETE FROM tb_producto WHERE id_producto = ?");
+                        pst.setLong(1, id_producto);
+                        i += pst.executeUpdate();
+                        pst.close();
+                    }
+                }
             } catch (SQLException ex) {
             }
 

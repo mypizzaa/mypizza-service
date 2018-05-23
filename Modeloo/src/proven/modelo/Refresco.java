@@ -18,6 +18,15 @@ public class Refresco extends Producto {
         super(id_prod, nombre, precio, img, id_tip);
         this.id_refresco = id_refresco;
     }
+
+    public Refresco(long id_refresco) {
+        this.id_refresco = id_refresco;
+    }
+
+    public Refresco(String nombre, double precio, String imagen, long id_tipo) {
+        super(nombre, precio, imagen, id_tipo);
+    }
+    
     //--------------------------------------------------------------------------
     
     //Getters

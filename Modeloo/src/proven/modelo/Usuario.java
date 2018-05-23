@@ -23,6 +23,7 @@ public class Usuario {
         this.imagen = imagen;
         this.tipo_Usuario = tipo_Usuario;
         this.correo = correo;
+        this.activo = activo;
     }
 
     public Usuario(String correo, String password) {

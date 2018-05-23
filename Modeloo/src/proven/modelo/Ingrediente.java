@@ -11,6 +11,12 @@ public class Ingrediente extends Producto {
         this.id_ingrediente = id_ingrediente;
     }
 
+    public Ingrediente(String nombre, double precio, String img, long id_tip) {
+        super(nombre, precio, img, id_tip);
+    }
+    
+    
+    
     public Ingrediente(long id_ingrediente) {
         this.id_ingrediente = id_ingrediente;
     }

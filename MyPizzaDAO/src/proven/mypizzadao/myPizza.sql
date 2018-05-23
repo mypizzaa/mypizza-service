@@ -115,7 +115,7 @@ CREATE TABLE `tb_usuario` (
     `nombre` VARCHAR(40) DEFAULT NULL,
     `apellidos` VARCHAR(40) DEFAULT NULL,
     `password` VARCHAR(40) DEFAULT NULL,
-    `imagen` VARCHAR(40) DEFAULT NULL,
+    `imagen` VARCHAR(40) DEFAULT NULL UNIQUE,
     `tipo_usuario` VARCHAR(40) DEFAULT NULL,
     `correo` VARCHAR(40) DEFAULT NULL,
     `activo` BOOLEAN DEFAULT TRUE,
@@ -166,7 +166,7 @@ on update cascade;
 
 alter table tb_pedido ADD CONSTRAINT FK_tbPedido_tbProducto
 foreign key (id_producto) references tb_producto(id_producto)
-on update cascade;
+on update cascade on delete SET NULL;
 
 alter table tb_factura ADD CONSTRAINT FK_Factura_tbPedidoInfo
 foreign key (id_pedido_info) references tb_pedido_info(id_pedido_info)
