@@ -1,18 +1,8 @@
 package proven.mypizzadao;
 
 import java.util.List;
-import proven.modelo.Cliente;
-import proven.modelo.Ingrediente;
-import proven.modelo.Pizza;
-import proven.modelo.Producto;
-import proven.modelo.Refresco;
-import proven.modelo.Usuario;
-import proven.mypizzadao.persist.ClientDao;
-import proven.mypizzadao.persist.EmployeeDao;
-import proven.mypizzadao.persist.LoginDao;
-import proven.mypizzadao.persist.OrderDao;
-import proven.mypizzadao.persist.PayMethodDao;
-import proven.mypizzadao.persist.ProductDao;
+import proven.modelo.*;
+import proven.mypizzadao.persist.*;
 
 public class Model {
 
@@ -102,33 +92,54 @@ public class Model {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Client ">
-        public List<Cliente> listAllClients(){
-            return clientDao.listAllClients();
-        }
-        
-        public Cliente findClientByDni(Cliente c){
-            return clientDao.findClientByDni(c);
-        }
-        
-        public int addClient(Cliente c){
-            return clientDao.addClient(c);
-        }
-        
-        public int checkIfExist(Cliente c){
-            return clientDao.checkIfExist(c);
-        }
-        
-        public int modifyPassword(Cliente c){
-            return clientDao.modifyPassword(c);
-        }
-        
-        public int modifyClient(Cliente c){
-            return clientDao.modifyClient(c);
-        }
-        
-        public int inactivateClient(Cliente c){
-            return clientDao.inactivateClient(c);
-        }
-                
+    public List<Cliente> listAllClients() {
+        return clientDao.listAllClients();
+    }
+
+    public Cliente findClientByDni(Cliente c) {
+        return clientDao.findClientByDni(c);
+    }
+
+    public int addClient(Cliente c) {
+        return clientDao.addClient(c);
+    }
+
+    public int checkIfExist(Cliente c) {
+        return clientDao.checkIfExist(c);
+    }
+
+    public int modifyPassword(Cliente c) {
+        return clientDao.modifyPassword(c);
+    }
+
+    public int modifyClient(Cliente c) {
+        return clientDao.modifyClient(c);
+    }
+
+    public int inactivateClient(Cliente c) {
+        return clientDao.inactivateClient(c);
+    }
     // </editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Employee">
+    public List<Empleado> listAllEmplyees(){
+        return employeeDao.listAllEmployees();
+    }
+    
+    public Empleado findEmployee(Empleado e){
+        return employeeDao.findEmployee(e);
+    }
+    
+    public int addEmployee(Empleado e){
+        return employeeDao.addEmployee(e);
+    }
+    
+    public int updateEmployee(Empleado e){
+        return employeeDao.updateEmployee(e);
+    }
+    
+    public int inactivateEmployee(Empleado e){
+        return employeeDao.inactivateEmployee(e);
+    }
+    //</editor-fold>
 }

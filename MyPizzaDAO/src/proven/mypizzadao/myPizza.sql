@@ -229,12 +229,14 @@ INSERT INTO tb_producto(`nombre`, `precio`, `imagen`, id_tipo ) VALUES
 ('Pizza Cebolla', 13.55, 'pcebolla.png', 1), ('Pizza Salami', 13.55, 'psalami.png', 1),
 ('Pizza Kebab', 13.55, 'pkebab.png', 1), ('Pizza doble Carne', 13.55, 'pdcarne.png', 1),
 ('Pizza de la Terra', 13.55, 'pterra.png', 1),
-('Coca-Cola', 1.8, 'beb', 2),
-('Aquarius', 1.6, 'beb', 2);
+('CocaCola', 1.8, 'cocacola.png', 2), ('Aquarius naranja', 2, 'aquarius_naranja.png', 2),
+('Aquarius limón', 1.8, 'aquarius_limon.png', 2), ('Nestea', 2, 'nestea.png', 2),
+('Fanta limón', 1.8, 'fanta_limon.png', 2), ('Fanta naranja', 2, 'fanta_naranja.png', 2),
+('Estrella damm', 1.5, 'damm.png', 2), ('Sprite', 2, 'sprite.png', 2), ('Agua 2l', 2, 'agua.png', 2) ;
 
 INSERT INTO tb_pizza(`id_producto`) VALUES (28), (29), (30), (31),(32), (33), (34), (35), (36), (37), (38);
 
-INSERT INTO tb_refresco(`id_producto`) VALUES (39), (40);
+INSERT INTO tb_refresco(`id_producto`) VALUES (39), (40), (41), (42), (43), (44), (45), (46), (47);
 
 -- Barbacoa
 INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (2, 1), (19, 1), (20, 1), (23, 1);

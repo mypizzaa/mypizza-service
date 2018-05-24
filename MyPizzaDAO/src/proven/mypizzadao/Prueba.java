@@ -5,6 +5,7 @@
  */
 package proven.mypizzadao;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import proven.modelo.*;
@@ -51,9 +52,13 @@ public class Prueba {
         System.out.println("Modify password: "+ m.modifyPassword(new Cliente("12642375A", "pass2")));
         System.out.println("Modify client: "+m.modifyClient(new Cliente(15, "12642375A", "Joselito", "Manolito", "manolete", "jmanolito", "cliente", "man@gmail.com", "c/ Santa Ana 34", null, "491248642", "Barcelona", "08901")));
         System.out.println("Inactivate client: "+ m.inactivateClient(new Cliente("12642375A")));
-        
-        
-        
+        System.out.println("");
+        System.out.println("/*************Employee*************/");
+        System.out.println("List all employees: "+m.listAllEmplyees());
+        System.out.println("Find employee: "+m.findEmployee(new Empleado("87542162P")));
+        System.out.println("Add employee: "+m.addEmployee(new Empleado(Time.valueOf("9:00:00"), Time.valueOf("17:00:00"), 40, 1000, "42532264H", "Pepe", "El killo", "pep123", "pkillo", "empleado", "pep@gmail.com")));
+        System.out.println("Update employee: "+m.updateEmployee(new Empleado(Time.valueOf("8:00:00"), Time.valueOf("17:00:00"), 45, 1200, 16, "42532264H", "Pepe", "Hernandez", "pep123", "pkillo", "empleado", "pep@gmail.com")));            
+        System.out.println("Inactivate empleado: "+m.inactivateEmployee(new Empleado("42532264H")));
     }
 
     private List<Ingrediente> createListOfIngredients() {

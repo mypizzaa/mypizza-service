@@ -114,16 +114,16 @@ public class EmployeeDao {
                     pst.setString(5, e.getCorreo());
                     pst.setLong(6, e.getIdUsuario());
 
-                    i = pst.executeUpdate();
+                    i += pst.executeUpdate();
 
                     if (i > 0) {
-                        PreparedStatement pst1 = conn.prepareStatement("UPDATE tb_usuario SET hora_entrada=?, hora_salida=?, horas_semanales=?, salario=? WHERE id_usuario=?");
-                        pst1.setTime(2, e.getHoraEntrada());
-                        pst1.setTime(3, e.getHoraSalida());
-                        pst1.setInt(4, e.getHorasSemanales());
-                        pst1.setDouble(5, e.getSalario());
-                        pst1.setLong(1, e.getIdUsuario());
-                        i = pst1.executeUpdate();
+                        PreparedStatement pst1 = conn.prepareStatement("UPDATE tb_empleado SET hora_entrada=?, hora_salida=?, horas_semanales=?, salario=? WHERE id_usuario=?");
+                        pst1.setTime(1, e.getHoraEntrada());
+                        pst1.setTime(2, e.getHoraSalida());
+                        pst1.setInt(3, e.getHorasSemanales());
+                        pst1.setDouble(4, e.getSalario());
+                        pst1.setLong(5, e.getIdUsuario());
+                        i += pst1.executeUpdate();
                     }
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
@@ -133,7 +133,7 @@ public class EmployeeDao {
         return i;
     }
 
-    public int removeEmployee(Empleado e) {
+    public int inactivateEmployee(Empleado e) {
         int i = 0;
         if (e.getDni() != null) {
             Connection conn = dbConnection.getConnection();

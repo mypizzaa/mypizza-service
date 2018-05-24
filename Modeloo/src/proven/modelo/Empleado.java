@@ -21,6 +21,32 @@ public class Empleado extends Usuario {
         this.Salario = Salario;
     }
 
+    public Empleado(String dni) {
+        super(dni);
+    }
+
+    public Empleado(Time hora_entrada, Time hora_salida, int horasSemanales, double Salario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
+        super(dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
+        this.hora_entrada = hora_entrada;
+        this.hora_salida = hora_salida;
+        this.horasSemanales = horasSemanales;
+        this.Salario = Salario;
+    }
+
+    public Empleado(Time hora_entrada, Time hora_salida, int horasSemanales, double Salario, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
+        super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
+        this.hora_entrada = hora_entrada;
+        this.hora_salida = hora_salida;
+        this.horasSemanales = horasSemanales;
+        this.Salario = Salario;
+    }
+    
+    public Empleado() {
+        
+    }
+    
+    
+
     //--------------------------------------------------------------------------
     //getters
     public long getIdEmpleado() {
