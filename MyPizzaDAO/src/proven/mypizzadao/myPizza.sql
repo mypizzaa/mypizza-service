@@ -7,7 +7,6 @@ CREATE USER 'administrator'@'localhost' IDENTIFIED BY 'adminpsw';
 
 CREATE DATABASE mypizza  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-
 GRANT SELECT, INSERT, UPDATE, DELETE ON mypizza.* TO 'administrator'@'localhost';
 
 USE mypizza;
@@ -130,7 +129,7 @@ CREATE TABLE `tb_cliente` (
     `direccion1` VARCHAR(40) DEFAULT NULL,
     `direccion2` VARCHAR(40) DEFAULT NULL,
     `poblacion`  VARCHAR (60) DEFAULT NULL,
-    `codigo_postal` INT(5) DEFAULT NULL,
+    `codigo_postal` VARCHAR(5) DEFAULT NULL,
     PRIMARY KEY (`id_cliente`)
 ) ENGINE=InnoDB;
 

@@ -113,5 +113,22 @@ public class Model {
         public int addClient(Cliente c){
             return clientDao.addClient(c);
         }
+        
+        public int checkIfExist(Cliente c){
+            return clientDao.checkIfExist(c);
+        }
+        
+        public int modifyPassword(Cliente c){
+            return clientDao.modifyPassword(c);
+        }
+        
+        public int modifyClient(Cliente c){
+            return clientDao.modifyClient(c);
+        }
+        
+        public int inactivateClient(Cliente c){
+            return clientDao.inactivateClient(c);
+        }
+                
     // </editor-fold>
 }

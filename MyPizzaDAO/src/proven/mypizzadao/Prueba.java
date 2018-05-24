@@ -46,7 +46,12 @@ public class Prueba {
         System.out.println("/*************Client*************/");
         System.out.println("List all clients: "+m.listAllClients());
         System.out.println("Find client by dni: "+ m.findClientByDni(new Cliente("21354234C")));
-        System.out.println("Add client"+ m.addClient(new Cliente("12642375A", "Joselito", "Manolito", "man123", "jmanolito", "cliente", "man@gmail.com", "c/ Santa Ana 34", null, "491248642", "Barcelona", 08901)));
+        System.out.println("Add client: "+ m.addClient(new Cliente("12642375A", "Joselito", "Manolito", "man123", "jmanolito", "cliente", "man@gmail.com", "c/ Santa Ana 34", null, "491248642", "Barcelona", "08901")));
+        System.out.println("Check if exist: "+ m.checkIfExist(new Cliente("12642375A")));
+        System.out.println("Modify password: "+ m.modifyPassword(new Cliente("12642375A", "pass2")));
+        System.out.println("Modify client: "+m.modifyClient(new Cliente(15, "12642375A", "Joselito", "Manolito", "manolete", "jmanolito", "cliente", "man@gmail.com", "c/ Santa Ana 34", null, "491248642", "Barcelona", "08901")));
+        System.out.println("Inactivate client: "+ m.inactivateClient(new Cliente("12642375A")));
+        
         
         
     }

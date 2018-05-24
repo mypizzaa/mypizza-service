@@ -7,11 +7,11 @@ public class Cliente extends Usuario {
     private String primeraDireccion;
     private String segundaDireccion;    
     private String poblacion;
-    private long codigo_postal;
+    private String codigo_postal;
 
     //constructor
 
-    public Cliente(long id_cliente, String telefono, String primeraDireccion, String segundaDireccion, String poblacion, int codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
+    public Cliente(long id_cliente, String telefono, String primeraDireccion, String segundaDireccion, String poblacion, String codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, int activo) {
         super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo, activo);
         this.id_cliente = id_cliente;
         this.telefono = telefono;
@@ -21,7 +21,20 @@ public class Cliente extends Usuario {
         this.codigo_postal = codigo_postal;
     }
 
-    public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo,String primeraDireccion, String segundaDireccion, String telefono, String poblacion, long codigo_postal) {
+    
+    
+    public Cliente(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, String primeraDireccion, String segundaDireccion, String telefono, String poblacion, String codigo_postal) {
+        super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
+        this.telefono = telefono;
+        this.primeraDireccion = primeraDireccion;
+        this.segundaDireccion = segundaDireccion;
+        this.poblacion = poblacion;
+        this.codigo_postal = codigo_postal;
+    }
+
+    
+
+    public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo,String primeraDireccion, String segundaDireccion, String telefono, String poblacion, String codigo_postal) {
         super(dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.primeraDireccion = primeraDireccion;
         this.segundaDireccion = segundaDireccion;
@@ -30,8 +43,8 @@ public class Cliente extends Usuario {
         this.codigo_postal = codigo_postal;
     }
 
-    public Cliente(String correo, String password) {
-        super(correo, password);
+    public Cliente(String dni, String password) {
+        super(dni, password);
     }
 
     public Cliente(String dni) {
@@ -89,11 +102,11 @@ public class Cliente extends Usuario {
         this.poblacion = poblacion;
     }
 
-    public long getCodigo_postal() {
+    public String getCodigo_postal() {
         return codigo_postal;
     }
 
-    public void setCodigo_postal(long codigo_postal) {
+    public void setCodigo_postal(String codigo_postal) {
         this.codigo_postal = codigo_postal;
     }
 
