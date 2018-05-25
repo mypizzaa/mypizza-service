@@ -41,6 +41,10 @@ public class Model {
     public int generateToken(Usuario u){
         return tokenDao.generateToken(u);
     }
+    
+    public Usuario validateClientToken(String token){
+        return tokenDao.validateClientToken(token);
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Products ">

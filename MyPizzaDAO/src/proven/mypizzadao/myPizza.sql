@@ -142,7 +142,7 @@ CREATE TABLE `tb_token` (
 ) ENGINE=InnoDB;
 
 ALTER TABLE tb_token ADD CONSTRAINT FK_tbToken_tbUsuario FOREIGN KEY (id_usuario)
-REFERENCES tb_usuario(id_usuario) ON UPDATE CASCADE ON DELETE SET NULL; 
+REFERENCES tb_usuario(id_usuario) ON UPDATE CASCADE; 
 
 alter table tb_pizza ADD CONSTRAINT FK_tbPizza_tbProducto
 foreign key (id_producto) references tb_producto(id_producto)

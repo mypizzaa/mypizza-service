@@ -25,6 +25,13 @@ public class Usuario {
         this.activo = activo;
     }
 
+    public Usuario(long id_usuario, String tipo_Usuario) {
+        this.id_usuario = id_usuario;
+        this.tipo_Usuario = tipo_Usuario;
+    }
+    
+    
+
     public Usuario(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
         this.id_usuario = id_usuario;
         this.dni = dni;
