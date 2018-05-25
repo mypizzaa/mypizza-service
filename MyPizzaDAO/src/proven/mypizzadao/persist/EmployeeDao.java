@@ -96,6 +96,8 @@ public class EmployeeDao {
                 }
             } catch (SQLException ex) {
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -129,6 +131,8 @@ public class EmployeeDao {
                     System.out.println(ex.getMessage());
                 }
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -144,6 +148,8 @@ public class EmployeeDao {
                     i = pst.executeUpdate();
                 } catch (SQLException ex) {
                 }
+            } else {
+                i = -1;
             }
         }
         return i;

@@ -12,6 +12,7 @@ public class Model {
     private final EmployeeDao employeeDao;
     private final OrderDao orderDao;
     private final PayMethodDao pmDao;
+    private final TokenDao tokenDao;
 
     private static Model instance;
 
@@ -22,18 +23,23 @@ public class Model {
         return instance;
     }
 
-    private Model() {
+    public Model() {
         loginDao = new LoginDao();
         productDao = new ProductDao();
         clientDao = new ClientDao();
         employeeDao = new EmployeeDao();
         orderDao = new OrderDao();
         pmDao = new PayMethodDao();
+        tokenDao = new TokenDao();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Login">
     public Usuario login(String correo, String pass) {
         return loginDao.login(correo, pass);
+    }
+    
+    public int generateToken(Usuario u){
+        return tokenDao.generateToken(u);
     }
     // </editor-fold>
 
@@ -122,7 +128,7 @@ public class Model {
     // </editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc=" Employee">
-    public List<Empleado> listAllEmplyees(){
+    public List<Empleado> listAllEmployees(){
         return employeeDao.listAllEmployees();
     }
     

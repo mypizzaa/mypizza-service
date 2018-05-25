@@ -28,6 +28,7 @@ public class Prueba {
         System.out.println("/*************Login*************/");
         System.out.println("Login ok: "+ m.login("a", "a"));
         System.out.println("Login error: "+ m.login("a", "b"));
+        System.out.println("Generate token: "+m.generateToken(new Usuario(1)));
         System.out.println("");
         System.out.println("/*************Product*************/");
         System.out.println("Get all pizzas: "+m.getAllPizzas());
@@ -54,7 +55,7 @@ public class Prueba {
         System.out.println("Inactivate client: "+ m.inactivateClient(new Cliente("12642375A")));
         System.out.println("");
         System.out.println("/*************Employee*************/");
-        System.out.println("List all employees: "+m.listAllEmplyees());
+        System.out.println("List all employees: "+m.listAllEmployees());
         System.out.println("Find employee: "+m.findEmployee(new Empleado("87542162P")));
         System.out.println("Add employee: "+m.addEmployee(new Empleado(Time.valueOf("9:00:00"), Time.valueOf("17:00:00"), 40, 1000, "42532264H", "Pepe", "El killo", "pep123", "pkillo", "empleado", "pep@gmail.com")));
         System.out.println("Update employee: "+m.updateEmployee(new Empleado(Time.valueOf("8:00:00"), Time.valueOf("17:00:00"), 45, 1200, 16, "42532264H", "Pepe", "Hernandez", "pep123", "pkillo", "empleado", "pep@gmail.com")));            

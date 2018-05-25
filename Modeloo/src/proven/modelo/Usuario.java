@@ -1,4 +1,3 @@
-
 package proven.modelo;
 
 public class Usuario {
@@ -36,15 +35,12 @@ public class Usuario {
         this.tipo_Usuario = tipo_Usuario;
         this.correo = correo;
     }
-    
-    
 
     public Usuario(String dni, String password) {
         this.dni = dni;
         this.password = password;
     }
-   
-   
+
     public Usuario(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo) {
         this.dni = dni;
         this.nombre = nombre;
@@ -57,13 +53,17 @@ public class Usuario {
 
     public Usuario(String dni) {
         this.dni = dni;
-    }  
+    }
+
+    public Usuario(long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 
     public Usuario() {
-       
+
     }
     //--------------------------------------------------------------------------
-    
+
     //Getters
     public long getIdUsuario() {
         return this.id_usuario;
@@ -96,8 +96,8 @@ public class Usuario {
     public String getCorreo() {
         return this.correo;
     }
-    
-     public int getActivo() {
+
+    public int getActivo() {
         return activo;
     }
 
@@ -133,11 +133,10 @@ public class Usuario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
- 
+
     public void setActivo(int activo) {
         this.activo = activo;
     }
-        
 
     //toString
     @Override
@@ -153,7 +152,7 @@ public class Usuario {
         sb.append(", imagen = " + imagen);
         sb.append(", tipo_Usuario = " + tipo_Usuario);
         sb.append(", correo = " + correo);
-        sb.append(", activo = "+activo);
+        sb.append(", activo = " + activo);
         sb.append(" ]");
 
         return sb.toString();

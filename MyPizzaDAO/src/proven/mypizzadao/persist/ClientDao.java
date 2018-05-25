@@ -72,34 +72,38 @@ public class ClientDao {
         int i = 0;
 
         Connection conn = dbConnect.getConnection();
-        try {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_usuario (dni, nombre, apellidos, password, imagen, tipo_usuario, correo) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            pst.setString(1, c.getDni());
-            pst.setString(2, c.getNombre());
-            pst.setString(3, c.getApellidos());
-            pst.setString(4, c.getPassword());
-            pst.setString(5, c.getImagen());
-            pst.setString(6, c.getTipoUsuario());
-            pst.setString(7, c.getCorreo());
-            pst.executeUpdate();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_usuario (dni, nombre, apellidos, password, imagen, tipo_usuario, correo) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                pst.setString(1, c.getDni());
+                pst.setString(2, c.getNombre());
+                pst.setString(3, c.getApellidos());
+                pst.setString(4, c.getPassword());
+                pst.setString(5, c.getImagen());
+                pst.setString(6, c.getTipoUsuario());
+                pst.setString(7, c.getCorreo());
+                pst.executeUpdate();
 
-            ResultSet rs = pst.getGeneratedKeys();
+                ResultSet rs = pst.getGeneratedKeys();
 
-            if (rs.next()) {
-                long id = rs.getInt(1);
-                PreparedStatement pst1 = conn.prepareStatement("INSERT INTO tb_cliente (id_usuario, telefono, direccion1, direccion2, poblacion, codigo_postal) VALUES(?, ?, ?, ?, ?, ?)");
-                pst1.setLong(1, id);
-                pst1.setString(2, c.getTelefono());
-                pst1.setString(3, c.getPrimeraDireccion());
-                pst1.setString(4, c.getSegundaDireccion());
-                pst1.setString(5, c.getPoblacion());
-                pst1.setString(6, c.getCodigo_postal());
+                if (rs.next()) {
+                    long id = rs.getInt(1);
+                    PreparedStatement pst1 = conn.prepareStatement("INSERT INTO tb_cliente (id_usuario, telefono, direccion1, direccion2, poblacion, codigo_postal) VALUES(?, ?, ?, ?, ?, ?)");
+                    pst1.setLong(1, id);
+                    pst1.setString(2, c.getTelefono());
+                    pst1.setString(3, c.getPrimeraDireccion());
+                    pst1.setString(4, c.getSegundaDireccion());
+                    pst1.setString(5, c.getPoblacion());
+                    pst1.setString(6, c.getCodigo_postal());
 
-                i = pst1.executeUpdate();
+                    i = pst1.executeUpdate();
+                }
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -120,13 +124,15 @@ public class ClientDao {
             } catch (SQLException ex) {
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }
 
     public int modifyPassword(Cliente c) {
         int i = 0;
-        if (c.getDni()!= null && c.getPassword() != null) {
+        if (c.getDni() != null && c.getPassword() != null) {
             Connection conn = dbConnect.getConnection();
             if (conn != null) {
                 try {
@@ -138,6 +144,8 @@ public class ClientDao {
                     System.out.println(ex.getMessage());
                 }
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -170,6 +178,8 @@ public class ClientDao {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -188,6 +198,8 @@ public class ClientDao {
 
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }

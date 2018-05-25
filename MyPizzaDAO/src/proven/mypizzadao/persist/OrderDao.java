@@ -7,17 +7,12 @@ package proven.mypizzadao.persist;
 
 import com.mysql.jdbc.Statement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import proven.modelo.Empleado;
 import proven.modelo.Factura;
-import proven.modelo.MetodoPago;
 import proven.modelo.Pedido;
 import proven.modelo.PedidoInfo;
 import proven.modelo.Producto;
@@ -43,11 +38,15 @@ public class OrderDao {
             PreparedStatement pst;
             try {
                 long id_info_pedido = receiveOrder(pi, conn);
-                i += setProductsToOrder(id_info_pedido, pList, conn);
-                i += generateBill(id_info_pedido, f, conn);
+                if (id_info_pedido > 0) {
+                    i += setProductsToOrder(id_info_pedido, pList, conn);
+                    i += generateBill(id_info_pedido, f, conn);
+                }
             } catch (SQLException ex) {
                 i = -1;
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -65,7 +64,7 @@ public class OrderDao {
             }
             pst.close();
             rs.close();
-        }
+        } 
         return id_pedido;
     }
 
@@ -83,6 +82,8 @@ public class OrderDao {
                 i = pst.executeUpdate();
                 pst.close();
             }
+        }else {
+            i = -1;
         }
         return i;
     }
@@ -98,6 +99,8 @@ public class OrderDao {
             pst.setString(5, f.getFecha());
             pst.setInt(6, 0);
             i += pst.executeUpdate();
+        }else {
+            i = -1;
         }
         return i;
     }
@@ -114,6 +117,8 @@ public class OrderDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
+        }else {
+            i = -1;
         }
         return i;
     }
@@ -130,6 +135,8 @@ public class OrderDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
+        }else {
+            i = -1;
         }
         return i;
     }
@@ -146,17 +153,19 @@ public class OrderDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
+        }else {
+            i = -1;
         }
         return i;
     }
-    
+
     public int setBillToPaid(PedidoInfo pi) {
         int i = 0;
         Connection conn = dbConnection.getConnection();
         if (conn != null) {
             PreparedStatement pst;
             try {
-                pst = conn.prepareStatement("UPDATE tb_facturta SET cobrado=? WHERE id_pedido_info=?");
+                pst = conn.prepareStatement("UPDATE tb_factura SET cobrado=? WHERE id_pedido_info=?");
                 pst.setInt(1, 1);
                 pst.setLong(2, pi.getId_pedido_info());
                 i = pst.executeUpdate();
@@ -222,7 +231,7 @@ public class OrderDao {
             if (rs1.next()) {
                 Producto p = new Producto(id_producto, rs.getString("nombre"), rs.getDouble("precio"), rs.getString("imagen"), rs.getInt("id_tipo"));
                 pe = new Pedido(rs.getLong("id_pedido"), rs.getLong("id_pedido_info"), p, rs.getString("observaciones"), rs.getInt("cantidad"), rs.getDouble("precio"));
-            }            
+            }
         }
 
         return pe;

@@ -61,14 +61,15 @@ public class PayMethodDao {
                 pst.setString(2, mp.getDetalles());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
-                i=-1;
+                i = -1;
             }
+        } else {
+            i = -1;
         }
 
         return i;
     }
-    
-    
+
     public int updatePayMethod(MetodoPago mp) {
         int i = 0;
 
@@ -81,14 +82,15 @@ public class PayMethodDao {
                 pst.setLong(3, mp.getIdMetodoPago());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
-                i=-1;
+                i = -1;
             }
+        } else {
+            i = -1;
         }
 
         return i;
     }
-    
-    
+
     public int removePayMethod(MetodoPago mp) {
         int i = 0;
 
@@ -99,8 +101,10 @@ public class PayMethodDao {
                 pst.setLong(1, mp.getIdMetodoPago());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
-                i=-1;
+                i = -1;
             }
+        } else {
+            i = -1;
         }
 
         return i;

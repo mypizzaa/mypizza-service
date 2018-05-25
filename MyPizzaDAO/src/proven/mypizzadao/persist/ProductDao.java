@@ -170,6 +170,8 @@ public class ProductDao {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -197,6 +199,8 @@ public class ProductDao {
             } catch (SQLException ex) {
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -224,6 +228,8 @@ public class ProductDao {
             } catch (SQLException ex) {
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -241,6 +247,8 @@ public class ProductDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -269,6 +277,8 @@ public class ProductDao {
                     System.out.println(ex.getMessage());
                 }
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -288,6 +298,8 @@ public class ProductDao {
                 } catch (SQLException ex) {
                 }
             }
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -315,7 +327,7 @@ public class ProductDao {
                         pst.setLong(1, p.getIdPizza());
                         i += pst.executeUpdate();
                         pst.close();
-                        
+
                         pst = conn.prepareStatement("DELETE FROM tb_pizza WHERE id_pizza=?");
                         pst.setLong(1, p.getIdPizza());
                         i += pst.executeUpdate();
@@ -331,6 +343,8 @@ public class ProductDao {
                 System.out.println(ex.getMessage());
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -374,6 +388,8 @@ public class ProductDao {
             } catch (SQLException ex) {
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }
@@ -409,6 +425,8 @@ public class ProductDao {
             } catch (SQLException ex) {
             }
 
+        } else {
+            i = -1;
         }
         return i;
     }

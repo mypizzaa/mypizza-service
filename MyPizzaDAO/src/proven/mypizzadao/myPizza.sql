@@ -100,10 +100,10 @@ CREATE TABLE `tb_metodoPago` (
 
 CREATE TABLE `tb_empleado` (
     `id_empleado` INT(4) NOT NULL AUTO_INCREMENT,
-    `id_usuario` INT(4),
-    `hora_entrada` TIME,
-    `hora_salida` TIME,
-    `horas_semanales` int(4),
+    `id_usuario` INT(4) NOT NULL,
+    `hora_entrada` TIME DEFAULT NULL,
+    `hora_salida` TIME DEFAULT NULL,
+    `horas_semanales` int(4) DEFAULT NULL,
     `salario` DOUBLE DEFAULT 0.0,  
     PRIMARY KEY (`id_empleado`)
 ) ENGINE=InnoDB;
@@ -133,6 +133,16 @@ CREATE TABLE `tb_cliente` (
     PRIMARY KEY (`id_cliente`)
 ) ENGINE=InnoDB;
 
+CREATE TABLE `tb_token` (
+    `id_token` INT(4) NOT NULL AUTO_INCREMENT,
+    `id_usuario` INT(4) NOT NULL,
+    `token` VARCHAR(50) NOT NULL UNIQUE,
+    `time_date` DATETIME NOT NULL,
+    PRIMARY KEY (`id_token`)
+) ENGINE=InnoDB;
+
+ALTER TABLE tb_token ADD CONSTRAINT FK_tbToken_tbUsuario FOREIGN KEY (id_usuario)
+REFERENCES tb_usuario(id_usuario) ON UPDATE CASCADE ON DELETE SET NULL; 
 
 alter table tb_pizza ADD CONSTRAINT FK_tbPizza_tbProducto
 foreign key (id_producto) references tb_producto(id_producto)
