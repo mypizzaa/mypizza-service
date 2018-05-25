@@ -1,0 +1,45 @@
+
+WS Producto :
+-----------------------------------------------------------------------------------
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/pizzas		    -cheked
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/bebidas		    -cheked
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/ingredientes		    -cheked
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/ingredientespizza/[id]   -cheked
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/addpizza
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/addbebida
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/addingrediente
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/modificarproducto
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/addingredientespizza
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/eliminaringredientespizza
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/eliminarpizza
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/eliminaringrediente
+http://localhost:8080/ServicioMyPizza/servicios/WSProducto/eliminardrink
+
+___________________________________________________________________________________
+
+WS Empleado :
+
+-----------------------------------------------------------------------------------
+http://localhost:8080/ServicioMyPizza/servicios/WSEmpleado/listall                -checked
+http://localhost:8080/ServicioMyPizza/servicios/WSEmpleado/buscar/[dni]      	  -checked
+http://localhost:8080/ServicioMyPizza/servicios/WSEmpleado/add 
+http://localhost:8080/ServicioMyPizza/servicios/WSEmpleado/update
+http://localhost:8080/ServicioMyPizza/servicios/WSEmpleado/baja/[dni] 		    -error
+
+___________________________________________________________________________________
+
+WS Cliente :
+
+-----------------------------------------------------------------------------------
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/listall	               -checked
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/buscar                       -checked
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/addd
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/comprobar/[dni]              -checked
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/modificarpswd/[dni]/[pswd]   -checked
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/modificar
+http://localhost:8080/ServicioMyPizza/servicios/WSCliente/baja/[dni] 		       -checked	
+
+
+
+
+ 
