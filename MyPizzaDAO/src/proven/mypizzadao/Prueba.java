@@ -22,13 +22,14 @@ public class Prueba {
     }
 
     private void run() {
-        Model m = Model.getInstance();       
+        Model m = new Model();
         System.out.println("--------------------Testig model--------------------");
         System.out.println("");
         System.out.println("/*************Login*************/");
         System.out.println("Login ok: "+ m.login("a", "a"));
         System.out.println("Login error: "+ m.login("a", "b"));
         System.out.println("Generate token: "+m.generateToken(new Usuario(1)));
+        System.out.println("Validate token: "+m.validateUser("315612114121853181517111012131069"));
         System.out.println("");
         System.out.println("/*************Product*************/");
         System.out.println("Get all pizzas: "+m.getAllPizzas());

@@ -20,6 +20,7 @@ public class Ingrediente extends Producto {
     public Ingrediente(long id_ingrediente) {
         this.id_ingrediente = id_ingrediente;
     }
+s
     
 
     //--------------------------------------------------------------------------

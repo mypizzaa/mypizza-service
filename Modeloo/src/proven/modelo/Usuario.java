@@ -51,6 +51,11 @@ public class Usuario {
         this.correo = correo;
     }
 
+    public Usuario(long id_usuario, String tipo_Usuario) {
+        this.id_usuario = id_usuario;
+        this.tipo_Usuario = tipo_Usuario;
+    }
+    
     public Usuario(String dni) {
         this.dni = dni;
     }
