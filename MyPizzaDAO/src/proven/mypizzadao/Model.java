@@ -14,15 +14,10 @@ public class Model {
     private final PayMethodDao pmDao;
     private final TokenDao tokenDao;
 
-    private static Model instance;
-
-    public static Model getInstance() {
-        if (instance == null) {
-            instance = new Model();
-        }
-        return instance;
-    }
-
+    
+    /**
+     * Constructo
+     */
     public Model() {
         loginDao = new LoginDao();
         productDao = new ProductDao();
@@ -34,36 +29,76 @@ public class Model {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Login">
+    /**
+     * uses{@link  proven.mypizzadao.persist.LoginDao#login(java.lang.String, java.lang.String) }
+     * @param correo email of the user
+     * @param pass password of the user
+     * @return  user if login is ok or null if not
+     */
     public Usuario login(String correo, String pass) {
         return loginDao.login(correo, pass);
     }
     
-    public int generateToken(Usuario u){
+    /**
+     * uses{@link proven.mypizzadao.persist.TokenDao#generateToken(proven.modelo.Usuario)}
+     * @param u user that log in
+     * @return a token with the user or null
+     */
+    public Token generateToken(Usuario u){
         return tokenDao.generateToken(u);
     }
-    
-    public Usuario validateClientToken(String token){
-        return tokenDao.validateClientToken(token);
+  
+    /**
+     * uses{@link proven.mypizzadao.persist.TokenDao#validateUser(java.lang.String) }
+     * @param token of the user
+     * @return a user if token exist or null if not
+     */
+    public Usuario validateUser(String token){
+        return tokenDao.validateUserToken(token);
+
     }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc=" Products ">
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#getAllPizzas() }
+     * @return a list of pizzas 
+     */
     public List<Pizza> getAllPizzas() {
         return productDao.getAllPizzas();
     }
-
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#getAllIngredients() }
+     * @return 
+     */
     public List<Ingrediente> getAllIngredients() {
         return productDao.getAllIngredients();
     }
-
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#getAllDrinks() }
+     * @return 
+     */
     public List<Refresco> getAllDrinks() {
         return productDao.getAllDrinks();
     }
-
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#getIngredientsFromPizzaId(long)}
+     * @param id of the pizza
+     * @return a list of ingredients of the pizza
+     */
     public List<Ingrediente> getIngredientsFromPizzaId(long id) {
         return productDao.getIngredientsFromPizzaId(id);
     }
-
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#addPizza(proven.modelo.Pizza, java.util.List) }
+     * @param p info od the pizza
+     * @param iList ingredients of the pizza
+     * @return rows affected or -1 if error
+     */
     public int addPizza(Pizza p, List<Ingrediente> iList) {
         return productDao.addPizza(p, iList);
     }

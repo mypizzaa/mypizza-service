@@ -4,22 +4,41 @@
  * and open the template in the editor.
  */
 package cat.proven.services;
-//@Provider
 
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
+import javax.servlet.ServletContext;
+import javax.ws.rs.Path;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import proven.modelo.Usuario;
+import proven.mypizzadao.Model;
 
-public class APIKeyCheckRequestFilter implements ContainerRequestFilter {
+/**
+ *
+ * @author alumne
+ */
+@Path("/WSToken")
+public class WSToken implements ContainerRequestFilter {
 
+    private final Model model;
     private static final String API_KEY = "X-API-KEY";
 
+    public WSToken(@Context ServletContext context) {
+        if (context.getAttribute("Model") != null) {
+            model = (Model) context.getAttribute("Model");
+        } else {
+            model = new Model();
+            context.setAttribute("Model", model);
+        }
+
+    }   
+
     @Override
-    public void filter(ContainerRequestContext containerRequestContext)
-            throws IOException {
+    public void filter(ContainerRequestContext containerRequestContext) throws IOException {
         final String apiKey = containerRequestContext.getHeaders().getFirst(API_KEY);
         URI myURI = containerRequestContext.getUriInfo().getAbsolutePath();
         String myPath = myURI.getPath();
@@ -41,7 +60,7 @@ public class APIKeyCheckRequestFilter implements ContainerRequestFilter {
      * @param path : path of service
      * @return
      */
-    public boolean isPublicService(String path) {
+    private boolean isPublicService(String path) {
         boolean isPublic = false;
         // TODO : put public services
         if (path.endsWith("/login")) {
@@ -56,20 +75,16 @@ public class APIKeyCheckRequestFilter implements ContainerRequestFilter {
      * @param apiKey : api key of service
      * @return
      */
-    public boolean isValidApiKey(String apiKey) {
+    private boolean isValidApiKey(String apiKey) {
         boolean isValid = false;
+        Usuario u = null;
         // TODO : validation of key 
         if (apiKey != null && !apiKey.isEmpty()) {
-            if (isValid(apiKey)) {
+            u = model.validateUser(apiKey);
+            if (u!=null) {
                 isValid = true;
             }
         }
         return isValid;
-    }
-    
-    private boolean isValid(String apiKey){
-        boolean b = false;
-        
-        return b;
     }
 }

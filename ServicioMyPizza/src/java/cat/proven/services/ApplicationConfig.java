@@ -3,6 +3,7 @@ package cat.proven.services;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+
  
 /**
  * Services application config
@@ -31,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(cat.proven.services.WSLogin.class);
         resources.add(cat.proven.services.WSPedido.class);
         resources.add(cat.proven.services.WSProducto.class);
+        resources.add(cat.proven.services.WSToken.class);
     }
  
 }

@@ -14,16 +14,22 @@ import java.sql.Timestamp;
 public class Token {
     
     private long id_token;
-    private long id_usuario;
+    private Usuario usuario;
     private String token;
     private Timestamp date_time;
 
-    public Token(long id_token, long id_usuario, String token, Timestamp date_time) {
+    public Token(long id_token, Usuario usuario, String token, Timestamp date_time) {
         this.id_token = id_token;
-        this.id_usuario = id_usuario;
+        this.usuario = usuario;
         this.token = token;
         this.date_time = date_time;
     }
+
+    public Token(Usuario usuario, String token, Timestamp date_time) {
+        this.usuario = usuario;
+        this.token = token;
+        this.date_time = date_time;
+    }        
 
     public Token() {
     }
@@ -36,12 +42,12 @@ public class Token {
         this.id_token = id_token;
     }
 
-    public long getId_usuario() {
-        return id_usuario;
+    public Usuario getId_usuario() {
+        return usuario;
     }
 
-    public void setId_usuario(long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getToken() {
@@ -62,6 +68,6 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" + "id_token=" + id_token + ", id_usuario=" + id_usuario + ", token=" + token + ", date_time=" + date_time + '}';
+        return "Token{" + "id_token=" + id_token + ", usuario=" + usuario + ", token=" + token + ", date_time=" + date_time + '}';
     }   
 }
