@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -51,9 +52,21 @@ public class WSClient {
     @POST
     @Path("/buscar/{dni}")
     @Produces(MediaType.APPLICATION_JSON)
-
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String findClientByDni(@PathParam("dni") String dni) {        
         Cliente c = model.findClientByDni(new Cliente(dni));    
+        return new Gson().toJson(c);
+    }
+    
+    @POST
+    @Path("/buscar/{phone}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String findClientByPhone(@PathParam("phone") String phone) {  
+        Cliente c = null;
+        if (phone != null){
+            c = model.findClienteByPhone(phone);
+        }
         return new Gson().toJson(c);
     }
     

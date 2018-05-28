@@ -54,6 +54,7 @@ public class Prueba {
         System.out.println("Modify password: "+ m.modifyPassword(new Cliente("12642375A", "pass2")));
         System.out.println("Modify client: "+m.modifyClient(new Cliente(15, "12642375A", "Joselito", "Manolito", "manolete", "jmanolito", "cliente", "man@gmail.com", "c/ Santa Ana 34", null, "491248642", "Barcelona", "08901")));
         System.out.println("Inactivate client: "+ m.inactivateClient(new Cliente("12642375A")));
+        System.out.println("Find client by phone: "+m.findClienteByPhone("123456789"));
         System.out.println("");
         System.out.println("/*************Employee*************/");
         System.out.println("List all employees: "+m.listAllEmployees());

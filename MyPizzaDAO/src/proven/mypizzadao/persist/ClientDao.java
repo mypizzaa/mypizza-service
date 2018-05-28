@@ -68,6 +68,27 @@ public class ClientDao {
         return cli;
     }
 
+    public Cliente findClientByPhone(String phone) {
+        Cliente cli = null;
+        Connection conn = dbConnect.getConnection();
+        if (conn != null && !"".equals(phone)) {
+            PreparedStatement pst;
+            try {
+                pst = conn.prepareStatement("SELECT * FROM tb_usuario INNER JOIN tb_cliente ON tb_cliente.id_usuario = tb_usuario.id_usuario WHERE tb_usuario.activo=1 AND tb_cliente.telefono=?");
+                pst.setString(1, phone);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    cli = resultSetToClient(rs);
+                }
+
+            } catch (SQLException ex) {
+            }
+
+        }
+
+        return cli;
+    }
+    
     public int addClient(Cliente c) {
         int i = 0;
 
@@ -115,8 +136,9 @@ public class ClientDao {
 
         if (conn != null && c != null) {
             try {
-                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE dni=?");
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE dni=? || correo=?");
                 pst.setString(1, c.getDni());
+                pst.setString(2, c.getCorreo());
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     i = 1;

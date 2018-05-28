@@ -236,4 +236,84 @@ public class OrderDao {
 
         return pe;
     }
+    
+    public List<PedidoInfo> getAllReceivedOrders() {
+        List<PedidoInfo> piList = null;
+
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info WHERE id_estado=?");
+                pst.setInt(1, 1);
+                ResultSet rs = pst.executeQuery();
+                piList = new ArrayList<PedidoInfo>();
+                while (rs.next()) {
+                    piList.add(pedidoInfoToResultSet(rs));
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return piList;
+    }
+    
+    public List<PedidoInfo> getAllCookingOrders() {
+        List<PedidoInfo> piList = null;
+
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info WHERE id_estado=?");
+                pst.setInt(1, 2);
+                ResultSet rs = pst.executeQuery();
+                piList = new ArrayList<PedidoInfo>();
+                while (rs.next()) {
+                    piList.add(pedidoInfoToResultSet(rs));
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return piList;
+    }
+    
+    public List<PedidoInfo> getAllReadyOrders() {
+        List<PedidoInfo> piList = null;
+
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info WHERE id_estado=?");
+                pst.setInt(1, 3);
+                ResultSet rs = pst.executeQuery();
+                piList = new ArrayList<PedidoInfo>();
+                while (rs.next()) {
+                    piList.add(pedidoInfoToResultSet(rs));
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return piList;
+    }
+    
+    public List<PedidoInfo> getAllDeliveryOrders() {
+        List<PedidoInfo> piList = null;
+
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info WHERE id_estado=?");
+                pst.setInt(1, 4);
+                ResultSet rs = pst.executeQuery();
+                piList = new ArrayList<PedidoInfo>();
+                while (rs.next()) {
+                    piList.add(pedidoInfoToResultSet(rs));
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return piList;
+    }
 }
