@@ -1,15 +1,15 @@
-DROP USER 'administrator'@'localhost';
+DROP USER 'dam1804'@'localhost';
 
-DROP DATABASE mypizza;
+DROP DATABASE dam1804;
 
-CREATE USER 'administrator'@'localhost' IDENTIFIED BY 'adminpsw';
+CREATE USER 'dam1804'@'localhost' IDENTIFIED BY 'Ew5kaer6';
 -- Crear base de dades.
 
-CREATE DATABASE mypizza  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE dam1804  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON mypizza.* TO 'administrator'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON dam1804.* TO 'dam1804'@'localhost';
 
-USE mypizza;
+USE dam1804;
 
 
 CREATE TABLE `tb_pizza`(
@@ -94,7 +94,7 @@ CREATE TABLE `tb_factura` (
 CREATE TABLE `tb_metodoPago` (
 	`id_metodoPago` INT(4) NOT NULL AUTO_INCREMENT,
     `nombre` VARCHAR(40),
-    `otros_detalles` VARCHAR(40),
+    `otros_detalles` VARCHAR(200),
     PRIMARY KEY (`id_metodoPago`)
 ) ENGINE=InnoDB;
 
@@ -110,13 +110,13 @@ CREATE TABLE `tb_empleado` (
 
 CREATE TABLE `tb_usuario` (
     `id_usuario` INT(4) NOT NULL AUTO_INCREMENT,
-    `dni` VARCHAR(9) DEFAULT NULL UNIQUE,
+    `dni` VARCHAR(9) NOT NULL UNIQUE,
     `nombre` VARCHAR(40) DEFAULT NULL,
     `apellidos` VARCHAR(40) DEFAULT NULL,
-    `password` VARCHAR(40) DEFAULT NULL,
-    `imagen` VARCHAR(40) DEFAULT NULL UNIQUE,
+    `password` VARCHAR(40) NOT NULL,
+    `imagen` VARCHAR(40) DEFAULT NULL,
     `tipo_usuario` VARCHAR(40) DEFAULT NULL,
-    `correo` VARCHAR(40) DEFAULT NULL,
+    `correo` VARCHAR(40) NOT NULL UNIQUE,
     `activo` BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB;

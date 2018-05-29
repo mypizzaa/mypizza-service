@@ -1,11 +1,9 @@
 package cat.proven.services;
 
 import com.google.gson.Gson;
-import javax.jws.WebService;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,6 +13,11 @@ import proven.modelo.Token;
 import proven.modelo.Usuario;
 import proven.mypizzadao.Model;
 
+/**
+ * 
+ * @author MyPizza
+ * @version 1.0
+ */
 @Path("/WSLogin")
 public class WSLogin {
 
@@ -38,7 +41,7 @@ public class WSLogin {
             @FormParam("password") String password) {
         Token token = null;
         Usuario u = model.login(correo, password);
-        if (u != null) {
+        if (u!=null) {
             token  = model.generateToken(u);
         }
 

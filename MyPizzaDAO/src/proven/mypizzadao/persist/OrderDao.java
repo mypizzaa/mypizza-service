@@ -18,18 +18,29 @@ import proven.modelo.PedidoInfo;
 import proven.modelo.Producto;
 
 /**
- *
- * @author alumne
+ * 
+ * @author MyPizza
+ * @version 1.0
  */
 public class OrderDao {
 
     private StoreDBConnect dbConnection;
-
+    
+    /**
+     * Constructor
+     */
     public OrderDao() {
 
         dbConnection = new StoreDBConnect();
     }
-
+    
+    /**
+     * Create and order in data source
+     * @param pi info of the order
+     * @param pList products in the order
+     * @param f bill to create
+     * @return rows affected or -1 if error
+     */
     public int createOrder(PedidoInfo pi, List<Pedido> pList, Factura f) {
         int i = 0;
 
@@ -50,7 +61,14 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * Create info order in data source
+     * @param pi information of the order
+     * @param conn connection with data source
+     * @return the id of the generated statement
+     * @throws SQLException if error ocurrs
+     */
     private int receiveOrder(PedidoInfo pi, Connection conn) throws SQLException {
         int id_pedido = 0;
         if (conn != null) {
@@ -67,7 +85,15 @@ public class OrderDao {
         } 
         return id_pedido;
     }
-
+    
+    /**
+     * Insert in data source the products of the order
+     * @param id_info_pedido id of the info order
+     * @param pList list of products of the order
+     * @param conn connection with data source
+     * @return rows affected or -1 if error
+     * @throws SQLException 
+     */
     private int setProductsToOrder(long id_info_pedido, List<Pedido> pList, Connection conn) throws SQLException {
         int i = 0;
         if (conn != null) {
@@ -87,7 +113,15 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * Create the bill in data source
+     * @param id_info_pedido if of the info order
+     * @param f bill to create
+     * @param conn connection with data source
+     * @return rows affected or -1 if error
+     * @throws SQLException if error ocurrs
+     */
     private int generateBill(long id_info_pedido, Factura f, Connection conn) throws SQLException {
         int i = 0;
         if (conn != null) {
@@ -104,7 +138,12 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * Set order to coock
+     * @param pi order to set to coock
+     * @return rows affected or -1 if null
+     */
     public int setOrderToCoock(PedidoInfo pi) {
         int i = 0;
         Connection conn = dbConnection.getConnection();
@@ -122,7 +161,12 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * Set order to ready
+     * @param pi order to set to ready
+     * @return rows affected or -1 if null
+     */
     public int setOrderToReady(PedidoInfo pi) {
         int i = 0;
         Connection conn = dbConnection.getConnection();
@@ -140,7 +184,12 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * Set order to delivery
+     * @param pi order to set to delivery
+     * @return rows affected or -1 if null
+     */
     public int setOrderToDelivery(PedidoInfo pi) {
         int i = 0;
         Connection conn = dbConnection.getConnection();
@@ -158,7 +207,12 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * Set bill to paid
+     * @param pi order to set to paid
+     * @return rows affected or -1 if null
+     */
     public int setBillToPaid(PedidoInfo pi) {
         int i = 0;
         Connection conn = dbConnection.getConnection();
@@ -174,7 +228,11 @@ public class OrderDao {
         }
         return i;
     }
-
+    
+    /**
+     * List all orders
+     * @return a list of orders or null if error
+     */
     public List<PedidoInfo> getAllInfoOrder() {
         List<PedidoInfo> piList = null;
 
@@ -194,6 +252,11 @@ public class OrderDao {
         return piList;
     }
 
+    /**
+     * List all products from oder
+     * @param pi order of the products
+     * @return a list of products or null if error
+     */
     public List<Pedido> getOrderFromProductInfo(PedidoInfo pi) {
         List<Pedido> peList = null;
         Connection conn = dbConnection.getConnection();
@@ -213,11 +276,23 @@ public class OrderDao {
         }
         return peList;
     }
-
+    
+    /**
+     * Convert ResultSet to order
+     * @param rs ResultSet
+     * @return order
+     * @throws SQLException if error ocurrs
+     */
     private PedidoInfo pedidoInfoToResultSet(ResultSet rs) throws SQLException {
         return new PedidoInfo(rs.getLong("id_pedido_info"), rs.getLong("id_estado"), rs.getString("direccion"));
     }
-
+    
+    /**
+     * Convert ResultSet to product order
+     * @param rs ResultSet
+     * @return product order
+     * @throws SQLException if error ocurrs
+     */
     private Pedido resultSetToPedido(ResultSet rs) throws SQLException {
         Pedido pe = null;
 
@@ -237,6 +312,10 @@ public class OrderDao {
         return pe;
     }
     
+    /**
+     * List all orders that are in received state
+     * @return a list of orders or null if error
+     */
     public List<PedidoInfo> getAllReceivedOrders() {
         List<PedidoInfo> piList = null;
 
@@ -257,6 +336,10 @@ public class OrderDao {
         return piList;
     }
     
+    /**
+     * List all orders that are in coocking state
+     * @return a list of orders or null if error
+     */
     public List<PedidoInfo> getAllCookingOrders() {
         List<PedidoInfo> piList = null;
 
@@ -277,6 +360,10 @@ public class OrderDao {
         return piList;
     }
     
+    /**
+     * List all orders that are in received state
+     * @return a list of orders or null if error
+     */
     public List<PedidoInfo> getAllReadyOrders() {
         List<PedidoInfo> piList = null;
 

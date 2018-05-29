@@ -42,7 +42,7 @@ public class Prueba {
         System.out.println("Modify product: "+ m.modifyProductInfo(new Producto(4, "Atun", 0.50, "atun.jpg")));
         System.out.println("Add ingredients to pizza: "+m.addIgredientsToPizza(new Pizza(1), addIngedient()));
         System.out.println("Remove igredients from pizza: "+ m.removeIngredientFromPizza(new Pizza(12), removeIngredients()));
-        System.out.println("Remove pizza: "+m.removePizza(new Pizza(12)));
+        System.out.println("Remove pizza: "+m.removePizza(new Pizza(1)));
         System.out.println("Remove ingrediente: "+m.removeIngrediente(new Ingrediente(1)));
         System.out.println("Remove drink: "+m.removeDrink(new Refresco(2)));
         System.out.println("");

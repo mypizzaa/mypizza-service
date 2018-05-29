@@ -11,7 +11,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import proven.mypizzadao.Model;
 
-
+/**
+ * 
+ * @author MyPizza
+ * @version 1.0
+ */
 @Path("/WSPedido")
 public class WSPedido {
     

@@ -34,8 +34,10 @@ public class Producto {
         this.precio = precio;
         this.imagen = imagen;
     }
-    
-    
+
+    public Producto(String nombre) {
+        this.nombre = nombre;
+    }            
     
     public Producto() {
     }

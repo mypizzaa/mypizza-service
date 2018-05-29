@@ -20,6 +20,11 @@ import proven.modelo.Producto;
 import proven.modelo.Refresco;
 import proven.mypizzadao.Model;
 
+/**
+ *
+ * @author MyPizza
+ * @version 1.0
+ */
 @Path("/WSProducto")
 public class WSProducto {
 
@@ -49,6 +54,23 @@ public class WSProducto {
         listapizzas = model.getAllPizzas();
 
         return new Gson().toJson("pizzas:" + listapizzas);
+    }
+    
+    /**
+     * Find a prodcut by dni,
+     * @param name of the product
+     * @return json of the product found or null if not
+     */
+    @POST
+    @Path("/buscar")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String findProductByName(@FormParam("name") String name) {
+        Producto p = null;
+        if (name != null) {
+            p = model.findProductByName(new Producto(name));
+        }
+        return new Gson().toJson(p);
     }
 
     /**
@@ -102,6 +124,15 @@ public class WSProducto {
         return new Gson().toJson(listaIngredientes);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param name name of the pizza
+     * @param price price of the pizza
+     * @param image image of the pizza
+     * @param list list of ingredients in the pizza
+     * @return json with rows affected
+     */
     @POST
     @Path("/addpizza")
     @Produces(MediaType.APPLICATION_JSON)
@@ -119,6 +150,14 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param name of the drink
+     * @param price of the drink
+     * @param image image of the drink
+     * @return json with rows affected
+     */
     @POST
     @Path("/addbebida")
     @Produces(MediaType.APPLICATION_JSON)
@@ -133,6 +172,14 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param name name of the ingredient
+     * @param price price of the ingredient
+     * @param image image of the ingredient
+     * @return json of rows affected
+     */
     @POST
     @Path("/addingrediente")
     @Produces(MediaType.APPLICATION_JSON)
@@ -146,6 +193,15 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param id_product id of the product to modify
+     * @param name name of the product
+     * @param price price of the product
+     * @param image image of the product
+     * @return
+     */
     @POST
     @Path("/modificarproducto")
     @Produces(MediaType.APPLICATION_JSON)
@@ -159,6 +215,13 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param idPizza id of the pizza to add ingredients
+     * @param list list of ids of the ingredients to add to the pizza
+     * @return json of the rows affected
+     */
     @POST
     @Path("/addingredientespizza")
     @Produces(MediaType.APPLICATION_JSON)
@@ -175,6 +238,13 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param idPizza id of the pizza to update
+     * @param list list of ids of ingredients to remove in the pizza
+     * @return json of rows affected
+     */
     @POST
     @Path("/eliminaringredientspizza")
     @Produces(MediaType.APPLICATION_JSON)
@@ -191,6 +261,12 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param idPizza id of the pizza to remove
+     * @return json of the rows affected
+     */
     @POST
     @Path("/eliminarpizza")
     @Produces(MediaType.APPLICATION_JSON)
@@ -203,6 +279,12 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param idIngredient id of the ingredient to remove
+     * @return json of the rows affected
+     */
     @POST
     @Path("/eliminaringredient")
     @Produces(MediaType.APPLICATION_JSON)
@@ -215,6 +297,12 @@ public class WSProducto {
         return new Gson().toJson(rowsAffected);
     }
 
+    /**
+     * get params if they are not null send params to model
+     *
+     * @param idDrink id of the drink to remove
+     * @return json of the rows affected
+     */
     @POST
     @Path("/eliminardrink")
     @Produces(MediaType.APPLICATION_JSON)

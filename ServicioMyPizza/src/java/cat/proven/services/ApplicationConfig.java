@@ -6,9 +6,9 @@ import javax.ws.rs.core.Application;
 
  
 /**
- * Services application config
- * @ApplicationPath determines base url for all controllers.
- * @author ProvenSoft
+ * Service application config
+ * @author MyPizza
+ * @version 1.0
  */
 @ApplicationPath("servicios")
 public class ApplicationConfig extends Application {
@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
         resources.add(cat.proven.services.WSClient.class);
         resources.add(cat.proven.services.WSEmpleado.class);
         resources.add(cat.proven.services.WSLogin.class);
+        resources.add(cat.proven.services.WSPayMethod.class);
         resources.add(cat.proven.services.WSPedido.class);
         resources.add(cat.proven.services.WSProducto.class);
         resources.add(cat.proven.services.WSToken.class);

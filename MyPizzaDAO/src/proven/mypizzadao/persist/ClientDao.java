@@ -5,7 +5,6 @@
  */
 package proven.mypizzadao.persist;
 
-;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,19 +15,25 @@ import java.util.List;
 import proven.modelo.Cliente;
 
 /**
- *
- * @author alumne
+ * 
+ * @author MyPizza
+ * @version 1.0
  */
-
-
 public class ClientDao {
 
     private StoreDBConnect dbConnect;
-
+    
+    /**
+     * Constructor
+     */
     public ClientDao() {
         dbConnect = new StoreDBConnect();
     }
-
+    
+    /**
+     * List all clients from data source
+     * @return a list of clients or null if error
+     */
     public List<Cliente> listAllClients() {
         List<Cliente> cList = null;
         Connection conn = dbConnect.getConnection();
@@ -46,7 +51,12 @@ public class ClientDao {
         }
         return cList;
     }
-
+    
+    /**
+     * Find a client by dni in data source
+     * @param c client to find
+     * @return client found or null if error
+     */
     public Cliente findClientByDni(Cliente c) {
         Cliente cli = null;
         Connection conn = dbConnect.getConnection();
@@ -67,7 +77,12 @@ public class ClientDao {
 
         return cli;
     }
-
+    
+    /**
+     * Find a client by phone
+     * @param phone phone of the client
+     * @return client found or null if not
+     */
     public Cliente findClientByPhone(String phone) {
         Cliente cli = null;
         Connection conn = dbConnect.getConnection();
@@ -89,6 +104,11 @@ public class ClientDao {
         return cli;
     }
     
+    /**
+     * Add a client in data source
+     * @param c client to add
+     * @return rows affected or -1 if null
+     */
     public int addClient(Cliente c) {
         int i = 0;
 
@@ -128,7 +148,12 @@ public class ClientDao {
         }
         return i;
     }
-
+    
+    /**
+     * Check if client dni or email exist
+     * @param c client with email and dni
+     * @return rows affected or -1 if error
+     */
     public int checkIfExist(Cliente c) {
         int i = 0;
 
@@ -151,7 +176,13 @@ public class ClientDao {
         }
         return i;
     }
-
+    
+    
+    /**
+     * Change the password of a client
+     * @param c client to change the password
+     * @return rows affected or -1 if error
+     */
     public int modifyPassword(Cliente c) {
         int i = 0;
         if (c.getDni() != null && c.getPassword() != null) {
@@ -171,7 +202,12 @@ public class ClientDao {
         }
         return i;
     }
-
+    
+    /**
+     * Update info of the client
+     * @param c cliento to modify
+     * @return rows affected or -1 if error
+     */
     public int modifyClient(Cliente c) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -205,7 +241,12 @@ public class ClientDao {
         }
         return i;
     }
-
+    
+    /**
+     * Inactive a client in data source
+     * @param c client to inactive
+     * @return rows affected or -1 if error
+     */
     public int inactivateClient(Cliente c) {
         int i = 0;
 
@@ -225,7 +266,13 @@ public class ClientDao {
         }
         return i;
     }
-
+    
+    /**
+     * Convert a ResultSet to Client
+     * @param rs ResultSet
+     * @return client
+     * @throws SQLException if error ocurrs 
+     */
     private Cliente resultSetToClient(ResultSet rs) throws SQLException {
         return new Cliente(rs.getLong("id_cliente"), rs.getString("telefono"),
                 rs.getString("direccion1"), rs.getString("direccion2"), rs.getString("poblacion"),

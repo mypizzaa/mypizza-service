@@ -4,6 +4,11 @@ import java.util.List;
 import proven.modelo.*;
 import proven.mypizzadao.persist.*;
 
+/**
+ * 
+ * @author MyPizza
+ * @version 1.0
+ */
 public class Model {
 
     private final LoginDao loginDao;
@@ -15,7 +20,7 @@ public class Model {
     private final TokenDao tokenDao;
 
     /**
-     * Constructo
+     * Constructor
      */
     public Model() {
         loginDao = new LoginDao();
@@ -71,6 +76,15 @@ public class Model {
      */
     public List<Pizza> getAllPizzas() {
         return productDao.getAllPizzas();
+    }
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#findProductByName(proven.modelo.Producto) }
+     * @param product to find
+     * @return  product found or null if error
+     */
+    public Producto findProductByName(Producto product){
+        return productDao.findProductByName(product);
     }
 
     /**

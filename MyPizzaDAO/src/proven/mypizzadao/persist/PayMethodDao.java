@@ -16,17 +16,25 @@ import java.util.logging.Logger;
 import proven.modelo.MetodoPago;
 
 /**
- *
- * @author alumne
+ * 
+ * @author MyPizza
+ * @version 1.0
  */
 public class PayMethodDao {
 
     private StoreDBConnect dbConnection;
-
+    
+    /**
+     * Constructor
+     */
     public PayMethodDao() {
         dbConnection = new StoreDBConnect();
     }
-
+    
+    /**
+     * List al pay methods from data source
+     * @return a list of pay methods or null if error
+     */
     public List<MetodoPago> listAllMethods() {
         List<MetodoPago> mpList = null;
         Connection conn = dbConnection.getConnection();
@@ -45,11 +53,22 @@ public class PayMethodDao {
         }
         return mpList;
     }
-
+    
+    /**
+     * Convert ResultSet to pay method
+     * @param rs ResultSet
+     * @return Pay Method
+     * @throws SQLException if error ocurrs 
+     */
     private MetodoPago resultSetToPayMethod(ResultSet rs) throws SQLException {
         return new MetodoPago(rs.getLong("id_MetodoPago"), rs.getString("nombre"), rs.getString("otros_detalles"));
     }
-
+    
+    /**
+     * Add a pay mehtod in data source
+     * @param mp Pay Method to add
+     * @return rows affected or -1 if error
+     */
     public int addPayMethod(MetodoPago mp) {
         int i = 0;
 
@@ -69,7 +88,12 @@ public class PayMethodDao {
 
         return i;
     }
-
+    
+    /**
+     * Update a pay method in data source
+     * @param mp pay method with same id and new info to update
+     * @return rows affected or -1 if null
+     */
     public int updatePayMethod(MetodoPago mp) {
         int i = 0;
 
@@ -90,10 +114,14 @@ public class PayMethodDao {
 
         return i;
     }
-
+    
+    /**
+     * Remove a pay method from data source
+     * @param mp pay method to delete
+     * @return rows affected or -1 if null
+     */
     public int removePayMethod(MetodoPago mp) {
         int i = 0;
-
         Connection conn = dbConnection.getConnection();
         if (conn != null) {
             try {
@@ -106,7 +134,6 @@ public class PayMethodDao {
         } else {
             i = -1;
         }
-
         return i;
     }
 

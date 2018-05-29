@@ -16,8 +16,11 @@ import proven.modelo.Empleado;
 import proven.modelo.Usuario;
 import proven.mypizzadao.Model;
 
-
-
+/**
+ * 
+ * @author MyPizza
+ * @version 1.0
+ */
 @Path("/WSEmpleado")
 public class WSEmpleado {
 

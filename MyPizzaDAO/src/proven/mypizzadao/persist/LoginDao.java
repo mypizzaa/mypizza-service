@@ -12,22 +12,30 @@ import java.sql.SQLException;
 import proven.modelo.Usuario;
 
 /**
- *
- * @author Javi Delgado
+ * 
+ * @author MyPizza
+ * @version 1.0
  */
 public class LoginDao {
 
     private StoreDBConnect dbConnect;
 
-    private final String QUERY_FIND_USER = "SELECT * FROM TB_usuario WHERE correo =?  AND password =? AND activo=?";
+    private final String QUERY_FIND_USER = "SELECT * FROM tb_usuario WHERE correo =? AND password =? AND activo=?";
 
+    /**
+     * Constructor
+     */
     public LoginDao() {
-
-
         dbConnect = new StoreDBConnect();
-
     }
 
+    /**
+     * Check if email and password exist in data source
+     *
+     * @param correo email of the user
+     * @param password of the user
+     * @return a user if params are corrects or null if not
+     */
     public Usuario login(String correo, String password) {
         Usuario u = null;
         Connection conn = dbConnect.getConnection();
@@ -41,16 +49,20 @@ public class LoginDao {
                 if (rs.next()) {
                     u = resultsetToUser(rs);
                 }
-
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
         return u;
     }
 
+    /**
+     * Convert a result set to user
+     *
+     * @param rs resultset from query
+     * @return user
+     * @throws SQLException if error appears
+     */
     private Usuario resultsetToUser(ResultSet rs) throws SQLException {
         long id_usuario = rs.getLong("id_usuario");
         String dni = rs.getString("dni");

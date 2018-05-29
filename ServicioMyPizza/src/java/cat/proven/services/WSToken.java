@@ -18,8 +18,9 @@ import proven.modelo.Usuario;
 import proven.mypizzadao.Model;
 
 /**
- *
- * @author alumne
+ * 
+ * @author MyPizza
+ * @version 1.0
  */
 @Path("/WSToken")
 public class WSToken implements ContainerRequestFilter {
@@ -37,6 +38,11 @@ public class WSToken implements ContainerRequestFilter {
 
     }   
 
+    /**
+     * Filter web service with tokens
+     * @param containerRequestContext
+     * @throws IOException 
+     */
     @Override
     public void filter(ContainerRequestContext containerRequestContext) throws IOException {
         final String apiKey = containerRequestContext.getHeaders().getFirst(API_KEY);

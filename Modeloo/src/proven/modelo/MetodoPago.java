@@ -13,6 +13,12 @@ public class MetodoPago {
         this.detalles = detalles;
     }
 
+    public MetodoPago(String nombre, String detalles) {
+        this.nombre = nombre;
+        this.detalles = detalles;
+    }
+        
+    
     public MetodoPago(long id_metodoPago) {
         this.id_metodoPago = id_metodoPago;
     }

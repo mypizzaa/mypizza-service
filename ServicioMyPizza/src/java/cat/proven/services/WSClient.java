@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,7 +21,11 @@ import javax.ws.rs.core.MediaType;
 import proven.modelo.Cliente;
 import proven.modelo.Ingrediente;
 import proven.mypizzadao.Model;
-
+/**
+ * 
+ * @author MyPizza
+ * @version 1.0
+ */
 @Path("/WSCliente")
 public class WSClient {
 
@@ -50,7 +55,7 @@ public class WSClient {
     
     
     @POST
-    @Path("/buscar/{dni}")
+    @Path("/buscarDni")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String findClientByDni(@PathParam("dni") String dni) {        
@@ -59,10 +64,10 @@ public class WSClient {
     }
     
     @POST
-    @Path("/buscar/{phone}")
+    @Path("/buscar")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String findClientByPhone(@PathParam("phone") String phone) {  
+    public String findClientByPhone(@FormParam("phone") String phone) {  
         Cliente c = null;
         if (phone != null){
             c = model.findClienteByPhone(phone);

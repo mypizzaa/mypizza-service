@@ -17,17 +17,25 @@ import java.util.logging.Logger;
 import proven.modelo.Empleado;
 
 /**
- *
- * @author alumne
+ * 
+ * @author MyPizza
+ * @version 1.0
  */
 public class EmployeeDao {
 
     private StoreDBConnect dbConnection;
-
+    
+    /**
+     * Constructor
+     */
     public EmployeeDao() {
         dbConnection = new StoreDBConnect();
     }
-
+    
+    /**
+     * List all employees from data source
+     * @return list of employees or null if error
+     */
     public List<Empleado> listAllEmployees() {
         List<Empleado> empList = null;
         Connection conn = dbConnection.getConnection();
@@ -44,7 +52,12 @@ public class EmployeeDao {
         }
         return empList;
     }
-
+    
+    /**
+     * Find an employee by dni
+     * @param e employee to find
+     * @return employee found or null if not 
+     */
     public Empleado findEmployee(Empleado e) {
         Empleado emp = null;
 
@@ -64,7 +77,12 @@ public class EmployeeDao {
 
         return emp;
     }
-
+    
+    /**
+     * Add an employee from data source
+     * @param e employee to add in data source
+     * @return rows affected or -1 if error
+     */
     public int addEmployee(Empleado e) {
         int i = 0;
 
@@ -101,7 +119,12 @@ public class EmployeeDao {
         }
         return i;
     }
-
+    
+    /**
+     * Update an employee in data source
+     * @param e employee to update with same id
+     * @return rows affected or -1 if error
+     */
     public int updateEmployee(Empleado e) {
         int i = 0;
         if (e != null) {
@@ -136,7 +159,12 @@ public class EmployeeDao {
         }
         return i;
     }
-
+    
+    /**
+     * Inactive an employee from data source
+     * @param e employee to inactive
+     * @return rows affected or -1 if error
+     */
     public int inactivateEmployee(Empleado e) {
         int i = 0;
         if (e.getDni() != null) {
@@ -154,7 +182,13 @@ public class EmployeeDao {
         }
         return i;
     }
-
+    
+    /**
+     * Convert a ResultSet to employee
+     * @param rs ResultSet
+     * @return an employee
+     * @throws SQLException if error ocurrs 
+     */
     private Empleado resultSetToEmployee(ResultSet rs) throws SQLException {
         return new Empleado(rs.getLong("id_empleado"),
                 rs.getTime("hora_entrada"), rs.getTime("hora_salida"), rs.getInt("horas_semanales"),

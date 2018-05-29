@@ -22,16 +22,25 @@ import proven.modelo.Usuario;
 
 /**
  *
- * @author alumne
+ * @author MyPizza
+ * @version 1.0
  */
 public class ProductDao {
 
     private StoreDBConnect dbConnect;
 
+    /**
+     * Constructor
+     */
     public ProductDao() {
         dbConnect = new StoreDBConnect();
     }
 
+    /**
+     * list all pizzas from data saource
+     *
+     * @return a list of pizzas or null if error
+     */
     public List<Pizza> getAllPizzas() {
         List<Pizza> pizzaList = null;
 
@@ -50,7 +59,36 @@ public class ProductDao {
         }
         return pizzaList;
     }
+    
+    /**
+     * Find a product by name in data source
+     * @param product product to find
+     * @return product found or null if not
+     */
+    public Producto findProductByName(Producto product) {
+        Producto p = null;
+        Connection conn = dbConnect.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` WHERE nombre = ?");
+                pst.setString(1, product.getNombre());
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    p = resultsetToProduct(rs);
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return p;
+    }
 
+    /**
+     * Convert a ResultSet to pizza
+     *
+     * @param rs ResultSet
+     * @return pizza
+     * @throws SQLException if error ocurrs
+     */
     private Pizza resultsetToPizza(ResultSet rs) throws SQLException {
         long id_producto = rs.getLong("id_producto");
         String nombre = rs.getString("nombre");
@@ -61,6 +99,12 @@ public class ProductDao {
         return new Pizza(id_producto, nombre, precio, imagen, id_tipo, id_pizza);
     }
 
+    /**
+     * Get ingredients from a pizza
+     *
+     * @param id of the pizza
+     * @return a list of ingredints or null if error
+     */
     public List<Ingrediente> getIngredientsFromPizzaId(long id) {
         List<Ingrediente> iList = null;
 
@@ -81,6 +125,13 @@ public class ProductDao {
         return iList;
     }
 
+    /**
+     * Convert a ResultSet to ingredien
+     *
+     * @param rs ResultSet
+     * @return an ingredient
+     * @throws SQLException if error occurs
+     */
     private Ingrediente resultsetToIngrediente(ResultSet rs) throws SQLException {
         long id_producto = rs.getLong("id_producto");
         String nombre = rs.getString("nombre");
@@ -91,6 +142,11 @@ public class ProductDao {
         return new Ingrediente(id_producto, nombre, precio, imagen, id_tipo, id_ingrediente);
     }
 
+    /**
+     * get a list of all ingredients from data source
+     *
+     * @return a list of ingredients or null if error
+     */
     public List<Ingrediente> getAllIngredients() {
         List<Ingrediente> iList = null;
 
@@ -110,6 +166,11 @@ public class ProductDao {
         return iList;
     }
 
+    /**
+     * get all drinks from data source
+     *
+     * @return a list of drinks or null if error
+     */
     public List<Refresco> getAllDrinks() {
         List<Refresco> rList = null;
 
@@ -129,6 +190,13 @@ public class ProductDao {
         return rList;
     }
 
+    /**
+     * Convert a ResultSet to drink
+     *
+     * @param rs ResultSet
+     * @return a drink
+     * @throws SQLException if error ocurrs
+     */
     private Refresco resultsetToRefresco(ResultSet rs) throws SQLException {
         long id_producto = rs.getLong("id_producto");
         String nombre = rs.getString("nombre");
@@ -139,9 +207,15 @@ public class ProductDao {
         return new Refresco(id_producto, nombre, precio, imagen, id_tipo, id_refresco);
     }
 
+    /**
+     * Add a pizza to data source
+     *
+     * @param p pizza to add
+     * @param iList list of ingedients of the pizza
+     * @return rows affected or null if error
+     */
     public int addPizza(Pizza p, List<Ingrediente> iList) {
         int i = 0;
-
         Connection conn = dbConnect.getConnection();
         if (conn != null) {
             PreparedStatement pst;
@@ -176,6 +250,12 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Add a drink to data source
+     *
+     * @param r drink to add
+     * @return rows affected or -1 if error
+     */
     public int addDrink(Refresco r) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -205,6 +285,12 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Add an ingredient to data source
+     *
+     * @param ing ingredient to add
+     * @return rows affected or -1 if error
+     */
     public int addIngredient(Ingrediente ing) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -234,6 +320,12 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Update product info in data source
+     *
+     * @param p product to modify
+     * @return rows affected or -1 if error
+     */
     public int modifyProductInfo(Producto p) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -253,6 +345,13 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Add ingredients to a pizza
+     *
+     * @param p pizza to add the ingredients
+     * @param iList list of ingredients to add to the pizza
+     * @return rows affected or -1 if null
+     */
     public int addIngredientsToPizza(Pizza p, List<Ingrediente> iList) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -283,6 +382,13 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Remove ingredients from a pizza check if ingredients are in the pizza
+     *
+     * @param p pizza to remove ingredients
+     * @param iList list of the ingredients to remove
+     * @return rows affected or -1 if error
+     */
     public int removeIngredientsFromPizza(Pizza p, List<Ingrediente> iList) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -304,6 +410,12 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Find product id Delete ingredients to pizza
+     *
+     * @param p pizza with id to remvoe
+     * @return
+     */
     public int removePizza(Pizza p) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -337,10 +449,13 @@ public class ProductDao {
                         pst.setLong(1, id_producto);
                         i += pst.executeUpdate();
                         pst.close();
+                    } else {
+                        i = -2;
                     }
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
+                i = -1;
             }
 
         } else {
@@ -349,6 +464,12 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Remove an ingredient in data source
+     *
+     * @param ing ingredient to remove
+     * @return rows affected or -1 if null
+     */
     public int removeIngredient(Ingrediente ing) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -394,6 +515,12 @@ public class ProductDao {
         return i;
     }
 
+    /**
+     * Remove a drink in data source
+     *
+     * @param r drink to remove
+     * @return rows affected or -1 if null
+     */
     public int removeDrink(Refresco r) {
         int i = 0;
         Connection conn = dbConnect.getConnection();
@@ -429,5 +556,20 @@ public class ProductDao {
             i = -1;
         }
         return i;
+    }
+    
+    /**
+     * Convert ResultSet to product
+     * @param rs ResultSet
+     * @return product
+     * @throws SQLException if error ocurrs
+     */
+    private Producto resultsetToProduct(ResultSet rs) throws SQLException {
+        long id_producto = rs.getLong("id_producto");
+        String nombre = rs.getString("nombre");
+        double precio = rs.getDouble("precio");
+        String imagen = rs.getString("imagen");
+        long id_tipo = rs.getLong("id_tipo");
+        return new Producto(id_producto, nombre, precio, imagen, id_tipo);
     }
 }
