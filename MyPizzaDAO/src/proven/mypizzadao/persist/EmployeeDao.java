@@ -95,7 +95,7 @@ public class EmployeeDao {
                 pst.setString(3, e.getApellidos());
                 pst.setString(4, e.getPassword());
                 pst.setString(5, e.getImagen());
-                pst.setString(6, e.getTipoUsuario());
+                pst.setString(6, "empleado");
                 pst.setString(7, e.getCorreo());
                 pst.executeUpdate();
 
