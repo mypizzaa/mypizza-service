@@ -62,15 +62,49 @@ public class WSProducto {
      * @return json of the product found or null if not
      */
     @POST
-    @Path("/buscar")
+    @Path("/buscarpizza")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String findProductByName(@FormParam("name") String name) {
-        Producto p = null;
+    public String findPizzaByName(@FormParam("name") String name) {
+        Pizza p = null;
         if (name != null) {
-            p = model.findProductByName(new Producto(name));
+            p = model.findPizzaByName(new Pizza(name));
         }
         return new Gson().toJson(p);
+    }
+    
+    /**
+     * Find a prodcut by dni,
+     * @param name of the product
+     * @return json of the product found or null if not
+     */
+    @POST
+    @Path("/buscaringrediente")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String findIngredientByName(@FormParam("name") String name) {
+        Ingrediente i = null;
+        if (name != null) {
+            i = model.findIngredientByName(new Ingrediente(name));
+        }
+        return new Gson().toJson(i);
+    }
+    
+    /**
+     * Find a prodcut by dni,
+     * @param name of the product
+     * @return json of the product found or null if not
+     */
+    @POST
+    @Path("/buscarbebida")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String findDrinkByName(@FormParam("name") String name) {
+        Refresco r = null;
+        if (name != null) {
+            r = model.findRefrescoByName(new Refresco(name));
+        }
+        return new Gson().toJson(r);
     }
 
     /**

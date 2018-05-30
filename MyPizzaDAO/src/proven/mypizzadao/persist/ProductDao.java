@@ -61,25 +61,70 @@ public class ProductDao {
     }
     
     /**
-     * Find a product by name in data source
-     * @param product product to find
+     * Find a pizza by name in data source
+     * @param pizza to find
      * @return product found or null if not
      */
-    public Producto findProductByName(Producto product) {
-        Producto p = null;
+    public Pizza findPizzaByName(Pizza pizza) {
+        Pizza p = null;
         Connection conn = dbConnect.getConnection();
         if (conn != null) {
             try {
-                PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` WHERE nombre = ?");
-                pst.setString(1, product.getNombre());
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` INNER JOIN tb_pizza ON tb_pizza.id_producto = tb_producto.id_producto WHERE nombre = ?");
+                pst.setString(1, pizza.getNombre());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    p = resultsetToProduct(rs);
+                    p = resultsetToPizza(rs);
                 }
             } catch (SQLException ex) {
             }
         }
         return p;
+    }
+    
+    /**
+     * Find a ingredient by name in data source
+     * @param ingredient to find
+     * @return ingredient found or null if not
+     */
+    public Ingrediente findIngredientName(Ingrediente ingredient) {
+        Ingrediente i = null;
+        Connection conn = dbConnect.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` INNER JOIN tb_ingredientes ON tb_ingredientes.id_producto = tb_producto.id_producto WHERE nombre = ?");
+                pst.setString(1, ingredient.getNombre());
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    i = resultsetToIngrediente(rs);
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return i;
+    }
+    
+    /**
+     * Find a ingredient by name in data source
+     * @param drink to find
+     * @return found found or null if not
+     */
+    public Refresco findDrinkByName(Refresco drink) {
+        Refresco r = null;
+        Connection conn = dbConnect.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` INNER JOIN tb_refresco ON tb_refresco.id_producto = tb_producto.id_producto"
+                        + " WHERE nombre = ?");
+                pst.setString(1, drink.getNombre());
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    r = resultsetToRefresco(rs);
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return r;
     }
 
     /**

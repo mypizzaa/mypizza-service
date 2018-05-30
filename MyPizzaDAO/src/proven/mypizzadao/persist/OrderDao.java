@@ -12,20 +12,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import proven.modelo.Factura;
 import proven.modelo.Pedido;
 import proven.modelo.PedidoInfo;
 import proven.modelo.Producto;
 
 /**
- * 
+ *
  * @author MyPizza
  * @version 1.0
  */
 public class OrderDao {
 
     private StoreDBConnect dbConnection;
-    
+
     /**
      * Constructor
      */
@@ -33,37 +35,37 @@ public class OrderDao {
 
         dbConnection = new StoreDBConnect();
     }
-    
+
     /**
      * Create and order in data source
+     *
      * @param pi info of the order
      * @param pList products in the order
      * @param f bill to create
      * @return rows affected or -1 if error
      */
-    public int createOrder(PedidoInfo pi, List<Pedido> pList, Factura f) {
-        int i = 0;
+    public long createOrder(PedidoInfo pi, Factura f) {
+        long id_info_pedido = 0;
 
         Connection conn = dbConnection.getConnection();
         if (conn != null) {
-            PreparedStatement pst;
             try {
-                long id_info_pedido = receiveOrder(pi, conn);
+                id_info_pedido = receiveOrder(pi, conn);
                 if (id_info_pedido > 0) {
-                    i += setProductsToOrder(id_info_pedido, pList, conn);
-                    i += generateBill(id_info_pedido, f, conn);
+                    generateBill(id_info_pedido, f, conn);
                 }
             } catch (SQLException ex) {
-                i = -1;
+                id_info_pedido = -1;
             }
         } else {
-            i = -1;
+            id_info_pedido = -1;
         }
-        return i;
+        return id_info_pedido;
     }
-    
+
     /**
      * Create info order in data source
+     *
      * @param pi information of the order
      * @param conn connection with data source
      * @return the id of the generated statement
@@ -82,40 +84,47 @@ public class OrderDao {
             }
             pst.close();
             rs.close();
-        } 
+        }
         return id_pedido;
     }
-    
+
     /**
      * Insert in data source the products of the order
+     *
      * @param id_info_pedido id of the info order
      * @param pList list of products of the order
      * @param conn connection with data source
      * @return rows affected or -1 if error
-     * @throws SQLException 
+     * @throws SQLException
      */
-    private int setProductsToOrder(long id_info_pedido, List<Pedido> pList, Connection conn) throws SQLException {
+    public int setProductsToOrder(List<Pedido> pList) {
         int i = 0;
+        Connection conn = dbConnection.getConnection();
         if (conn != null) {
             PreparedStatement pst;
             for (Pedido p : pList) {
-                pst = conn.prepareStatement("INSERT INTO tb_pedido (id_pedido_info, id_producto, observaciones, cantidad, precio) VALUES (?,?,?,?,?)");
-                pst.setLong(1, id_info_pedido);
-                pst.setLong(2, p.getProducto().getIdProducto());
-                pst.setString(3, p.getObservaciones());
-                pst.setInt(4, p.getCantidad());
-                pst.setDouble(5, p.getPrecio());
-                i = pst.executeUpdate();
-                pst.close();
+                try {
+                    pst = conn.prepareStatement("INSERT INTO tb_pedido (id_pedido_info, id_producto, observaciones, cantidad, precio) VALUES (?,?,?,?,?)");
+                    pst.setLong(1, p.getId_pedido_info());
+                    pst.setLong(2, p.getProducto().getIdProducto());
+                    pst.setString(3, p.getObservaciones());
+                    pst.setInt(4, p.getCantidad());
+                    pst.setDouble(5, p.getPrecio());
+                    i += pst.executeUpdate();
+                    pst.close();
+                } catch (SQLException ex) {
+                   i = -1;
+                }
             }
-        }else {
+        } else {
             i = -1;
         }
         return i;
     }
-    
+
     /**
      * Create the bill in data source
+     *
      * @param id_info_pedido if of the info order
      * @param f bill to create
      * @param conn connection with data source
@@ -133,14 +142,15 @@ public class OrderDao {
             pst.setString(5, f.getFecha());
             pst.setInt(6, 0);
             i += pst.executeUpdate();
-        }else {
+        } else {
             i = -1;
         }
         return i;
     }
-    
+
     /**
      * Set order to coock
+     *
      * @param pi order to set to coock
      * @return rows affected or -1 if null
      */
@@ -156,14 +166,15 @@ public class OrderDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
-        }else {
+        } else {
             i = -1;
         }
         return i;
     }
-    
+
     /**
      * Set order to ready
+     *
      * @param pi order to set to ready
      * @return rows affected or -1 if null
      */
@@ -179,14 +190,15 @@ public class OrderDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
-        }else {
+        } else {
             i = -1;
         }
         return i;
     }
-    
+
     /**
      * Set order to delivery
+     *
      * @param pi order to set to delivery
      * @return rows affected or -1 if null
      */
@@ -202,14 +214,15 @@ public class OrderDao {
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
             }
-        }else {
+        } else {
             i = -1;
         }
         return i;
     }
-    
+
     /**
      * Set bill to paid
+     *
      * @param pi order to set to paid
      * @return rows affected or -1 if null
      */
@@ -228,9 +241,10 @@ public class OrderDao {
         }
         return i;
     }
-    
+
     /**
      * List all orders
+     *
      * @return a list of orders or null if error
      */
     public List<PedidoInfo> getAllInfoOrder() {
@@ -254,6 +268,7 @@ public class OrderDao {
 
     /**
      * List all products from oder
+     *
      * @param pi order of the products
      * @return a list of products or null if error
      */
@@ -276,9 +291,10 @@ public class OrderDao {
         }
         return peList;
     }
-    
+
     /**
      * Convert ResultSet to order
+     *
      * @param rs ResultSet
      * @return order
      * @throws SQLException if error ocurrs
@@ -286,9 +302,10 @@ public class OrderDao {
     private PedidoInfo pedidoInfoToResultSet(ResultSet rs) throws SQLException {
         return new PedidoInfo(rs.getLong("id_pedido_info"), rs.getLong("id_estado"), rs.getString("direccion"));
     }
-    
+
     /**
      * Convert ResultSet to product order
+     *
      * @param rs ResultSet
      * @return product order
      * @throws SQLException if error ocurrs
@@ -311,9 +328,10 @@ public class OrderDao {
 
         return pe;
     }
-    
+
     /**
      * List all orders that are in received state
+     *
      * @return a list of orders or null if error
      */
     public List<PedidoInfo> getAllReceivedOrders() {
@@ -335,9 +353,10 @@ public class OrderDao {
 
         return piList;
     }
-    
+
     /**
      * List all orders that are in coocking state
+     *
      * @return a list of orders or null if error
      */
     public List<PedidoInfo> getAllCookingOrders() {
@@ -359,9 +378,10 @@ public class OrderDao {
 
         return piList;
     }
-    
+
     /**
      * List all orders that are in received state
+     *
      * @return a list of orders or null if error
      */
     public List<PedidoInfo> getAllReadyOrders() {
@@ -383,7 +403,7 @@ public class OrderDao {
 
         return piList;
     }
-    
+
     public List<PedidoInfo> getAllDeliveryOrders() {
         List<PedidoInfo> piList = null;
 
@@ -404,7 +424,7 @@ public class OrderDao {
 
         return piList;
     }
-    
+
     public List<PedidoInfo> getAllPaidOrders() {
         List<PedidoInfo> piList = null;
 

@@ -1,9 +1,11 @@
 package cat.proven.services;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import static javafx.scene.input.KeyCode.T;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -114,24 +116,109 @@ public class WSPedido {
     }
 
     @POST
-    @Path("/createOrder")
+    @Path("/createorder")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String createOrder(@FormParam("address") String address, @FormParam("client_id") long clientId,
             @FormParam("payMethod_id") long payMethodId, @FormParam("total_price") double totalPrice,
-            @FormParam("date_time") String dateTime, @FormParam("product_id") List<Long> productId,
-            @FormParam("observations") String observations, @FormParam("quantity") int quantity,
-            @FormParam("price") double price) {
+            @FormParam("date_time") String dateTime) {
+        int id_pedido_info = -1;
+        if (address != null && clientId > 0 && payMethodId > 0 && totalPrice > 0 && dateTime != null) {
+            id_pedido_info = (int) model.createOrder(new PedidoInfo(address), new Factura(dateTime, clientId, payMethodId, totalPrice));
+        } else {
+            id_pedido_info = -2;
+        }
+        return new Gson().toJson(id_pedido_info);
+    }
+
+    /*Json example
+    [{"id_pedido_info":12,"producto":{"id_producto": 3},"observaciones":"Con atun","cantidad":1,"precio": 0.5},{"id_pedido_info":12, "producto":{"id_producto":4},"cantidad":3,"precio":0.5}]
+     */
+    /**
+     * Set products to order
+     *
+     * @param pList list of products
+     * @return rows affected
+     */
+    @POST
+    @Path("/productsorder")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String createProductOrders(String pList) {
         int rowsAffected = -1;
-        if (address != null && clientId > 0 && payMethodId > 0 && totalPrice > 0 && dateTime != null
-                && productId != null && quantity > 0 && price > 0) {
-            List<Pedido> pList = new ArrayList();
-            for (Long l: productId){
-                pList.add(new Pedido(new Producto(l), observations, quantity, price));
-            }
-            rowsAffected = model.createOrder(new PedidoInfo(address), pList, new Factura(dateTime, clientId, payMethodId, totalPrice));
+        if (pList != null) {
+            List<Pedido> pedList = new Gson().fromJson(pList, new TypeToken<List<Pedido>>() {
+            }.getType());
+            rowsAffected = model.setProductsToOrder(pedList);
         }
         return new Gson().toJson(rowsAffected);
     }
-
+    
+    /**
+     * Set order to coock
+     * @param id of the order
+     * @return rows affected or -1 if error
+     */
+    @POST
+    @Path("/ordertocook")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String setOrdertoCoock(@FormParam("id") long id) {
+        int rowsAffected = -1;
+        if (id > 0) {
+            rowsAffected = model.setOrderToCoock(new PedidoInfo(id));
+        }
+        return new Gson().toJson(rowsAffected);
+    }
+    
+    /**
+     * Set order to ready
+     * @param id of the order
+     * @return rows affected or -1 if error
+     */
+    @POST
+    @Path("/ordertoready")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String setOrdertoReady(@FormParam("id") long id) {
+        int rowsAffected = -1;
+        if (id > 0) {
+            rowsAffected = model.setOrderToReady(new PedidoInfo(id));
+        }
+        return new Gson().toJson(rowsAffected);
+    }
+    
+    /**
+     * Set order to delivery
+     * @param id of the order
+     * @return rows affected or -1 if error
+     */
+    @POST
+    @Path("/ordertodelivery")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String setOrderToDelivery(@FormParam("id") long id) {
+        int rowsAffected = -1;
+        if (id > 0) {
+            rowsAffected = model.setOrderToDelivery(new PedidoInfo(id));
+        }
+        return new Gson().toJson(rowsAffected);
+    }
+    
+    /**
+     * Set order to paid
+     * @param id of the order
+     * @return rows affected or -1 if error
+     */
+    @POST
+    @Path("/paid")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String paid(@FormParam("id") long id) {
+        int rowsAffected = -1;
+        if (id > 0) {
+            rowsAffected = model.setBillToPaid(new PedidoInfo(id));
+        }
+        return new Gson().toJson(rowsAffected);
+    }
 }

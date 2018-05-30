@@ -79,12 +79,30 @@ public class Model {
     }
     
     /**
-     * uses{@link proven.mypizzadao.persist.ProductDao#findProductByName(proven.modelo.Producto) }
-     * @param product to find
+     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) ) }
+     * @param pizza
      * @return  product found or null if error
      */
-    public Producto findProductByName(Producto product){
-        return productDao.findProductByName(product);
+    public Pizza findPizzaByName(Pizza pizza){
+        return productDao.findPizzaByName(pizza);
+    }
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) ) }
+     * @param ingredient to find
+     * @return  ingredient found or null if error
+     */
+    public Ingrediente findIngredientByName(Ingrediente ingredient){
+        return productDao.findIngredientName(ingredient);
+    }
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) ) }
+     * @param drink to find
+     * @return  drink found or null if error
+     */
+    public Refresco findRefrescoByName(Refresco drink){
+        return productDao.findDrinkByName(drink);
     }
 
     /**
@@ -354,8 +372,12 @@ public class Model {
      * @param f bill to create
      * @return rows affected or -1 if error
      */
-    public int createOrder(PedidoInfo pi, List<Pedido> pList, Factura f) {
-        return orderDao.createOrder(pi, pList, f);
+    public long createOrder(PedidoInfo pi, Factura f) {
+        return orderDao.createOrder(pi, f);
+    }
+    
+    public int setProductsToOrder(List<Pedido> pList){
+        return orderDao.setProductsToOrder(pList);
     }
 
     /**
