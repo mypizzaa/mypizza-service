@@ -255,12 +255,21 @@ public class Model {
     }
     
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfExist(proven.modelo.Cliente) }
-     * @param c client  to check if exist by dni or email
+     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfDniExist(proven.modelo.Cliente) }
+     * @param dni dni to check
      * @return rows affected if exist or -1 if error
      */
-    public int checkIfExist(Cliente c) {
-        return clientDao.checkIfExist(c);
+    public int checkIfDniExist(String dni) {
+        return clientDao.checkIfDniExist(dni);
+    }
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfEmailExist(proven.modelo.Cliente) }
+     * @param correo email to check
+     * @return rows affected if exist or -1 if error
+     */
+    public int checkIfEmailExist(String correo) {
+        return clientDao.checkIfEmailExist(correo);
     }
 
     /**

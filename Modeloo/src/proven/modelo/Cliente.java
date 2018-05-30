@@ -23,7 +23,7 @@ public class Cliente extends Usuario {
 
     
     
-    public Cliente(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, String primeraDireccion, String segundaDireccion, String telefono, String poblacion, String codigo_postal) {
+    public Cliente(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo, String telefono, String primeraDireccion, String segundaDireccion, String poblacion, String codigo_postal) {
         super(id_usuario, dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.telefono = telefono;
         this.primeraDireccion = primeraDireccion;
@@ -32,8 +32,17 @@ public class Cliente extends Usuario {
         this.codigo_postal = codigo_postal;
     }
 
+    public Cliente(String telefono, String primeraDireccion, String segundaDireccion, String poblacion, String codigo_postal, long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String correo) {
+        super(id_usuario, dni, nombre, apellidos, password, imagen, correo);
+        this.telefono = telefono;
+        this.primeraDireccion = primeraDireccion;
+        this.segundaDireccion = segundaDireccion;
+        this.poblacion = poblacion;
+        this.codigo_postal = codigo_postal;
+    }
     
-
+    
+    
     public Cliente(String dni, String nombre, String apellidos, String password, String imagen, String tipo_Usuario, String correo,String primeraDireccion, String segundaDireccion, String telefono, String poblacion, String codigo_postal) {
         super(dni, nombre, apellidos, password, imagen, tipo_Usuario, correo);
         this.primeraDireccion = primeraDireccion;
@@ -43,12 +52,27 @@ public class Cliente extends Usuario {
         this.codigo_postal = codigo_postal;
     }
 
+    public Cliente(String telefono, String primeraDireccion, String segundaDireccion, String poblacion, String codigo_postal, String dni, String nombre, String apellidos, String password, String imagen, String correo) {
+        super(dni, nombre, apellidos, password, imagen, correo);
+        this.telefono = telefono;
+        this.primeraDireccion = primeraDireccion;
+        this.segundaDireccion = segundaDireccion;
+        this.poblacion = poblacion;
+        this.codigo_postal = codigo_postal;
+    }
+    
+     
+
     public Cliente(String dni, String password) {
         super(dni, password);
     }
 
     public Cliente(String dni) {
         super(dni);
+    }
+
+    public Cliente() {
+        
     }
 
     //--------------------------------------------------------------------------

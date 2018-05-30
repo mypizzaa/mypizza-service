@@ -25,6 +25,27 @@ public class Usuario {
         this.activo = activo;
     }
 
+    public Usuario(String dni, String nombre, String apellidos, String password, String imagen, String correo) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.password = password;
+        this.imagen = imagen;
+        this.correo = correo;
+    }        
+
+    public Usuario(long id_usuario, String dni, String nombre, String apellidos, String password, String imagen, String correo) {
+        this.id_usuario = id_usuario;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.password = password;
+        this.imagen = imagen;
+        this.correo = correo;
+    }
+    
+    
+    
     public Usuario(long id_usuario, String tipo_Usuario) {
         this.id_usuario = id_usuario;
         this.tipo_Usuario = tipo_Usuario;

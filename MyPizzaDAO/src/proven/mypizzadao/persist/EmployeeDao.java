@@ -17,23 +17,24 @@ import java.util.logging.Logger;
 import proven.modelo.Empleado;
 
 /**
- * 
+ *
  * @author MyPizza
  * @version 1.0
  */
 public class EmployeeDao {
 
     private StoreDBConnect dbConnection;
-    
+
     /**
      * Constructor
      */
     public EmployeeDao() {
         dbConnection = new StoreDBConnect();
     }
-    
+
     /**
      * List all employees from data source
+     *
      * @return list of employees or null if error
      */
     public List<Empleado> listAllEmployees() {
@@ -52,11 +53,12 @@ public class EmployeeDao {
         }
         return empList;
     }
-    
+
     /**
      * Find an employee by dni
+     *
      * @param e employee to find
-     * @return employee found or null if not 
+     * @return employee found or null if not
      */
     public Empleado findEmployee(Empleado e) {
         Empleado emp = null;
@@ -77,9 +79,10 @@ public class EmployeeDao {
 
         return emp;
     }
-    
+
     /**
      * Add an employee from data source
+     *
      * @param e employee to add in data source
      * @return rows affected or -1 if error
      */
@@ -89,6 +92,9 @@ public class EmployeeDao {
         Connection conn = dbConnection.getConnection();
         if (conn != null) {
             try {
+                if (e.getImagen() == null) {
+                    e.setImagen("default.jpg");
+                }
                 PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_usuario (dni, nombre, apellidos, password, imagen, tipo_usuario, correo) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, e.getDni());
                 pst.setString(2, e.getNombre());
@@ -119,9 +125,10 @@ public class EmployeeDao {
         }
         return i;
     }
-    
+
     /**
      * Update an employee in data source
+     *
      * @param e employee to update with same id
      * @return rows affected or -1 if error
      */
@@ -131,6 +138,9 @@ public class EmployeeDao {
             Connection conn = dbConnection.getConnection();
             if (conn != null) {
                 try {
+                    if (e.getImagen() == null) {
+                        e.setImagen("default.jpg");
+                    }
                     PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET nombre=?, apellidos=?, password=?, imagen=?, correo=? WHERE id_usuario=?");
                     pst.setString(1, e.getNombre());
                     pst.setString(2, e.getApellidos());
@@ -159,9 +169,10 @@ public class EmployeeDao {
         }
         return i;
     }
-    
+
     /**
      * Inactive an employee from data source
+     *
      * @param e employee to inactive
      * @return rows affected or -1 if error
      */
@@ -182,12 +193,13 @@ public class EmployeeDao {
         }
         return i;
     }
-    
+
     /**
      * Convert a ResultSet to employee
+     *
      * @param rs ResultSet
      * @return an employee
-     * @throws SQLException if error ocurrs 
+     * @throws SQLException if error ocurrs
      */
     private Empleado resultSetToEmployee(ResultSet rs) throws SQLException {
         return new Empleado(rs.getLong("id_empleado"),

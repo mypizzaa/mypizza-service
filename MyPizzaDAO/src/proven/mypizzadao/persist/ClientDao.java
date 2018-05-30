@@ -15,23 +15,24 @@ import java.util.List;
 import proven.modelo.Cliente;
 
 /**
- * 
+ *
  * @author MyPizza
  * @version 1.0
  */
 public class ClientDao {
 
     private StoreDBConnect dbConnect;
-    
+
     /**
      * Constructor
      */
     public ClientDao() {
         dbConnect = new StoreDBConnect();
     }
-    
+
     /**
      * List all clients from data source
+     *
      * @return a list of clients or null if error
      */
     public List<Cliente> listAllClients() {
@@ -51,9 +52,10 @@ public class ClientDao {
         }
         return cList;
     }
-    
+
     /**
      * Find a client by dni in data source
+     *
      * @param c client to find
      * @return client found or null if error
      */
@@ -63,23 +65,23 @@ public class ClientDao {
         if (conn != null && c.getDni() != null) {
             PreparedStatement pst;
             try {
-                pst = conn.prepareStatement("SELECT * FROM tb_usuario INNER JOIN tb_cliente ON tb_cliente.id_usuario = tb_usuario.id_usuario WHERE tb_usuario.activo=1 AND tb_usuario.dni=?");
-                pst.setString(1, c.getDni());
+                pst = conn.prepareStatement("SELECT * FROM tb_usuario INNER JOIN tb_cliente ON tb_cliente.id_usuario = tb_usuario.id_usuario WHERE tb_usuario.activo=? AND tb_usuario.dni=?");
+                pst.setInt(1, 1);
+                pst.setString(2, c.getDni());
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     cli = resultSetToClient(rs);
                 }
-
             } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
-
         }
-
         return cli;
     }
-    
+
     /**
      * Find a client by phone
+     *
      * @param phone phone of the client
      * @return client found or null if not
      */
@@ -103,9 +105,10 @@ public class ClientDao {
 
         return cli;
     }
-    
+
     /**
      * Add a client in data source
+     *
      * @param c client to add
      * @return rows affected or -1 if null
      */
@@ -115,13 +118,16 @@ public class ClientDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null) {
             try {
+                if (c.getImagen() == null) {
+                    c.setImagen("default.jpg");
+                }
                 PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_usuario (dni, nombre, apellidos, password, imagen, tipo_usuario, correo) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, c.getDni());
                 pst.setString(2, c.getNombre());
                 pst.setString(3, c.getApellidos());
                 pst.setString(4, c.getPassword());
                 pst.setString(5, c.getImagen());
-                pst.setString(6, c.getTipoUsuario());
+                pst.setString(6, "cliente");
                 pst.setString(7, c.getCorreo());
                 pst.executeUpdate();
 
@@ -148,22 +154,22 @@ public class ClientDao {
         }
         return i;
     }
-    
+
     /**
-     * Check if client dni or email exist
-     * @param c client with email and dni
+     * Check if client dni exist
+     *
+     * @param dni to check
      * @return rows affected or -1 if error
      */
-    public int checkIfExist(Cliente c) {
+    public int checkIfDniExist(String dni) {
         int i = 0;
 
         Connection conn = dbConnect.getConnection();
 
-        if (conn != null && c != null) {
+        if (conn != null && (dni != null)) {
             try {
-                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE dni=? || correo=?");
-                pst.setString(1, c.getDni());
-                pst.setString(2, c.getCorreo());
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE dni=?");
+                pst.setString(1, dni);
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     i = 1;
@@ -177,9 +183,37 @@ public class ClientDao {
         return i;
     }
     
-    
+       /**
+     * Check if client email exist
+     *
+     * @param email to check
+     * @return rows affected or -1 if error
+     */
+    public int checkIfEmailExist(String email) {
+        int i = 0;
+
+        Connection conn = dbConnect.getConnection();
+
+        if (conn != null && (email != null)) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_usuario WHERE correo=?");
+                pst.setString(1, email);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    i = 1;
+                }
+            } catch (SQLException ex) {
+            }
+
+        } else {
+            i = -1;
+        }
+        return i;
+    }
+
     /**
      * Change the password of a client
+     *
      * @param c client to change the password
      * @return rows affected or -1 if error
      */
@@ -202,9 +236,10 @@ public class ClientDao {
         }
         return i;
     }
-    
+
     /**
      * Update info of the client
+     *
      * @param c cliento to modify
      * @return rows affected or -1 if error
      */
@@ -213,6 +248,9 @@ public class ClientDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null && c != null) {
             try {
+                if (c.getImagen() == null) {
+                    c.setImagen("default.jpg");
+                }
                 PreparedStatement pst = conn.prepareStatement("UPDATE tb_usuario SET nombre=?, apellidos=?, password=?, imagen=?, correo=? WHERE id_usuario=?");
                 pst.setString(1, c.getNombre());
                 pst.setString(2, c.getApellidos());
@@ -221,7 +259,7 @@ public class ClientDao {
                 pst.setString(5, c.getCorreo());
                 pst.setLong(6, c.getIdUsuario());
 
-                i = pst.executeUpdate();
+                i += pst.executeUpdate();
 
                 if (i > 0) {
                     PreparedStatement pst1 = conn.prepareStatement("UPDATE tb_cliente SET telefono=?, direccion1=?, direccion2=?, poblacion=?, codigo_postal=? WHERE id_usuario=?");
@@ -231,7 +269,7 @@ public class ClientDao {
                     pst1.setString(4, c.getPoblacion());
                     pst1.setString(5, c.getCodigo_postal());
                     pst1.setLong(6, c.getIdUsuario());
-                    i = pst1.executeUpdate();
+                    i += pst1.executeUpdate();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -241,9 +279,10 @@ public class ClientDao {
         }
         return i;
     }
-    
+
     /**
      * Inactive a client in data source
+     *
      * @param c client to inactive
      * @return rows affected or -1 if error
      */
@@ -266,12 +305,13 @@ public class ClientDao {
         }
         return i;
     }
-    
+
     /**
      * Convert a ResultSet to Client
+     *
      * @param rs ResultSet
      * @return client
-     * @throws SQLException if error ocurrs 
+     * @throws SQLException if error ocurrs
      */
     private Cliente resultSetToClient(ResultSet rs) throws SQLException {
         return new Cliente(rs.getLong("id_cliente"), rs.getString("telefono"),
