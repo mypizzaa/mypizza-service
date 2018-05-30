@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import proven.modelo.Cliente;
 import proven.modelo.Factura;
 import proven.modelo.Pedido;
 import proven.modelo.PedidoInfo;
@@ -220,5 +221,29 @@ public class WSPedido {
             rowsAffected = model.setBillToPaid(new PedidoInfo(id));
         }
         return new Gson().toJson(rowsAffected);
+    }
+    
+    @POST
+    @Path("/orderbill")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String orderBill(@FormParam("id") long id) {
+        Factura f = null;
+        if (id > 0) {
+            f = model.getOrderBill(new PedidoInfo(id));
+        }
+        return new Gson().toJson(f);
+    }
+    
+    @POST
+    @Path("/clientorders")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String clientOrders(@FormParam("id") long id) {
+        List<PedidoInfo> piList = null;
+        if (id > 0) {
+            piList = model.getOrdersByClient(new Cliente(id));
+        }
+        return new Gson().toJson(piList);
     }
 }

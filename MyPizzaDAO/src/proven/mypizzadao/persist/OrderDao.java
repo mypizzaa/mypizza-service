@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import proven.modelo.Cliente;
 import proven.modelo.Factura;
 import proven.modelo.Pedido;
 import proven.modelo.PedidoInfo;
@@ -113,7 +114,7 @@ public class OrderDao {
                     i += pst.executeUpdate();
                     pst.close();
                 } catch (SQLException ex) {
-                   i = -1;
+                    i = -1;
                 }
             }
         } else {
@@ -444,5 +445,50 @@ public class OrderDao {
         }
 
         return piList;
+    }
+
+    public Factura getOrderBill(PedidoInfo pi) {
+        Factura f = null;
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_factura WHERE id_pedido_info = ?");
+                pst.setLong(1, pi.getId_pedido_info());
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    f = resultSetToBill(rs);
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+        return f;
+    }
+
+    private Factura resultSetToBill(ResultSet rs) throws SQLException {
+        return new Factura(rs.getLong("id_factura"), rs.getLong("id_cliente"), rs.getLong("id_metodoPago"), rs.getLong("id_pedido_info"), rs.getDouble("precio_total"), rs.getString("dia_hora"), rs.getInt("cobrado"));
+    }
+
+    public List<PedidoInfo> getOrdersByClient(Cliente c) {
+        List<PedidoInfo> piList = null;
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT tb_pedido_info.id_pedido_info, tb_pedido_info.id_estado, tb_pedido_info.direccion FROM `tb_pedido_info` INNER JOIN tb_factura ON tb_factura.id_pedido_info = tb_pedido_info.id_pedido_info WHERE tb_factura.id_cliente = ?");
+                pst.setLong(1, c.getIdCliente());
+                ResultSet rs = pst.executeQuery();
+                piList = new ArrayList();
+                while(rs.next()){
+                    piList.add(resultSetToOrderInfo(rs));
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+        return piList;
+    }
+
+    private PedidoInfo resultSetToOrderInfo(ResultSet rs) throws SQLException {
+        return new PedidoInfo(rs.getLong("id_pedido_info"), rs.getInt("id_estado"), rs.getString("direccion"));
     }
 }

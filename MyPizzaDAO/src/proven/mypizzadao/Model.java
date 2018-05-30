@@ -5,7 +5,7 @@ import proven.modelo.*;
 import proven.mypizzadao.persist.*;
 
 /**
- * 
+ *
  * @author MyPizza
  * @version 1.0
  */
@@ -77,31 +77,37 @@ public class Model {
     public List<Pizza> getAllPizzas() {
         return productDao.getAllPizzas();
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) ) }
+     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) )
+     * }
+     *
      * @param pizza
-     * @return  product found or null if error
+     * @return product found or null if error
      */
-    public Pizza findPizzaByName(Pizza pizza){
+    public Pizza findPizzaByName(Pizza pizza) {
         return productDao.findPizzaByName(pizza);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) ) }
+     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) )
+     * }
+     *
      * @param ingredient to find
-     * @return  ingredient found or null if error
+     * @return ingredient found or null if error
      */
-    public Ingrediente findIngredientByName(Ingrediente ingredient){
+    public Ingrediente findIngredientByName(Ingrediente ingredient) {
         return productDao.findIngredientName(ingredient);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) ) }
+     * uses{@link proven.mypizzadao.persist.ProductDao#findPizzaByName(proven.modelo.Pizza) )
+     * }
+     *
      * @param drink to find
-     * @return  drink found or null if error
+     * @return drink found or null if error
      */
-    public Refresco findRefrescoByName(Refresco drink){
+    public Refresco findRefrescoByName(Refresco drink) {
         return productDao.findDrinkByName(drink);
     }
 
@@ -239,50 +245,61 @@ public class Model {
     // <editor-fold defaultstate="collapsed" desc="Client">
     /**
      * uses{@link proven.mypizzadao.persist.ClientDao}
+     *
      * @return list of all clients or null if error
      */
     public List<Cliente> listAllClients() {
         return clientDao.listAllClients();
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#findClientByDni(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#findClientByDni(proven.modelo.Cliente)
+     * }
+     *
      * @param c client to find by dni
      * @return client found or null if error
      */
     public Cliente findClientByDni(Cliente c) {
         return clientDao.findClientByDni(c);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#findClientByPhone(java.lang.String) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#findClientByPhone(java.lang.String)
+     * }
+     *
      * @param phone phone of the client to find
      * @return client found or null if error
      */
     public Cliente findClienteByPhone(String phone) {
         return clientDao.findClientByPhone(phone);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#addClient(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#addClient(proven.modelo.Cliente)
+     * }
+     *
      * @param c client to add
      * @return rows affected or -1 if error
      */
     public int addClient(Cliente c) {
         return clientDao.addClient(c);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfDniExist(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfDniExist(proven.modelo.Cliente)
+     * }
+     *
      * @param dni dni to check
      * @return rows affected if exist or -1 if error
      */
     public int checkIfDniExist(String dni) {
         return clientDao.checkIfDniExist(dni);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfEmailExist(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#checkIfEmailExist(proven.modelo.Cliente)
+     * }
+     *
      * @param correo email to check
      * @return rows affected if exist or -1 if error
      */
@@ -291,25 +308,31 @@ public class Model {
     }
 
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#modifyPassword(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#modifyPassword(proven.modelo.Cliente)
+     * }
+     *
      * @param c client to modify the password
      * @return rows affected or -1 if error
      */
     public int modifyPassword(Cliente c) {
         return clientDao.modifyPassword(c);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#modifyPassword(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#modifyPassword(proven.modelo.Cliente)
+     * }
+     *
      * @param c client with new parameters
      * @return rows affected or -1 if error
      */
     public int modifyClient(Cliente c) {
         return clientDao.modifyClient(c);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.ClientDao#inactivateClient(proven.modelo.Cliente) }
+     * uses{@link proven.mypizzadao.persist.ClientDao#inactivateClient(proven.modelo.Cliente)
+     * }
+     *
      * @param c client to inactive
      * @return rows affected or -1 if error
      */
@@ -320,42 +343,50 @@ public class Model {
 
     //<editor-fold defaultstate="collapsed" desc=" Employee">
     /**
-     * uses{@link proven.mypizzadao.persist.EmployeeDao#listAllEmployees()}   
+     * uses{@link proven.mypizzadao.persist.EmployeeDao#listAllEmployees()}
+     *
      * @return a list of employees or null if error
      */
     public List<Empleado> listAllEmployees() {
         return employeeDao.listAllEmployees();
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.EmployeeDao#findEmployee(proven.modelo.Empleado)}   
+     * uses{@link proven.mypizzadao.persist.EmployeeDao#findEmployee(proven.modelo.Empleado)}
+     *
      * @param e employee to find
-     * @return  employee or null if error
+     * @return employee or null if error
      */
     public Empleado findEmployee(Empleado e) {
         return employeeDao.findEmployee(e);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.EmployeeDao#addEmployee(proven.modelo.Empleado) }
+     * uses{@link proven.mypizzadao.persist.EmployeeDao#addEmployee(proven.modelo.Empleado)
+     * }
+     *
      * @param e employee to add
      * @return rows affected or -1 if error
      */
     public int addEmployee(Empleado e) {
         return employeeDao.addEmployee(e);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.EmployeeDao#updateEmployee(proven.modelo.Empleado) }
+     * uses{@link proven.mypizzadao.persist.EmployeeDao#updateEmployee(proven.modelo.Empleado)
+     * }
+     *
      * @param e employee with new params
      * @return rows affected or -1 if error
      */
     public int updateEmployee(Empleado e) {
         return employeeDao.updateEmployee(e);
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.EmployeeDao#inactivateEmployee(proven.modelo.Empleado) }
+     * uses{@link proven.mypizzadao.persist.EmployeeDao#inactivateEmployee(proven.modelo.Empleado)
+     * }
+     *
      * @param e employee to inactivate
      * @return rows affected or -1 if error
      */
@@ -366,7 +397,8 @@ public class Model {
 
     //<editor-fold defaultstate="collapsed" desc="Order">
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#createOrder(proven.modelo.PedidoInfo, java.util.List, proven.modelo.Factura)}     
+     * uses{@link proven.mypizzadao.persist.OrderDao#createOrder(proven.modelo.PedidoInfo, java.util.List, proven.modelo.Factura)}
+     *
      * @param pi order info
      * @param pList list of products of the order
      * @param f bill to create
@@ -375,8 +407,8 @@ public class Model {
     public long createOrder(PedidoInfo pi, Factura f) {
         return orderDao.createOrder(pi, f);
     }
-    
-    public int setProductsToOrder(List<Pedido> pList){
+
+    public int setProductsToOrder(List<Pedido> pList) {
         return orderDao.setProductsToOrder(pList);
     }
 
@@ -414,7 +446,8 @@ public class Model {
     }
 
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#setBillToPaid(proven.modelo.PedidoInfo) }
+     * uses{@link proven.mypizzadao.persist.OrderDao#setBillToPaid(proven.modelo.PedidoInfo)
+     * }
      *
      * @param pi order info to set to paid
      * @return rows affected or -1 if error
@@ -431,16 +464,18 @@ public class Model {
     public List<PedidoInfo> getAllInfoOrder() {
         return orderDao.getAllInfoOrder();
     }
-    
+
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#getOrderFromProductInfo(proven.modelo.PedidoInfo)  }
+     * uses{@link proven.mypizzadao.persist.OrderDao#getOrderFromProductInfo(proven.modelo.PedidoInfo)
+     * }
+     *
      * @param pi order to get the products
      * @return list of products whith thar order
      */
     public List<Pedido> getOrderFromProductInfo(PedidoInfo pi) {
         return orderDao.getOrderFromProductInfo(pi);
     }
-    
+
     /**
      * uses{@link proven.mypizzadao.persist.OrderDao#getAllRecivedOrders()}
      *
@@ -449,7 +484,7 @@ public class Model {
     public List<PedidoInfo> getAllReceivedOrders() {
         return orderDao.getAllReceivedOrders();
     }
-    
+
     /**
      * uses{@link proven.mypizzadao.persist.OrderDao#getAllCookingOrders()}
      *
@@ -458,7 +493,7 @@ public class Model {
     public List<PedidoInfo> getAllCookingOrders() {
         return orderDao.getAllCookingOrders();
     }
-    
+
     /**
      * uses{@link proven.mypizzadao.persist.OrderDao#getAllReadyOrders()}
      *
@@ -467,7 +502,7 @@ public class Model {
     public List<PedidoInfo> getAllReadyOrders() {
         return orderDao.getAllReadyOrders();
     }
-    
+
     /**
      * uses{@link proven.mypizzadao.persist.OrderDao#getAllDeliveryOrders() }
      *
@@ -476,7 +511,7 @@ public class Model {
     public List<PedidoInfo> getAllDeliveryOrders() {
         return orderDao.getAllDeliveryOrders();
     }
-    
+
     /**
      * uses{@link proven.mypizzadao.persist.OrderDao#getAllPaidOrders()}
      *
@@ -484,6 +519,14 @@ public class Model {
      */
     public List<PedidoInfo> getAllPaidOrders() {
         return orderDao.getAllPaidOrders();
+    }
+
+    public Factura getOrderBill(PedidoInfo pi) {
+        return orderDao.getOrderBill(pi);
+    }
+
+    public List<PedidoInfo> getOrdersByClient(Cliente c) {
+        return orderDao.getOrdersByClient(c);
     }
     //</editor-fold>
 

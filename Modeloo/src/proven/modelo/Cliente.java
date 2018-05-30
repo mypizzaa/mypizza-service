@@ -71,6 +71,10 @@ public class Cliente extends Usuario {
         super(dni);
     }
 
+    public Cliente(long id_cliente) {
+        this.id_cliente = id_cliente;
+    }        
+
     public Cliente() {
         
     }
