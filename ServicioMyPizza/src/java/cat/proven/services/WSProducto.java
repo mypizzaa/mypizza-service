@@ -41,9 +41,9 @@ public class WSProducto {
 
     //--------------------------------------------------------------------------
     /**
-     * Lista todas las pizzas de la tienda
+     * List all pizzas
      *
-     * @return una lista de pizzas si no null
+     * @return a list of pizzas or null if error
      */
     @GET
     @Path("/pizzas")
@@ -53,7 +53,7 @@ public class WSProducto {
         List<Pizza> listapizzas;
         listapizzas = model.getAllPizzas();
 
-        return new Gson().toJson("pizzas:" + listapizzas);
+        return new Gson().toJson(listapizzas);
     }
     
     /**

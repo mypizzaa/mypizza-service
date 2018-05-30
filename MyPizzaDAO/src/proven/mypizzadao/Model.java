@@ -392,8 +392,7 @@ public class Model {
     }
 
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#setBillToPaid(proven.modelo.PedidoInfo)
-     * }
+     * uses{@link proven.mypizzadao.persist.OrderDao#setBillToPaid(proven.modelo.PedidoInfo) }
      *
      * @param pi order info to set to paid
      * @return rows affected or -1 if error
@@ -421,7 +420,7 @@ public class Model {
     }
     
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#getAllRecivedOrders() () }
+     * uses{@link proven.mypizzadao.persist.OrderDao#getAllRecivedOrders()}
      *
      * @return a list of the orders that are received
      */
@@ -430,7 +429,7 @@ public class Model {
     }
     
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#getAllCookingOrders() () }
+     * uses{@link proven.mypizzadao.persist.OrderDao#getAllCookingOrders()}
      *
      * @return a list of the orders that are coocking
      */
@@ -439,7 +438,7 @@ public class Model {
     }
     
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#getAllReadyOrders() () }
+     * uses{@link proven.mypizzadao.persist.OrderDao#getAllReadyOrders()}
      *
      * @return a list of the orders that are ready
      */
@@ -448,12 +447,21 @@ public class Model {
     }
     
     /**
-     * uses{@link proven.mypizzadao.persist.OrderDao#getAllDeliveryOrders() () () }
+     * uses{@link proven.mypizzadao.persist.OrderDao#getAllDeliveryOrders() }
      *
-     * @return a list of the orders that are ready
+     * @return a list of the orders that are in delivery
      */
     public List<PedidoInfo> getAllDeliveryOrders() {
         return orderDao.getAllDeliveryOrders();
+    }
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.OrderDao#getAllPaidOrders()}
+     *
+     * @return a list of the orders that are paid
+     */
+    public List<PedidoInfo> getAllPaidOrders() {
+        return orderDao.getAllPaidOrders();
     }
     //</editor-fold>
 

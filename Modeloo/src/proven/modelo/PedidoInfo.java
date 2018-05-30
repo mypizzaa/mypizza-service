@@ -21,9 +21,13 @@ public class PedidoInfo {
         this.direccion = direccion;
     }
 
-    public PedidoInfo(String direccion, String dia_hora, long id_cliente) {
+    public PedidoInfo(String direccion) {
         this.direccion = direccion;
     }
+
+    public PedidoInfo(long id_pedido_info) {
+        this.id_pedido_info = id_pedido_info;
+    }        
 
     public PedidoInfo() {
     }

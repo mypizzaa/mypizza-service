@@ -390,8 +390,30 @@ public class OrderDao {
         Connection conn = dbConnection.getConnection();
         if (conn != null) {
             try {
-                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info WHERE id_estado=?");
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info INNER JOIN tb_factura ON tb_factura.id_pedido_info = tb_pedido_info.id_pedido_info WHERE tb_pedido_info.id_estado=? AND tb_factura.cobrado = ?");
                 pst.setInt(1, 4);
+                pst.setInt(2, 0);
+                ResultSet rs = pst.executeQuery();
+                piList = new ArrayList<PedidoInfo>();
+                while (rs.next()) {
+                    piList.add(pedidoInfoToResultSet(rs));
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return piList;
+    }
+    
+    public List<PedidoInfo> getAllPaidOrders() {
+        List<PedidoInfo> piList = null;
+
+        Connection conn = dbConnection.getConnection();
+        if (conn != null) {
+            try {
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM tb_pedido_info INNER JOIN tb_factura ON tb_factura.id_pedido_info = tb_pedido_info.id_pedido_info WHERE tb_pedido_info.id_estado=? AND tb_factura.cobrado = ?");
+                pst.setInt(1, 4);
+                pst.setInt(2, 1);
                 ResultSet rs = pst.executeQuery();
                 piList = new ArrayList<PedidoInfo>();
                 while (rs.next()) {
