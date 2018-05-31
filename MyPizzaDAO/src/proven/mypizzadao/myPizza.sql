@@ -220,7 +220,7 @@ INSERT INTO tb_producto (nombre,precio,imagen,id_tipo) VALUES ("Jamon York", 0.5
 ("Gambas", 0.50, "gambas.png",3), ("Queso cheddar", 0.50, "quesocheddar.png",3),
 ("Queso cabra", 0.50, "quesocabra.png",3), ("Mozzarella", 0.50, "mozzarella.png",3),
 ("Frankfurt", 0.50, "frankfurt.png",3), ("Tomate natural", 0.50, "tomatenatural.png",3),
-("Pepinillo", 0.50, "pepinillo.png",3), ("Champiñones", 0.50, "pchampions.png",3),
+("Pepinillo", 0.50, "pepinillo.png",3), ("Champiñones", 0.50, "champions.png",3),
 ("Kebab", 1.50, "kebab.png",3), ("Ternera", 1.50, "ternera.png",3),
 ("Pollo", 1.50, "pollo.png",3), ("Salsa blanca", 0.50, "salsablanca.png",3),
 ("Piña", 0.50, "piña.png",3), ("Bacon", 0.50, "bacon.png",3), ("Cebolla", 0.50, "cebolla.png",3), 
@@ -234,7 +234,7 @@ INSERT INTO tb_ingredientes (`id_producto`) VALUES (1), (2), (3), (4),
 -- Pizzas y bebidas
 INSERT INTO tb_producto(`nombre`, `precio`, `imagen`, id_tipo ) VALUES 
 ('Pizza Barbacoa', 14.95, 'pbarbacoa.png', 1), ('Pizza 4 quesos', 13.55, 'pqueso.png', 1),
-('Pizza Champiñones', 13.55, 'pchampiñones.png', 1), ('Pizza Hawaiana', 14.95, 'phawaiana.png', 1),
+('Pizza Champiñones', 13.55, 'pchampions.png', 1), ('Pizza Hawaiana', 14.95, 'phawaiana.png', 1),
 ('Pizza Atun', 13.55, 'patun.png', 1), ('Pizza Burguer', 13.55, 'pburguer.png', 1),
 ('Pizza Cebolla', 13.55, 'pcebolla.png', 1), ('Pizza Salami', 13.55, 'psalami.png', 1),
 ('Pizza Kebab', 13.55, 'pkebab.png', 1), ('Pizza doble Carne', 13.55, 'pdcarne.png', 1),
