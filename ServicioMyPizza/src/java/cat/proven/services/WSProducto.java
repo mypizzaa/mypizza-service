@@ -174,7 +174,7 @@ public class WSProducto {
     public String addPizza(@FormParam("name") String name, @FormParam("price") double price,
             @FormParam("image") String image, @FormParam("idIngredient") List<Long> list) {
         int rowsAffected = -1;
-        if (list != null && name != null && price > 0 && image != null) {
+        if (list != null && name != null && price > 0) {
             List<Ingrediente> iList = new ArrayList<>();
             for (Long l : list) {
                 iList.add(new Ingrediente(l));
@@ -199,7 +199,7 @@ public class WSProducto {
     public String addBebida(@FormParam("name") String name, @FormParam("price") double price,
             @FormParam("image") String image) {
         int rowsAffected = -1;
-        if (name != null && price > 0 && image != null) {
+        if (name != null && price > 0) {
             rowsAffected = model.addDrink(new Refresco(name, price, image, 2));
         }
 
@@ -221,7 +221,7 @@ public class WSProducto {
     public String addIngrediente(@FormParam("name") String name, @FormParam("price") double price,
             @FormParam("image") String image) {
         int rowsAffected = -1;
-        if (name != null && price > 0 && image != null) {
+        if (name != null && price > 0) {
             rowsAffected = model.addIngredient(new Ingrediente(name, price, image, 3));
         }
         return new Gson().toJson(rowsAffected);
