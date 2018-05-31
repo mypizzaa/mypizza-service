@@ -71,7 +71,11 @@ public class WSPedido {
 
         return new Gson().toJson(pList);
     }
-
+    
+    /**
+     * get all orders in received status
+     * @return json of orders
+     */
     @GET
     @Path("/receivedorders")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,7 +83,11 @@ public class WSPedido {
         List<PedidoInfo> piList = model.getAllReceivedOrders();
         return new Gson().toJson(piList);
     }
-
+    
+    /**
+     * get all orders in coocked status
+     * @return json of orders
+     */
     @GET
     @Path("/coockingorders")
     @Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +95,11 @@ public class WSPedido {
         List<PedidoInfo> piList = model.getAllCookingOrders();
         return new Gson().toJson(piList);
     }
-
+    
+    /**
+     * get all orders in ready status
+     * @return json of orders
+     */
     @GET
     @Path("/readyorders")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,7 +107,11 @@ public class WSPedido {
         List<PedidoInfo> piList = model.getAllReadyOrders();
         return new Gson().toJson(piList);
     }
-
+    
+    /**
+     * get all orders in delivery status
+     * @return json of orders
+     */
     @GET
     @Path("/deliveryorders")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,7 +119,11 @@ public class WSPedido {
         List<PedidoInfo> piList = model.getAllDeliveryOrders();
         return new Gson().toJson(piList);
     }
-
+    
+    /**
+     * get all orders in paid status
+     * @return json of orders
+     */
     @GET
     @Path("/paidorders")
     @Produces(MediaType.APPLICATION_JSON)
@@ -111,7 +131,16 @@ public class WSPedido {
         List<PedidoInfo> piList = model.getAllPaidOrders();
         return new Gson().toJson(piList);
     }
-
+    
+    /**
+     * Create a new order
+     * @param address of the order
+     * @param clientId of the order
+     * @param payMethodId pay method of the order
+     * @param totalPrice total price of the order
+     * @param dateTime date time of the order
+     * @return genertaed id order
+     */
     @POST
     @Path("/createorder")
     @Produces(MediaType.APPLICATION_JSON)
@@ -219,6 +248,11 @@ public class WSPedido {
         return new Gson().toJson(rowsAffected);
     }
     
+    /**
+     * show the bill of an order
+     * @param id of the order
+     * @return bill or null if error
+     */
     @POST
     @Path("/orderbill")
     @Produces(MediaType.APPLICATION_JSON)
@@ -231,6 +265,11 @@ public class WSPedido {
         return new Gson().toJson(f);
     }
     
+    /**
+     * Get a list of orders of the client
+     * @param id of the client
+     * @return list of orders or null if error
+     */
     @POST
     @Path("/clientorders")
     @Produces(MediaType.APPLICATION_JSON)
