@@ -59,9 +59,10 @@ public class ProductDao {
         }
         return pizzaList;
     }
-    
+
     /**
      * Find a pizza by name in data source
+     *
      * @param pizza to find
      * @return product found or null if not
      */
@@ -73,7 +74,7 @@ public class ProductDao {
                 PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` INNER JOIN tb_pizza ON tb_pizza.id_producto = tb_producto.id_producto WHERE nombre = ?");
                 pst.setString(1, pizza.getNombre());
                 ResultSet rs = pst.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     p = resultsetToPizza(rs);
                 }
             } catch (SQLException ex) {
@@ -81,9 +82,10 @@ public class ProductDao {
         }
         return p;
     }
-    
+
     /**
      * Find a ingredient by name in data source
+     *
      * @param ingredient to find
      * @return ingredient found or null if not
      */
@@ -95,7 +97,7 @@ public class ProductDao {
                 PreparedStatement pst = conn.prepareStatement("SELECT * FROM `tb_producto` INNER JOIN tb_ingredientes ON tb_ingredientes.id_producto = tb_producto.id_producto WHERE nombre = ?");
                 pst.setString(1, ingredient.getNombre());
                 ResultSet rs = pst.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     i = resultsetToIngrediente(rs);
                 }
             } catch (SQLException ex) {
@@ -103,9 +105,10 @@ public class ProductDao {
         }
         return i;
     }
-    
+
     /**
      * Find a ingredient by name in data source
+     *
      * @param drink to find
      * @return found found or null if not
      */
@@ -118,7 +121,7 @@ public class ProductDao {
                         + " WHERE nombre = ?");
                 pst.setString(1, drink.getNombre());
                 ResultSet rs = pst.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     r = resultsetToRefresco(rs);
                 }
             } catch (SQLException ex) {
@@ -265,6 +268,9 @@ public class ProductDao {
         if (conn != null) {
             PreparedStatement pst;
             try {
+                if (p.getImagen() == null || p.getImagen().equals("")) {
+                    p.setImagen("pizza.png");
+                }
                 pst = conn.prepareStatement("INSERT INTO tb_producto (nombre, precio, imagen, id_tipo) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, p.getNombre());
                 pst.setDouble(2, p.getPrecio());
@@ -306,6 +312,9 @@ public class ProductDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null && r != null) {
             try {
+                if (r.getImagen() == null || r.getImagen().equals("")) {
+                    r.setImagen("bebida.png");
+                }
                 PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_producto (nombre, precio, imagen, id_tipo) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, r.getNombre());
                 pst.setDouble(2, r.getPrecio());
@@ -341,6 +350,9 @@ public class ProductDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null && ing != null) {
             try {
+                if (ing.getImagen() == null || ing.getImagen().equals("")) {
+                    ing.setImagen("ingrediente.png");
+                }
                 PreparedStatement pst = conn.prepareStatement("INSERT INTO tb_producto (nombre, precio, imagen, id_tipo) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, ing.getNombre());
                 pst.setDouble(2, ing.getPrecio());
@@ -376,6 +388,21 @@ public class ProductDao {
         Connection conn = dbConnect.getConnection();
         if (conn != null) {
             try {
+                if (p.getImagen() == null || p.getImagen().equals("")) {
+                    int tipo = getProductType(p.getIdProducto(), conn);
+                    switch (tipo) {
+                        case 1:
+                            p.setImagen("pizza.png");
+                            break;
+                        case 2:
+                            p.setImagen("bebida.png");
+                            break;
+                        case 3:
+                            p.setImagen("ingrediente.png");
+                            break;
+                    }
+                }
+                System.out.println(p);
                 PreparedStatement pst = conn.prepareStatement("UPDATE tb_producto SET nombre=?, precio=?, imagen=? WHERE id_producto=?");
                 pst.setString(1, p.getNombre());
                 pst.setDouble(2, p.getPrecio());
@@ -383,6 +410,7 @@ public class ProductDao {
                 pst.setLong(4, p.getIdProducto());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
         } else {
             i = -1;
@@ -411,7 +439,7 @@ public class ProductDao {
                     rs = pst.executeQuery();
                     if (!rs.next()) {
                         pst.close();
-                        pst = conn.prepareStatement("INSERT INTO tb_pizzaDetalle (id_ingrediente, id_pizza) VALUES (?,?)");
+                        pst = conn.prepareStatement("INSERT INTO tb_pizzadetalle (id_ingrediente, id_pizza) VALUES (?,?)");
                         pst.setLong(1, ing.getIdIngrediente());
                         pst.setLong(2, p.getIdPizza());
                         i += pst.executeUpdate();
@@ -441,7 +469,7 @@ public class ProductDao {
             PreparedStatement pst;
             for (Ingrediente ing : iList) {
                 try {
-                    pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_ingrediente=? AND id_pizza=?");
+                    pst = conn.prepareStatement("DELETE FROM tb_pizzadetalle WHERE id_ingrediente=? AND id_pizza=?");
                     pst.setLong(1, ing.getIdIngrediente());
                     pst.setLong(2, p.getIdPizza());
                     i += pst.executeUpdate();
@@ -480,7 +508,7 @@ public class ProductDao {
                     pst.setLong(1, id_producto);
                     rs = pst.executeQuery();
                     if (!rs.next()) {
-                        pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_pizza=?");
+                        pst = conn.prepareStatement("DELETE FROM tb_pizzadetalle WHERE id_pizza=?");
                         pst.setLong(1, p.getIdPizza());
                         i += pst.executeUpdate();
                         pst.close();
@@ -525,7 +553,6 @@ public class ProductDao {
                 pst = conn.prepareStatement("SELECT id_producto FROM tb_ingredientes WHERE id_ingrediente=?");
                 pst.setLong(1, ing.getIdIngrediente());
                 ResultSet rs = pst.executeQuery();
-
                 if (rs.next()) {
                     long id_producto = rs.getInt(1);
                     pst.close();
@@ -533,7 +560,7 @@ public class ProductDao {
                     pst.setLong(1, id_producto);
                     rs = pst.executeQuery();
                     if (!rs.next()) {
-                        pst = conn.prepareStatement("DELETE FROM tb_pizzaDetalle WHERE id_ingrediente=?");
+                        pst = conn.prepareStatement("DELETE FROM tb_pizzadetalle WHERE id_ingrediente=?");
                         pst.setLong(1, ing.getIdIngrediente());
                         i += pst.executeUpdate();
                         pst.close();
@@ -552,6 +579,7 @@ public class ProductDao {
                 }
 
             } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
 
         } else {
@@ -602,9 +630,10 @@ public class ProductDao {
         }
         return i;
     }
-    
+
     /**
      * Convert ResultSet to product
+     *
      * @param rs ResultSet
      * @return product
      * @throws SQLException if error ocurrs
@@ -616,5 +645,24 @@ public class ProductDao {
         String imagen = rs.getString("imagen");
         long id_tipo = rs.getLong("id_tipo");
         return new Producto(id_producto, nombre, precio, imagen, id_tipo);
+    }
+
+    /**
+     * get type of prodcut
+     *
+     * @param idProducto to find
+     * @param conn connection
+     * @return id kind
+     */
+    private int getProductType(long idProducto, Connection conn) throws SQLException {
+        int id_tipo = -1;
+        PreparedStatement pst = conn.prepareStatement("SELECT id_tipo FROM tb_producto WHERE id_producto=?");
+        pst.setLong(1, idProducto);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            id_tipo = rs.getInt(1);
+        }
+        pst.close();
+        return id_tipo;
     }
 }

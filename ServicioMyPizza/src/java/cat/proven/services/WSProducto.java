@@ -149,7 +149,6 @@ public class WSProducto {
     @GET
     @Path("/ingredientespizza/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-
     public String listIngredientesOfPizza(@PathParam("id") long id) {
 
         List<Ingrediente> listaIngredientes;

@@ -2,10 +2,7 @@ package cat.proven.services;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-import static javafx.scene.input.KeyCode.T;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -19,7 +16,6 @@ import proven.modelo.Cliente;
 import proven.modelo.Factura;
 import proven.modelo.Pedido;
 import proven.modelo.PedidoInfo;
-import proven.modelo.Producto;
 import proven.mypizzadao.Model;
 
 /**

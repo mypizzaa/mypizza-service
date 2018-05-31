@@ -18,7 +18,7 @@ CREATE TABLE `tb_pizza`(
     PRIMARY KEY (`id_pizza`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `tb_pizzaDetalle` (
+CREATE TABLE `tb_pizzadetalle` (
 	`id` INT(4) NOT NULL AUTO_INCREMENT,
 	`id_ingrediente` INT(4) NOT NULL,
     `id_pizza` INT(4) NOT NULL,    
@@ -148,11 +148,11 @@ alter table tb_pizza ADD CONSTRAINT FK_tbPizza_tbProducto
 foreign key (id_producto) references tb_producto(id_producto)
 on update cascade;
 
-alter table tb_pizzaDetalle ADD CONSTRAINT FK_tbPizzaDetalle_tbPizza
+alter table tb_pizzadetalle ADD CONSTRAINT FK_tbPizzadetalle_tbPizza
 foreign key (id_pizza) references tb_pizza(id_pizza)
 on update cascade;
 
-alter table tb_pizzaDetalle ADD CONSTRAINT FK_tbPizzaDetalle_tbIngrediente
+alter table tb_pizzadetalle ADD CONSTRAINT FK_tbPizzadetalle_tbIngrediente
 foreign key (id_ingrediente) references tb_ingredientes(id_ingrediente)
 on update cascade;
 
@@ -249,37 +249,37 @@ INSERT INTO tb_pizza(`id_producto`) VALUES (28), (29), (30), (31),(32), (33), (3
 INSERT INTO tb_refresco(`id_producto`) VALUES (39), (40), (41), (42), (43), (44), (45), (46), (47);
 
 -- Barbacoa
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (2, 1), (19, 1), (20, 1), (23, 1);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (2, 1), (19, 1), (20, 1), (23, 1);
 
 -- 4 Quesos
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (11, 2), (13, 2), (12, 2), (13, 2);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (11, 2), (13, 2), (12, 2), (13, 2);
 
 -- Champiñones
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 3), (17, 3);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 3), (17, 3);
 
 -- Hawaiana 
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 4), (22, 4);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 4), (22, 4);
 
 -- Atún
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 5), (17, 5), (24, 5);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 5), (17, 5), (24, 5);
 
 -- Burguer
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (27, 6), (15, 6), (24, 6), (23, 6);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (27, 6), (15, 6), (24, 6), (23, 6);
 
 -- Cebolla
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (24, 7), (1, 7), (19, 7), (11, 7);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (24, 7), (1, 7), (19, 7), (11, 7);
 
 -- Salami
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 8), (11, 8), (5, 8);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (1, 8), (11, 8), (5, 8);
 
 -- Kebab
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (18, 9), (21, 9), (26, 9), (23, 9);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (18, 9), (21, 9), (26, 9), (23, 9);
 
 -- Doble Carne
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (19, 10), (20, 10), (27, 10);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (19, 10), (20, 10), (27, 10);
 
 -- De la Terra
-INSERT INTO tb_pizzaDetalle(`id_ingrediente`, `id_pizza`) VALUES (6, 11), (7, 11), (19, 11), (23, 11);
+INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (6, 11), (7, 11), (19, 11), (23, 11);
 
 
 
