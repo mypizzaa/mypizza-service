@@ -286,12 +286,12 @@ INSERT INTO tb_pizzadetalle(`id_ingrediente`, `id_pizza`) VALUES (6, 11), (7, 11
 -- Empleados
 
 INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
-('46472595Z', 'Javi', 'Delgado', 'a','jdelgado.jpg', 'admin', 'a');
+('46472595Z', 'Javi', 'Delgado', 'admin','jdelgado.jpg', 'admin', 'admin');
 INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
 VALUES (1, '10:00:00', '18:00:00', '40', '1200');
 
 INSERT INTO tb_usuario(`dni`, `nombre`, `apellidos`, `password`, `imagen`, `tipo_usuario`, `correo` ) VALUES 
-('21343243A', 'Jose', 'Morales', 'b','jmorales.jpg', 'empleado', 'b');
+('21343243A', 'Jose', 'Morales', 'empleado','jmorales.jpg', 'empleado', 'empleado');
 INSERT INTO tb_empleado(id_usuario, hora_entrada, hora_salida, horas_semanales, salario) 
 VALUES (2, '12:00:00', '21:00:00', '20', '1100');
 

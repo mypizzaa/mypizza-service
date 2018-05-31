@@ -96,7 +96,6 @@ public class TokenDao {
                     }
                 }
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
 
         }

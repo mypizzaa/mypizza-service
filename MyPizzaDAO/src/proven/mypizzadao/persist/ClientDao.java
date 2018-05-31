@@ -73,7 +73,6 @@ public class ClientDao {
                     cli = resultSetToClient(rs);
                 }
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
         }
         return cli;
@@ -147,7 +146,6 @@ public class ClientDao {
                 }
 
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
         } else {
             i = -1;
@@ -228,7 +226,6 @@ public class ClientDao {
                     pst.setString(2, c.getDni());
                     i = pst.executeUpdate();
                 } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
                 }
             }
         } else {
@@ -272,7 +269,6 @@ public class ClientDao {
                     i += pst1.executeUpdate();
                 }
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
         } else {
             i = -1;

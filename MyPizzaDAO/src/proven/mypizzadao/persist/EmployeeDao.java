@@ -161,7 +161,7 @@ public class EmployeeDao {
                         i += pst1.executeUpdate();
                     }
                 } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
+
                 }
             }
         } else {

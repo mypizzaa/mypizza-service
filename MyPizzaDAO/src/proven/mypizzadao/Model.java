@@ -520,11 +520,23 @@ public class Model {
     public List<PedidoInfo> getAllPaidOrders() {
         return orderDao.getAllPaidOrders();
     }
-
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.OrderDao#getOrderBill(proven.modelo.PedidoInfo) }
+     *
+     * @param pi order of the bill
+     * @return a bill
+     */
     public Factura getOrderBill(PedidoInfo pi) {
         return orderDao.getOrderBill(pi);
     }
-
+    
+    /**
+     * uses{@link proven.mypizzadao.persist.OrderDao#getOrdersByClient(proven.modelo.Cliente) }
+     *
+     * @param c client to find the orders
+     * @return a list of orders of the client
+     */
     public List<PedidoInfo> getOrdersByClient(Cliente c) {
         return orderDao.getOrdersByClient(c);
     }

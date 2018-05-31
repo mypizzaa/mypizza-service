@@ -446,7 +446,12 @@ public class OrderDao {
 
         return piList;
     }
-
+    
+    /**
+     * get the bill of an order
+     * @param pi order to find the bill
+     * @return bill found or null if not
+     */
     public Factura getOrderBill(PedidoInfo pi) {
         Factura f = null;
         Connection conn = dbConnection.getConnection();
@@ -468,7 +473,12 @@ public class OrderDao {
     private Factura resultSetToBill(ResultSet rs) throws SQLException {
         return new Factura(rs.getLong("id_factura"), rs.getLong("id_cliente"), rs.getLong("id_metodoPago"), rs.getLong("id_pedido_info"), rs.getDouble("precio_total"), rs.getString("dia_hora"), rs.getInt("cobrado"));
     }
-
+    
+    /**
+     * get all orders fo a client in data source
+     * @param c cliento to find the orders by id
+     * @return list of orders or null
+     */
     public List<PedidoInfo> getOrdersByClient(Cliente c) {
         List<PedidoInfo> piList = null;
         Connection conn = dbConnection.getConnection();

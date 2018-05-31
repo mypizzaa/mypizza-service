@@ -55,7 +55,6 @@ public class ProductDao {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
         return pizzaList;
     }
@@ -168,7 +167,6 @@ public class ProductDao {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
         return iList;
     }
@@ -209,7 +207,6 @@ public class ProductDao {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
         return iList;
     }
@@ -233,7 +230,6 @@ public class ProductDao {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
         return rList;
     }
@@ -293,7 +289,6 @@ public class ProductDao {
                 }
 
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
         } else {
             i = -1;
@@ -402,7 +397,6 @@ public class ProductDao {
                             break;
                     }
                 }
-                System.out.println(p);
                 PreparedStatement pst = conn.prepareStatement("UPDATE tb_producto SET nombre=?, precio=?, imagen=? WHERE id_producto=?");
                 pst.setString(1, p.getNombre());
                 pst.setDouble(2, p.getPrecio());
@@ -410,7 +404,6 @@ public class ProductDao {
                 pst.setLong(4, p.getIdProducto());
                 i = pst.executeUpdate();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
         } else {
             i = -1;
@@ -446,7 +439,6 @@ public class ProductDao {
                         pst.close();
                     }
                 } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
                 }
             }
         } else {
@@ -527,7 +519,6 @@ public class ProductDao {
                     }
                 }
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
                 i = -1;
             }
 
@@ -579,7 +570,6 @@ public class ProductDao {
                 }
 
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
 
         } else {
