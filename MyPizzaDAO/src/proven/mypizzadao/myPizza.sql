@@ -359,8 +359,8 @@ INSERT INTO `tb_cliente`(`id_usuario`, `telefono`, `direccion1`, `direccion2`, `
 
 
 -- Metodos de pago
-INSERT INTO tb_metodoPago (`nombre`, `otros_detalles`) VALUES ('Tarjeta', 'VISA'), 
-('Tarjeta', 'VISA Electron'), ('Tarjeta', 'MaterCard'), ('Tarjeta', 'Maestro'), ('PAYPAL', NULL),
+INSERT INTO tb_metodoPago (`nombre`, `otros_detalles`) VALUES ('VISA', NULL), 
+('VISA Electron', NULL), ('MaterCard', NULL), ('Maestro', NULL), ('PAYPAL', NULL),
 ('Contra Rembolso', NULL);
 
 -- Estados pedido
